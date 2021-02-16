@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4 Regresión lineal múltiple | Modelos Lineales</title>
+  <meta name="description" content="Material para el curso Modelos Lineales de la Facultad de Ciencias, Universidad Nacional Autónoma de México" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="4 Regresión lineal múltiple | Modelos Lineales" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Material para el curso Modelos Lineales de la Facultad de Ciencias, Universidad Nacional Autónoma de México" />
+  <meta name="github-repo" content="alberto-mateos-mo/ModelosLinealesLibro" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4 Regresión lineal múltiple | Modelos Lineales" />
+  
+  <meta name="twitter:description" content="Material para el curso Modelos Lineales de la Facultad de Ciencias, Universidad Nacional Autónoma de México" />
+  
+
+<meta name="author" content="Sofía Villers Gómez" />
+<meta name="author" content="David Alberto Mateos Montes de Oca" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="regresión-lineal-simple.html"/>
+
+<script src="libs/header-attrs-2.3/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Modelos Lineales 2021-2</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#detalles-técnicos"><i class="fa fa-check"></i><b>0.1</b> Detalles técnicos</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#licencia"><i class="fa fa-check"></i>Licencia</a></li>
+</ul></li>
+<li class="part"><span><b>I Introduccion</b></span></li>
+<li class="chapter" data-level="1" data-path="modelos-lineales.html"><a href="modelos-lineales.html"><i class="fa fa-check"></i><b>1</b> Modelos lineales</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="modelos-lineales.html"><a href="modelos-lineales.html#principios-de-la-modelización-estadística"><i class="fa fa-check"></i><b>1.1</b> Principios de la modelización estadística</a></li>
+<li class="chapter" data-level="1.2" data-path="modelos-lineales.html"><a href="modelos-lineales.html#identificar-y-caracterizar-variables"><i class="fa fa-check"></i><b>1.2</b> Identificar y Caracterizar Variables</a></li>
+<li class="chapter" data-level="1.3" data-path="modelos-lineales.html"><a href="modelos-lineales.html#tipos-de-variables-y-tipo-de-modelo"><i class="fa fa-check"></i><b>1.3</b> Tipos de variables y tipo de modelo</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="modelos-lineales.html"><a href="modelos-lineales.html#en-función-de-las-variables-explicativas"><i class="fa fa-check"></i><b>1.3.1</b> En función de las variables explicativas</a></li>
+<li class="chapter" data-level="1.3.2" data-path="modelos-lineales.html"><a href="modelos-lineales.html#en-función-de-la-variable-respuesta"><i class="fa fa-check"></i><b>1.3.2</b> En función de la variable respuesta</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="modelos-lineales.html"><a href="modelos-lineales.html#el-modelo-lineal-general"><i class="fa fa-check"></i><b>1.4</b> El modelo lineal general</a></li>
+</ul></li>
+<li class="part"><span><b>II Modelos de Regresión</b></span></li>
+<li class="chapter" data-level="2" data-path="regresión-lineal.html"><a href="regresión-lineal.html"><i class="fa fa-check"></i><b>2</b> Regresión Lineal</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="regresión-lineal.html"><a href="regresión-lineal.html#un-poco-de-história"><i class="fa fa-check"></i><b>2.1</b> Un poco de história</a></li>
+<li class="chapter" data-level="2.2" data-path="regresión-lineal.html"><a href="regresión-lineal.html#objetivos-del-análisis-de-regresión"><i class="fa fa-check"></i><b>2.2</b> Objetivos del análisis de regresión</a></li>
+<li class="chapter" data-level="2.3" data-path="regresión-lineal.html"><a href="regresión-lineal.html#el-algorítmo-de-regresión-lineal"><i class="fa fa-check"></i><b>2.3</b> El algorítmo de regresión lineal</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="regresión-lineal-simple.html"><a href="regresión-lineal-simple.html"><i class="fa fa-check"></i><b>3</b> Regresión lineal simple</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="regresión-lineal-simple.html"><a href="regresión-lineal-simple.html#solución-al-problema-de-regresión-lineal-simple"><i class="fa fa-check"></i><b>3.1</b> Solución al problema de regresión lineal simple</a></li>
+<li class="chapter" data-level="3.2" data-path="regresión-lineal-simple.html"><a href="regresión-lineal-simple.html#mínimos-cuadrados-ordinarios"><i class="fa fa-check"></i><b>3.2</b> Mínimos cuadrados ordinarios</a></li>
+<li class="chapter" data-level="3.3" data-path="regresión-lineal-simple.html"><a href="regresión-lineal-simple.html#pruebas-de-hipótesis"><i class="fa fa-check"></i><b>3.3</b> Pruebas de hipótesis</a></li>
+<li class="chapter" data-level="3.4" data-path="regresión-lineal-simple.html"><a href="regresión-lineal-simple.html#interpretación-de-los-parámetros"><i class="fa fa-check"></i><b>3.4</b> Interpretación de los parámetros</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html"><i class="fa fa-check"></i><b>4</b> Regresión lineal múltiple</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#solución-al-problema-de-regresión-lineal-múltiple-ecuaciones-normales"><i class="fa fa-check"></i><b>4.1</b> Solución al problema de regresión lineal múltiple: Ecuaciones normales</a></li>
+<li class="chapter" data-level="4.2" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#prueba-de-hipótesis"><i class="fa fa-check"></i><b>4.2</b> Prueba de hipótesis</a></li>
+<li class="chapter" data-level="4.3" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#interpretación-de-parámetros"><i class="fa fa-check"></i><b>4.3</b> Interpretación de parámetros</a></li>
+<li class="chapter" data-level="4.4" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#predicción-de-nuevos-valores"><i class="fa fa-check"></i><b>4.4</b> Predicción de nuevos valores</a></li>
+<li class="chapter" data-level="4.5" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#coeficiente-de-determinación"><i class="fa fa-check"></i><b>4.5</b> Coeficiente de determinación</a></li>
+<li class="chapter" data-level="4.6" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#evaluación-de-supuestos"><i class="fa fa-check"></i><b>4.6</b> Evaluación de supuestos</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#residuos"><i class="fa fa-check"></i><b>4.6.1</b> Residuos</a></li>
+<li class="chapter" data-level="4.6.2" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#linealidad-de-los-predictores"><i class="fa fa-check"></i><b>4.6.2</b> Linealidad de los predictores</a></li>
+<li class="chapter" data-level="4.6.3" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#supuestos-sobre-los-errores"><i class="fa fa-check"></i><b>4.6.3</b> Supuestos sobre los errores</a></li>
+<li class="chapter" data-level="4.6.4" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#puntos-palanca"><i class="fa fa-check"></i><b>4.6.4</b> Puntos palanca</a></li>
+<li class="chapter" data-level="4.6.5" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#multicolinealidad"><i class="fa fa-check"></i><b>4.6.5</b> Multicolinealidad</a></li>
+<li class="chapter" data-level="4.6.6" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#relación-funcional"><i class="fa fa-check"></i><b>4.6.6</b> Relación funcional</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#aplicación-en-r"><i class="fa fa-check"></i><b>4.7</b> Aplicación en R</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Modelos Lineales</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="regresión-lineal-múltiple" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Regresión lineal múltiple</h1>
+<p>La mayoría de los fenómenos reales son multicausales, por esta razón, un modelo de regresión más acorde a estudios reales es el modelo de regresión lineal múltiple, que es la generalización del modelo simple.</p>
+<p>En este modelo supondremos que la variable de respuesta, <span class="math inline">\(y\)</span>, puede explicarse a través de una colección de <span class="math inline">\(k\)</span> covariables <span class="math inline">\(x_1,\dots,x_k\)</span>.</p>
+<p>El modelo se escribe de la siguiente manera:</p>
+<p><span class="math display">\[y_i = \beta_0+\beta_1 x_1^{(i)}+\beta_2 x_2^{(i)}+\dots++\beta_k x_k^{(i)}+\epsilon_i\]</span>
+Al igual que en el caso simple, los parámetros del modelo se pueden estimar por mínimos cuadrados, con el inconveniente de que no se pueden realizar inferencias sobre ellos. Nuevamente, para poder hacer intervalos de confianza y pruebas de hipótesis sobre los verdaderos parámetros hay que suponer que el vector de errores se distribuye normal, en este caso multivariada, es decir:</p>
+<p><span class="math display">\[\epsilon\sim N_n(0,\sigma^2\mathbb{I})\]</span></p>
+<p>Esta estructura del error permite tener las mismas propiedades distribucionales que en regresión simple, es decir, <span class="math inline">\(y_i\)</span> se distribuye normal y <span class="math inline">\(\beta_i\)</span> tiene distribución normal, facilitando las inferencias sobre cada parámetro y la construcción de intervalos de predicción para las <span class="math inline">\(y\)</span>’s.</p>
+<div id="solución-al-problema-de-regresión-lineal-múltiple-ecuaciones-normales" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Solución al problema de regresión lineal múltiple: Ecuaciones normales</h2>
+<p>Las expresiones para estimar los parámetros involucrados en el modelo son:</p>
+<p><span class="math display">\[\hat{\beta}=(X^TX)^{-1}X^Ty\]</span>
+<span class="math display">\[\hat{\sigma}^2=\frac{\sum_{i=1}^n(y_i-\hat{y_i})^2}{n-p}\]</span></p>
+<p>donde <span class="math inline">\(p=k+1\)</span> es el número total de parámetros en el modelo.</p>
+<p>Tanto en el modelo simple como en el múltiple, la variación total de las <span class="math inline">\(y\)</span>’s se puede descomponer en una parte que explica el modelo, i.e., los <span class="math inline">\(k\)</span> regresores o variables explicativas y otra no explicada por estas variables, llamada error.</p>
+<p><span class="math display">\[\sum_{i=1}^n(y_i-\bar{y})^2=\sum_{i=1}^n(\hat{y_i}-\bar{y})^2+\sum_{i=1}^n(\hat{y_i}-y_i)^2\]</span></p>
+</div>
+<div id="prueba-de-hipótesis" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Prueba de hipótesis</h2>
+<p>La descomposición anterior ayuda para realizar la importante prueba de hipótesis:</p>
+<p><span class="math display">\[H_0:\beta_1=\beta_2=\dots=\beta_k=0\ vs.\ H_a:\beta_i\neq0 \ p.a. \ i\]</span></p>
+<p>misma que se realiza a través del cociente entre los errores cuadráticos medios:</p>
+<p><span class="math display">\[F_0=\frac{SS_R/k}{SS_E/(n-k-1)}=\frac{MS_R}{MS_E}\sim F_{(k,n-k-1)}\]</span>
+Esta estadística se desprende de la tabla de análisis de varianza, que es muy similar a la tabla ANOVA que se utiliza para hacer pruebas de hipótesis.</p>
+<p>En este caso la tabla es:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Fuente de variación</th>
+<th align="center">Grados de libertad</th>
+<th align="center">Suma de cuadrados</th>
+<th align="center">Cuadrados medios</th>
+<th align="center">F</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Regresión</td>
+<td align="center">k</td>
+<td align="center"><span class="math inline">\(SS_R\)</span></td>
+<td align="center"><span class="math inline">\(MS_R=SS_R/k\)</span></td>
+<td align="center"></td>
+</tr>
+<tr class="even">
+<td align="center">Error</td>
+<td align="center">n-k-1</td>
+<td align="center"><span class="math inline">\(SS_E\)</span></td>
+<td align="center"><span class="math inline">\(MS_E=SS_E/(n-k-1)\)</span></td>
+<td align="center"><span class="math inline">\(F=\frac{MS_R}{MS_E}\)</span></td>
+</tr>
+<tr class="odd">
+<td align="center">Total</td>
+<td align="center">n-1</td>
+<td align="center"><span class="math inline">\(S_{yy}\)</span></td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
+<p>Por lo general, esta estadística rechaza la hipótesis nula, ya que de lo contrario, implicaría que ninguna de las variables contribuye a explicar la respuesta, <span class="math inline">\(y\)</span>. Como se puede observar en la hipótesis alternativa, el rechazar <span class="math inline">\(H_0\)</span> solo implica que al menos uno de los regresores contribuye significativamente a explicar <span class="math inline">\(y\)</span>.</p>
+<p>Asimismo, el rechazar <span class="math inline">\(H_0\)</span> no implica que todos contribuyan ni tampoco dice cuál o cuáles contribuyen, por esta razón, una salida estándar de regresión múltiple tiene pruebas individuales sobre la significancia de cada regresor en el modelo.</p>
+<p>El estadístico para hacer tanto los contrastes de hipótesis como los intervalos de confianza individuales, es:</p>
+<p><span class="math display">\[t=\frac{\hat{\beta_i}-\beta_0^{(i)}}{\sqrt{\hat{\mathbb{V}ar}(\hat{\beta_i})}}\sim t_{(n-p)}\]</span>
+Podemos apreciar que los constrastes de hipótesis se pueden hacer contra cualquier valor particular del parámetro <span class="math inline">\(\beta_0^{(i)}\)</span>, en general. No obstante, en las pruebas estándar sobre los parámetros de un modelo, este valor particular es 0, ya que se intenta determinar si la variable asociada al <span class="math inline">\(i\)</span>-ésimo parámetro es estadísticamente significativa para explicar la respuesta.</p>
+<p>Por lo que el estadístico para este caso es:</p>
+<p><span class="math display">\[t=\frac{\hat{\beta_i}}{\sqrt{\hat{\mathbb{V}ar}(\hat{\beta_i})}}\sim t_{(n-p)}\]</span></p>
+<p>De este estadístico se desprenden también los intervalos de confianza para cada parámetro:</p>
+<p><span class="math display">\[\beta_i\in(\hat{\beta_i}\pm t_{(n-p,1-\alpha/2)} \sqrt{\hat{\mathbb{V}ar} (\hat{\beta_i})})\]</span></p>
+</div>
+<div id="interpretación-de-parámetros" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> Interpretación de parámetros</h2>
+<p>La interpretación de cada parámetro es similar a la del coeficiente de regresión <span class="math inline">\(\hat{\beta_1}\)</span> en el modelo simple, anexando la frase: “manteniendo constantes el resto de las variables”.</p>
+<p>Esto es, <span class="math inline">\(\hat{\beta_i}\)</span> es el cambio promedio o cambio esperado en <span class="math inline">\(y\)</span> por unidad de cambio en <span class="math inline">\(x_i\)</span>, sin considerar cambio alguno en ninguna de las otras variables dentro del modelo, es decir, suponiendo que estas otras variables permanecen fijas. Esta interpretación es similar a la que se hace de la derivada parcial en un modelo determinista.</p>
+<p>Nuevamente, la interpretación de <span class="math inline">\(\hat{\beta_0}\)</span> estará sujeta a la posibilidad de que, en este caso, todas las variables puedan tomar el valor cero.</p>
+</div>
+<div id="predicción-de-nuevos-valores" class="section level2" number="4.4">
+<h2><span class="header-section-number">4.4</span> Predicción de nuevos valores</h2>
+<p>Uno de los usos más frecuentes del modelo de regresión es el de predecir un valor de la respuesta para un valor particular de las covariables en el modelo. Si la predicción se realiza para un valor de las covariables dentro del rango de observación de las mismas, se tratará de una interpolación, y si se realiza para un valor fuera de este rango, hablaremos de una extrapolación.</p>
+<p>En cualquiera de los dos casos, estaremos interesados en dos tipos de predicciones:</p>
+<ul>
+<li><p>Predicción de la respuesta media: <span class="math inline">\(y_0=\mathbb{E}(y|X_0)\)</span></p></li>
+<li><p>Predicción de una nueva observación: <span class="math inline">\(y_0\)</span></p></li>
+</ul>
+<p>En ambos casos, la estimación puntual es la misma: <span class="math inline">\(\hat{y_0}=X_0^T\hat{\beta}\)</span></p>
+<p>Lo que difiere es el intervalo de predicción.</p>
+<p>Para la respuesta media es: <span class="math inline">\(y_0=(\hat{y_0}\pm t_{(n-p,1-\alpha/2)}\sqrt{\hat{\sigma^2}X_0^T(X^TX)^{-1}X_0})\)</span></p>
+<p>Y para predecir una observación: <span class="math inline">\(y_0=(\hat{y_0}\pm t_{(n-p,1-\alpha/2)}\sqrt{\hat{\sigma^2}(1+X_0^T(X^TX)^{-1}X_0)})\)</span></p>
+</div>
+<div id="coeficiente-de-determinación" class="section level2" number="4.5">
+<h2><span class="header-section-number">4.5</span> Coeficiente de determinación</h2>
+<p>Un primer elemento de juicio sobre el modelo de regresión lo constituye el coeficiente de determinación <span class="math inline">\(R^2\)</span>, que es la proporción de variabilidad de las <span class="math inline">\(y\)</span>’s que es explicada por las <span class="math inline">\(x\)</span>’s y que se escribe como:</p>
+<p><span class="math display">\[R^2=\frac{SS_R}{S_{yy}}=1-\frac{SS_E}{S_{yy}}\]</span>
+Una <span class="math inline">\(R^2\)</span> cercana a uno implicaría que mucha de la variabilidad de la respuesta es explicada por el conjunto de regresores incluidos en el modelo.</p>
+<p>Es deseable tener una <span class="math inline">\(R^2\)</span> grande en nuestro modelo, pero esto no significa, como mucha gente piensa, que ya el modelo está bien ajustado.</p>
+</div>
+<div id="evaluación-de-supuestos" class="section level2" number="4.6">
+<h2><span class="header-section-number">4.6</span> Evaluación de supuestos</h2>
+<p>Los dos modelos de regresión presentados, el simple y el múltiple, se construyeron sobre los supuestos de:</p>
+<ul>
+<li><p>La relación funcional entre la variable de respuesta <span class="math inline">\(y\)</span> y cada regresor <span class="math inline">\(x_i\)</span> es lineal</p></li>
+<li><p>La esperanza de los errores es cero, <span class="math inline">\(\mathbb{E}(\epsilon_i=0)\)</span></p></li>
+<li><p>La varianza de los errores es constante, <span class="math inline">\(\mathbb{V}ar(\epsilon_i) = \sigma^2\)</span></p></li>
+<li><p>Los errores no están correlacionados, <span class="math inline">\(\mathbb{C}ov(\epsilon_i, \epsilon_j) = 0;\ i\neq j\)</span></p></li>
+<li><p>Los errores tienen distribución normal con media cero y varianza <span class="math inline">\(\sigma^2\)</span></p></li>
+</ul>
+<p>Entonces, para garantizar que el modelo es adecuado, es indispensable verificar estos supuestos.</p>
+<div id="residuos" class="section level3" number="4.6.1">
+<h3><span class="header-section-number">4.6.1</span> Residuos</h3>
+<p>Los elementos más importantes para verificar estos supuestos son los residuos, definidos como:</p>
+<p><span class="math display">\[e_i=y_i-\hat{y}_i\]</span></p>
+<p>Estos residuos representan la discrepancia entre la respuesta predicha por el modelo ajustado, <span class="math inline">\(\hat{y}_i\)</span> y el correspondiente valor observado, <span class="math inline">\(y_i\)</span>.</p>
+<p>En la literatura de regresi ́on lineal existen cuatro tipos de residuos, a saber</p>
+<ul>
+<li><p><strong>Residuo crudo</strong>: <span class="math inline">\(e_i\)</span></p></li>
+<li><p><strong>Residuo estandarizado</strong>: <span class="math inline">\(d_i=\frac{e_i}{\sqrt{\hat{\sigma}^2}}\)</span></p></li>
+<li><p><strong>Residuo estudentizado interno</strong>: <span class="math inline">\(r_i=\frac{e_i}{\sqrt{\hat{\sigma}^2(1-h_{ii}})}\)</span></p></li>
+<li><p><strong>Residuo estudentizado externo</strong>: <span class="math inline">\(t_i=\frac{e_i}{\sqrt{\hat{\sigma_{(-i)}}^2(1-h_{ii})}}\)</span></p></li>
+</ul>
+<p>Estos residuos se utilizan en los distintos procedimientos para evaluar los supuestos y lo adecuado del ajuste del modelo. La mayoría de las pruebas conocidas para la verificación de los supuestos, son pruebas gráficas.</p>
+<p>Indudablemente, la prueba más importante es sobre la normalidad de los errores, ya que sobre este supuesto descansan todas la inferencias de este modelo.</p>
+<p>La manera de verificarlo es a través de la gráfica conocida como QQ-plot o QQ-norm, que grafica los cuantiles teóricos de una distribución normal (eje x) vs. los cuantiles asociados a los residuos. Entonces, si los residuos realmente provienen de una normal, la gráfica debe mostrar la función identidad. Fuertes desviaciones de esta línea darían evidencia de que los errores no se distribuyen normal.</p>
+<p><img src="_main_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+</div>
+<div id="linealidad-de-los-predictores" class="section level3" number="4.6.2">
+<h3><span class="header-section-number">4.6.2</span> Linealidad de los predictores</h3>
+<p>La manera estándar de evaluar la linealidad de las variables explicativas es a través de la gráfica de cada una de ellas contra los residuos. Si la variable en cuestión ingresa al modelo de manera lineal, esta gráfica debe mostrar un patrón totalmente aleatorio entre los puntos dispuestos en ella.</p>
+<p>Cuando la variable explicativa es politómica, este tipo de gráficas son poco ilustrativas en este sentido.</p>
+<p><img src="_main_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+<div id="supuestos-sobre-los-errores" class="section level3" number="4.6.3">
+<h3><span class="header-section-number">4.6.3</span> Supuestos sobre los errores</h3>
+<p>Si la gráfica entre los valores ajustados y los residuos estandarizados, muestra un patrón aleatorio, es simétrica alrededor del cero y los puntos están comprendidos entre los valores -2 y 2, entonces se tendrá evidencia de que los errores tienen media cero, varianza constante y no están correlacionados.</p>
+<p><img src="_main_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Los métodos mostrados hasta ahora, permiten evaluar el modelo de manera global y no por cada observación dentro del mismo. Dado que una observación puede resultar determinante sobre alguna(s) característica(s) del modelo, es conveniente verificar el impacto que cada observación pueda tener en los distintos aspectos del modelo. Las estadísticas para evaluar el impacto que tiene una observación sobre todo el vector de parámetros, alguno de los regresores y sobre los valores predichos, se basan en la misma idea, que consiste en cuantificar el cambio en la característica de interés con y sin la observación que se está evaluando.</p>
+</div>
+<div id="puntos-palanca" class="section level3" number="4.6.4">
+<h3><span class="header-section-number">4.6.4</span> Puntos palanca</h3>
+<p>Antes de presentar las estadísticas que servirán para hacer este diagnóstico, introduciremos un elemento que es común a ellas: la llamada palanca (leverage) de una observación.</p>
+<p>Recordemos que el ajuste del modelo se expresaba como:</p>
+<p><span class="math display">\[\hat{\beta}=(X^TX)^{-1}X^Ty \Rightarrow \hat{y}=X\hat{\beta}=Hy\]</span></p>
+<p>Con <span class="math inline">\(H\)</span> conocida como la matriz sombrero.</p>
+<p>Un resultado fundamental sobre esta matriz sombrero es:</p>
+<p><span class="math display">\[\mathbb{V}ar(e)=(I-H)\sigma^2 \Rightarrow \mathbb{V}ar(e_i)=(1-h_i)\sigma^2\]</span>
+Con <span class="math inline">\(h_i\)</span> el i-ésimo elemento de la diagonal de la matriz <span class="math inline">\(H\)</span>.</p>
+<p>Observemos que esta palanca sólo depende de <span class="math inline">\(X\)</span>, entonces, una observación con una palanca, <span class="math inline">\(h_i\)</span>, grande, es aquella con valores extremos en alguna(s) de su(s) covariable(s).</p>
+<p>Ya que el promedio de las <span class="math inline">\(h_i&#39;s\)</span> es <span class="math inline">\(p/n\)</span>, consideraremos una observación con palanca grande si su palanca es mayor a <span class="math inline">\(2p/n\)</span>. En este sentido, <span class="math inline">\(h_i\)</span> corresponde a la <em>distancia de Mahalanobis</em> de <span class="math inline">\(X\)</span> definida como <span class="math inline">\((X-\bar{X})^T\hat{\Sigma}^{-1}(X-\bar{X})\)</span>.</p>
+<p>La dependencia de las estadísticas para el diagnóstico de las observaciones, estriba en que sus cálculos dependen de los valores de la palanca de cada individuo. Estas estadísticas son:</p>
+<ul>
+<li>Distancia de Cook</li>
+<li>Dfbetas</li>
+<li>Dffits</li>
+</ul>
+<p><strong>Distancia de Cook</strong>: Sirve para determinar si una observación es influyente en todo el vector de parámetros. Una observación se considera influyente, si su distancia de Cook sobrepasa el valor uno.</p>
+<p><img src="_main_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><strong>Dfbetas</strong>: Sirven para determinar si una observación es influyente en alguno de los coeficientes de regresión. Hay un dfbeta por cada parámetro dentro del modelo, incluido, por supuesto, el de la ordenada al origen. La regla de dedo es que la observación <span class="math inline">\(i\)</span> es influyente en el j-ésimo coeficiente de regresión si:</p>
+<p><span class="math display">\[|Dfbetas_{j,i}|&gt;\frac{2}{\sqrt{n}}\]</span></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-9-1.png" width="672" /><img src="_main_files/figure-html/unnamed-chunk-9-2.png" width="672" /></p>
+<p><strong>Dffits</strong>: Se utilizan para determinar si una observación es influyente en la predicción de <span class="math inline">\(y\)</span>. Se dice que la i-ésima observación es influyente para predecir <span class="math inline">\(y\)</span>, si:</p>
+<p><span class="math display">\[|Dffits_i|&gt;2\sqrt{\frac{p}{n}}\]</span></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+</div>
+<div id="multicolinealidad" class="section level3" number="4.6.5">
+<h3><span class="header-section-number">4.6.5</span> Multicolinealidad</h3>
+<p>El modelo de regresión lineal múltiple, se construye bajo el supuesto de que los regresores son ortogonales, i.e., son independientes.</p>
+<p>Desafortunadamente, en la mayoría de las aplicaciones el conjunto de regresores no es ortogonal. Algunas veces, esta falta de ortogonalidad no es seria; sin embargo, en algunas otras los regresores están muy cerca de una perfecta relación lineal, en tales casos las inferencias realizadas a través del modelo de regresión lineal pueden ser erróneas. Cuando hay una cercana dependencia lineal entre los regresores, se dice que estamos en presencia de un problema de multicolinealidad.</p>
+<p><strong>Efectos de la multicolinealidad</strong>:</p>
+<ul>
+<li><p>Varianzas de los coeficientes estimados son muy grandes.</p></li>
+<li><p>Los estimadores calculados de distintas sub muestras de la misma población, pueden ser muy diferentes.</p></li>
+<li><p>La significancia de algún regresor se puede ver afectada (volverse no significativo) por que su varianza es más grande de lo que debería ser en realidad o por la correlación de la variable con el resto dentro del modelo.</p></li>
+<li><p>Es común que algún signo de un parámetro cambie, haciendo ilógica su interpretación dentro del modelo.</p></li>
+</ul>
+<div id="cómo-detectar-multicolinealidad" class="section level4" number="4.6.5.1">
+<h4><span class="header-section-number">4.6.5.1</span> ¿Cómo detectar multicolinealidad?</h4>
+<p><strong>Matriz de correlación.</strong></p>
+<p>Examinar las correlaciones entre pares de variables:</p>
+<p><span class="math display">\[r_{ij}\ \ \  i, j = 1, 2, \dots, k\ \  i\neq j\]</span></p>
+<p>Pero, si dos o más regresores están linealmente relacionados, es posible que ninguna de las correlaciones entre cada par de variables, sea grande.</p>
+<p><strong>Factor de inflación de la varianza.</strong></p>
+<p><span class="math display">\[VIF_j=(1-R_j^2)^{-1}\]</span>
+Con <span class="math inline">\(R_j^2\)</span> el coeficiente de determinación del modelo de regresión entre el j-ésimo regresor, <span class="math inline">\(x_j\)</span> (tomado como variable de respuesta) y el resto de los regresores <span class="math inline">\(x_i\)</span>, <span class="math inline">\(i\neq j\)</span>.</p>
+<p>Experiencias prácticas indican que si algunos de los VIF’s excede a 10, su coeficiente asociado es pobremente estimado por el modelo debido a multicolinealidad.</p>
+<p><strong>Análisis del eigensistema.</strong></p>
+<p>Basado en los eigenvalores de la matriz <span class="math inline">\(X^TX\)</span>.</p>
+<p><strong>Número de condición.</strong></p>
+<p><span class="math display">\[K=\frac{\lambda_{max}}{\lambda_{min}}\]</span>
+Si el número de condición es menor que 100, no existen problemas serios de multicolinealidad. Si está entre 100 y 1000 existe de moderada a fuerte multicolinealidad y si excede a 1000, hay severa multicolinealidad.</p>
+<p><strong>Índice de condición.</strong></p>
+<p><span class="math display">\[k_j=\frac{\lambda_{max}}{\lambda_j}\]</span>
+Si el índice de condición es menor que 10, no hay ningún problema. Si está entre 10 y 30, hay moderada multicolinealidad, y si es mayor que 30, existe una fuerte colinealidad en la j-ésima variable en el modelo.</p>
+<p>N.B. En algunos paquetes estos índices se presentan aplicando la raíz cuadrada a su expresión, entonces hay que extraer raíz a los puntos de corte de los criterios correspondientes.</p>
+</div>
+</div>
+<div id="relación-funcional" class="section level3" number="4.6.6">
+<h3><span class="header-section-number">4.6.6</span> Relación funcional</h3>
+<p>Un supuesto importante en el modelo de regresión es el que considera que debe existir una relación funcional lineal entre cada regresor y la variable de respuestas. Pero, ¿qué debemos hacer si no se cumple esta relación lineal de la respuesta con alguno(s) de los regresor(es)?</p>
+<p>Primero, ya dijimos que este supuesto se evalúa realizando la gráfica de dispersión entre los residuos del modelo y los valores de la variable en cuestión. Cuando no hay una asociación lineal entre la respuesta y la covariable, generalmente este diagrama de dispersión muestra un patrón (tendencia) que sugiere qué tipo de transformación se debería hacer a la covariable para lograr linealidad con la respuesta.</p>
+<p>Debe quedar claro que la transformación puede realizarse a la variable explicativa o a la variable de respuesta.</p>
+<p>A muchos investigadores no les gusta transformar la respuesta porque argumentan que pierden <em>interpretabilidad</em> del modelo. Aunque esto puede ser cierto, existen transformaciones de la respuesta que pueden <em>regresarse</em> para interpretar el modelo con la respuesta original.</p>
+<p><img src="_main_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>Un problema asociado a esta identificación por parte del usuario, es que debe tener experiencia para asociar estas formas a una función analítica específica; hecho no necesariamente cierto. Por lo tanto, requiere de alguna herramienta técnica que pudiera auxiliarlo en esta labor.</p>
+<p>Un buen auxiliar, en el caso de que se crea que es necesario transformar la respuesta, es usar la llamada trasformación Box-Cox.</p>
+<div id="transformación-box-cox" class="section level4" number="4.6.6.1">
+<h4><span class="header-section-number">4.6.6.1</span> Transformación Box-Cox</h4>
+<p>La transformación Box-Cox de la respuesta, es una función que sirve para normalizar la distribución del error, estabilizar la varianza de este error y mejorar la relación lineal entre <span class="math inline">\(y\)</span> y las <span class="math inline">\(X’s\)</span>.</p>
+<p>Se define como:</p>
+<p><span class="math display">\[y_i^{\lambda} = \left\{ \begin{array}{ll} \frac{y_i^{\lambda-1}}{\lambda}, &amp;  \lambda \neq 0;\\ ln(y_i), &amp; \lambda=0 .\end{array} \right.\]</span>
+La siguiente tabla muestra el rango de valores de <span class="math inline">\(\lambda\)</span> que estarían asociados a una transformación analítica común.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Rango <span class="math inline">\(\lambda\)</span></th>
+<th align="center">Transformación Asociada</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">(-2.5, -1.5]</td>
+<td align="center"><span class="math inline">\(\frac{1}{y^2}\)</span></td>
+</tr>
+<tr class="even">
+<td align="center">(-1.5, -0.75]</td>
+<td align="center"><span class="math inline">\(\frac{1}{y}\)</span></td>
+</tr>
+<tr class="odd">
+<td align="center">(-0.75, -0.25]</td>
+<td align="center"><span class="math inline">\(\frac{1}{\sqrt{y}}\)</span></td>
+</tr>
+<tr class="even">
+<td align="center">(-0.25, 0.25]</td>
+<td align="center"><span class="math inline">\(ln(y)\)</span></td>
+</tr>
+<tr class="odd">
+<td align="center">(0.25, 0.75]</td>
+<td align="center"><span class="math inline">\(\sqrt{y}\)</span></td>
+</tr>
+<tr class="even">
+<td align="center">(0.75, 1.25]</td>
+<td align="center"><span class="math inline">\(y\)</span></td>
+</tr>
+<tr class="odd">
+<td align="center">(1.25, 2.5)</td>
+<td align="center"><span class="math inline">\(y^2\)</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="transformación-box-tidwell" class="section level4" number="4.6.6.2">
+<h4><span class="header-section-number">4.6.6.2</span> Transformación Box-Tidwell</h4>
+<p>Box y Tidwell implementan un proceso iterativo para encontrar la mejor transformación de las variables predictoras en el modelo de regresión lineal.</p>
+<p>Definiendo como <span class="math inline">\(X_j^{\gamma_j}\)</span> la correspondiente transformación Box-Tidwell de la variable <span class="math inline">\(j\)</span>.</p>
+<p>La tabla anterior para las transfomaciones analíticas de la respuesta, también aplican para estas transformaciones de los predictores.</p>
+</div>
+</div>
+</div>
+<div id="aplicación-en-r" class="section level2" number="4.7">
+<h2><span class="header-section-number">4.7</span> Aplicación en R</h2>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="regresión-lineal-simple.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

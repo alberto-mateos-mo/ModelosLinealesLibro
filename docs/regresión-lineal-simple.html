@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 Regresión lineal simple | Modelos Lineales</title>
+  <meta name="description" content="Material para el curso Modelos Lineales de la Facultad de Ciencias, Universidad Nacional Autónoma de México" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3 Regresión lineal simple | Modelos Lineales" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Material para el curso Modelos Lineales de la Facultad de Ciencias, Universidad Nacional Autónoma de México" />
+  <meta name="github-repo" content="alberto-mateos-mo/ModelosLinealesLibro" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 Regresión lineal simple | Modelos Lineales" />
+  
+  <meta name="twitter:description" content="Material para el curso Modelos Lineales de la Facultad de Ciencias, Universidad Nacional Autónoma de México" />
+  
+
+<meta name="author" content="Sofía Villers Gómez" />
+<meta name="author" content="David Alberto Mateos Montes de Oca" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="regresión-lineal.html"/>
+<link rel="next" href="regresión-lineal-múltiple.html"/>
+<script src="libs/header-attrs-2.3/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Modelos Lineales 2021-2</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#detalles-técnicos"><i class="fa fa-check"></i><b>0.1</b> Detalles técnicos</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#licencia"><i class="fa fa-check"></i>Licencia</a></li>
+</ul></li>
+<li class="part"><span><b>I Introduccion</b></span></li>
+<li class="chapter" data-level="1" data-path="modelos-lineales.html"><a href="modelos-lineales.html"><i class="fa fa-check"></i><b>1</b> Modelos lineales</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="modelos-lineales.html"><a href="modelos-lineales.html#principios-de-la-modelización-estadística"><i class="fa fa-check"></i><b>1.1</b> Principios de la modelización estadística</a></li>
+<li class="chapter" data-level="1.2" data-path="modelos-lineales.html"><a href="modelos-lineales.html#identificar-y-caracterizar-variables"><i class="fa fa-check"></i><b>1.2</b> Identificar y Caracterizar Variables</a></li>
+<li class="chapter" data-level="1.3" data-path="modelos-lineales.html"><a href="modelos-lineales.html#tipos-de-variables-y-tipo-de-modelo"><i class="fa fa-check"></i><b>1.3</b> Tipos de variables y tipo de modelo</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="modelos-lineales.html"><a href="modelos-lineales.html#en-función-de-las-variables-explicativas"><i class="fa fa-check"></i><b>1.3.1</b> En función de las variables explicativas</a></li>
+<li class="chapter" data-level="1.3.2" data-path="modelos-lineales.html"><a href="modelos-lineales.html#en-función-de-la-variable-respuesta"><i class="fa fa-check"></i><b>1.3.2</b> En función de la variable respuesta</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="modelos-lineales.html"><a href="modelos-lineales.html#el-modelo-lineal-general"><i class="fa fa-check"></i><b>1.4</b> El modelo lineal general</a></li>
+</ul></li>
+<li class="part"><span><b>II Modelos de Regresión</b></span></li>
+<li class="chapter" data-level="2" data-path="regresión-lineal.html"><a href="regresión-lineal.html"><i class="fa fa-check"></i><b>2</b> Regresión Lineal</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="regresión-lineal.html"><a href="regresión-lineal.html#un-poco-de-história"><i class="fa fa-check"></i><b>2.1</b> Un poco de história</a></li>
+<li class="chapter" data-level="2.2" data-path="regresión-lineal.html"><a href="regresión-lineal.html#objetivos-del-análisis-de-regresión"><i class="fa fa-check"></i><b>2.2</b> Objetivos del análisis de regresión</a></li>
+<li class="chapter" data-level="2.3" data-path="regresión-lineal.html"><a href="regresión-lineal.html#el-algorítmo-de-regresión-lineal"><i class="fa fa-check"></i><b>2.3</b> El algorítmo de regresión lineal</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="regresión-lineal-simple.html"><a href="regresión-lineal-simple.html"><i class="fa fa-check"></i><b>3</b> Regresión lineal simple</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="regresión-lineal-simple.html"><a href="regresión-lineal-simple.html#solución-al-problema-de-regresión-lineal-simple"><i class="fa fa-check"></i><b>3.1</b> Solución al problema de regresión lineal simple</a></li>
+<li class="chapter" data-level="3.2" data-path="regresión-lineal-simple.html"><a href="regresión-lineal-simple.html#mínimos-cuadrados-ordinarios"><i class="fa fa-check"></i><b>3.2</b> Mínimos cuadrados ordinarios</a></li>
+<li class="chapter" data-level="3.3" data-path="regresión-lineal-simple.html"><a href="regresión-lineal-simple.html#pruebas-de-hipótesis"><i class="fa fa-check"></i><b>3.3</b> Pruebas de hipótesis</a></li>
+<li class="chapter" data-level="3.4" data-path="regresión-lineal-simple.html"><a href="regresión-lineal-simple.html#interpretación-de-los-parámetros"><i class="fa fa-check"></i><b>3.4</b> Interpretación de los parámetros</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html"><i class="fa fa-check"></i><b>4</b> Regresión lineal múltiple</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#solución-al-problema-de-regresión-lineal-múltiple-ecuaciones-normales"><i class="fa fa-check"></i><b>4.1</b> Solución al problema de regresión lineal múltiple: Ecuaciones normales</a></li>
+<li class="chapter" data-level="4.2" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#prueba-de-hipótesis"><i class="fa fa-check"></i><b>4.2</b> Prueba de hipótesis</a></li>
+<li class="chapter" data-level="4.3" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#interpretación-de-parámetros"><i class="fa fa-check"></i><b>4.3</b> Interpretación de parámetros</a></li>
+<li class="chapter" data-level="4.4" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#predicción-de-nuevos-valores"><i class="fa fa-check"></i><b>4.4</b> Predicción de nuevos valores</a></li>
+<li class="chapter" data-level="4.5" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#coeficiente-de-determinación"><i class="fa fa-check"></i><b>4.5</b> Coeficiente de determinación</a></li>
+<li class="chapter" data-level="4.6" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#evaluación-de-supuestos"><i class="fa fa-check"></i><b>4.6</b> Evaluación de supuestos</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#residuos"><i class="fa fa-check"></i><b>4.6.1</b> Residuos</a></li>
+<li class="chapter" data-level="4.6.2" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#linealidad-de-los-predictores"><i class="fa fa-check"></i><b>4.6.2</b> Linealidad de los predictores</a></li>
+<li class="chapter" data-level="4.6.3" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#supuestos-sobre-los-errores"><i class="fa fa-check"></i><b>4.6.3</b> Supuestos sobre los errores</a></li>
+<li class="chapter" data-level="4.6.4" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#puntos-palanca"><i class="fa fa-check"></i><b>4.6.4</b> Puntos palanca</a></li>
+<li class="chapter" data-level="4.6.5" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#multicolinealidad"><i class="fa fa-check"></i><b>4.6.5</b> Multicolinealidad</a></li>
+<li class="chapter" data-level="4.6.6" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#relación-funcional"><i class="fa fa-check"></i><b>4.6.6</b> Relación funcional</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#aplicación-en-r"><i class="fa fa-check"></i><b>4.7</b> Aplicación en R</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Modelos Lineales</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="regresión-lineal-simple" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Regresión lineal simple</h1>
+<p><img src="_main_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Para este modelo supondremos que nuestra respuesta, <span class="math inline">\(y\)</span>, es explicada únicamente por una covariable, <span class="math inline">\(x\)</span>.</p>
+<p>Entonces, escribimos nuestro modelo como:</p>
+<p><span class="math display">\[y^{(i)}=\beta_0+\beta_1x^{(i)}+\epsilon^{(i)},\ \ i=1,2,\dots,n\]</span>
+Como podemos observar, se ha propuesto una relación lineal entre la variable <span class="math inline">\(y\)</span> y la variable explicativa <span class="math inline">\(x\)</span>, que es nuestro primer supuesto sobre el modelo: La relación funcional entre <span class="math inline">\(x\)</span> y <span class="math inline">\(y\)</span> es una línea recta.</p>
+<p>Observamos que la relación no es perfecta, ya que se agrega el término de error, <span class="math inline">\(\epsilon\)</span>. Dado que la parte aleatoria del modelo es la variable <span class="math inline">\(y\)</span>, asumimos que al error se le “cargan” los errores de medición de <span class="math inline">\(y\)</span>, así como las perturbaciones que le pudieran ocasionar los términos omitidos en el modelo.
+Gauss desarrolló este modelo a partir de la teoría de errores de medición, que es de donde se desprenden los supuestos sobre este término:</p>
+<ul>
+<li><span class="math inline">\(\mathbb{E}(\epsilon^{(i)})=0\)</span></li>
+<li><span class="math inline">\(\mathbb{V}ar(\epsilon^{(i)})=\sigma^2\)</span></li>
+<li><span class="math inline">\(\mathbb{C}ov(\epsilon^{(i)},\epsilon^{(j)})=0, \ \forall i\neq j\)</span></li>
+</ul>
+<p>N.B. Los errores <span class="math inline">\(\epsilon^{(i)}\)</span> son variables aleatorias no observables.</p>
+<div id="solución-al-problema-de-regresión-lineal-simple" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Solución al problema de regresión lineal simple</h2>
+</div>
+<div id="mínimos-cuadrados-ordinarios" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Mínimos cuadrados ordinarios</h2>
+<p>En una situación real, tenemos <span class="math inline">\(n\)</span> observaciones de la variable de respuesta así como de la variable explicativa, que conforman las parejas de entrenamiento <span class="math inline">\((x_i, y_i), \ i = 1, 2, ..., n\)</span>.</p>
+<p>Entonces, nuestro objetivo será encontrar la recta que mejor ajuste a los datos observados.</p>
+<p>Utilizaremos el método de mínimos cuadrados para estimar los parámetros del modelo, que consiste en minimizar la suma de los errores al cuadrado, esto es:</p>
+<p><span class="math display">\[\sum_{i=1}^n \epsilon_i^2 = \sum_{i=1}^n(y_i-(\beta_0+\beta_1x^{(i)}))^2\]</span>
+Al minimizar la expresión anteriore obtenemos las siguientes expresiones para los estimadores:</p>
+<p><span class="math display">\[\hat{\beta_1}=\frac{\sum_{i=1}^ny_i(x_i-\bar{x})}{\sum_{i=1}^n(x_i-\bar{x})^2}\]</span>
+<span class="math display">\[\hat{\beta_0}=\bar{y}-\hat{\beta_1}\bar{x}\]</span>
+Una desventaja del método de mínimos cuadrados, es que no se pueden hacer procesos de inferencia sobre los parámetros de interés <span class="math inline">\(\beta_0\)</span> y <span class="math inline">\(\beta_1\)</span>; procesos como intervalos de confianza o pruebas de hipótesis.</p>
+<p>Para subsanar esta deficiencia, es necesario asumir una distribución para el error, <span class="math inline">\(\epsilon_i\)</span>, que, siguiendo la teoría general de errores, se asume que tiene distribución normal, con media cero y varianza <span class="math inline">\(\sigma^2\)</span>.</p>
+<p>Este supuesto garantiza que las distribuciones de <span class="math inline">\(y_i,\ \hat{\beta_0},\ \hat{\beta_1}\)</span> sean normales, lo que permite tanto la construcción de intervalos de confianza como de pruebas de hipótesis.</p>
+<p>N.B El estimador de <span class="math inline">\(\sigma^2\)</span> está dado por <span class="math inline">\(\hat{\sigma^2}=\frac{\sum_{i=1}^n(y_i-\hat{y_i})^2}{n-2}\)</span></p>
+</div>
+<div id="pruebas-de-hipótesis" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> Pruebas de hipótesis</h2>
+<p>En el modelo de regresión lineal simple, la prueba de hipótesis más importante es determinar si estadísticamente existe la dependencia líneal entre <span class="math inline">\(x\)</span> y <span class="math inline">\(y\)</span>, y que no sea producto del muestreo (debido al azar). Es decir, realizar la prueba de hipótesis:</p>
+<p><span class="math display">\[H_0:\beta_1=0 \ vs.\ H_a:\beta_1\neq 0\]</span>
+No rechazar la hipótesis nula, implicaría que la variable <span class="math inline">\(x\)</span> <em>no ayuda a explicar</em> a <span class="math inline">\(y\)</span> o bien que, tal vez, la relación entre estas variables <strong>no es lineal</strong>.</p>
+<p>En este modelo, esta última explicación es un poco cuestionable, ya que se parte, de inicio, del diagrama de dispersión de los datos.</p>
+<p>Si rechazamos la hipótesis nula, implicará que <span class="math inline">\(x\)</span> <em>es importante para explicar la respuesta</em> <span class="math inline">\(y\)</span> y que la relación lineal entre ellas puede ser adecuada.</p>
+<p>Rechazar esta hipótesis nula, también podría implicar que existe una relación lineal entre las variables pero, tal vez, se pueda mejorar el ajuste con algún otro término no lineal.</p>
+</div>
+<div id="interpretación-de-los-parámetros" class="section level2" number="3.4">
+<h2><span class="header-section-number">3.4</span> Interpretación de los parámetros</h2>
+<p>Cuando se tiene una recta en el sentido determinista, los parámetros <span class="math inline">\(\beta_0\)</span> y <span class="math inline">\(\beta_1\)</span> tienen una interpretación muy clara; <span class="math inline">\(\beta_0\)</span> se interpreta como el valor de <span class="math inline">\(y\)</span> cuando <span class="math inline">\(x\)</span> es igual a cero y <span class="math inline">\(\beta_1\)</span> como el cambio que experimenta la variable de respuesta <span class="math inline">\(y\)</span> por unidad de cambio en <span class="math inline">\(x\)</span>.</p>
+<p>La interpretación, desde el punto de vista estadístico, de los parámetros estimados en el modelo de regresión es muy similar:</p>
+<ul>
+<li><p><span class="math inline">\(\hat{\beta_0}\)</span> es el promedio esperado de la respuesta <span class="math inline">\(y\)</span> cuando <span class="math inline">\(x = 0\)</span> (este parámetro tendrá una interpretación dentro del
+modelo, si tiene sentido que <span class="math inline">\(x\)</span> tome el valor cero, de lo contrario, no tiene una interpretación razonable) y</p></li>
+<li><p><span class="math inline">\(\hat{\beta_1}\)</span> es el cambio promedio o cambio esperado en <span class="math inline">\(y\)</span> por unidad de cambio en <span class="math inline">\(x\)</span>.</p></li>
+</ul>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="regresión-lineal.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="regresión-lineal-múltiple.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

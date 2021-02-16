@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>1 Modelos lineales | Modelos Lineales</title>
+  <meta name="description" content="Material para el curso Modelos Lineales de la Facultad de Ciencias, Universidad Nacional Autónoma de México" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="1 Modelos lineales | Modelos Lineales" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Material para el curso Modelos Lineales de la Facultad de Ciencias, Universidad Nacional Autónoma de México" />
+  <meta name="github-repo" content="alberto-mateos-mo/ModelosLinealesLibro" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="1 Modelos lineales | Modelos Lineales" />
+  
+  <meta name="twitter:description" content="Material para el curso Modelos Lineales de la Facultad de Ciencias, Universidad Nacional Autónoma de México" />
+  
+
+<meta name="author" content="Sofía Villers Gómez" />
+<meta name="author" content="David Alberto Mateos Montes de Oca" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="regresión-lineal.html"/>
+<script src="libs/header-attrs-2.3/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Modelos Lineales 2021-2</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#detalles-técnicos"><i class="fa fa-check"></i><b>0.1</b> Detalles técnicos</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#licencia"><i class="fa fa-check"></i>Licencia</a></li>
+</ul></li>
+<li class="part"><span><b>I Introduccion</b></span></li>
+<li class="chapter" data-level="1" data-path="modelos-lineales.html"><a href="modelos-lineales.html"><i class="fa fa-check"></i><b>1</b> Modelos lineales</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="modelos-lineales.html"><a href="modelos-lineales.html#principios-de-la-modelización-estadística"><i class="fa fa-check"></i><b>1.1</b> Principios de la modelización estadística</a></li>
+<li class="chapter" data-level="1.2" data-path="modelos-lineales.html"><a href="modelos-lineales.html#identificar-y-caracterizar-variables"><i class="fa fa-check"></i><b>1.2</b> Identificar y Caracterizar Variables</a></li>
+<li class="chapter" data-level="1.3" data-path="modelos-lineales.html"><a href="modelos-lineales.html#tipos-de-variables-y-tipo-de-modelo"><i class="fa fa-check"></i><b>1.3</b> Tipos de variables y tipo de modelo</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="modelos-lineales.html"><a href="modelos-lineales.html#en-función-de-las-variables-explicativas"><i class="fa fa-check"></i><b>1.3.1</b> En función de las variables explicativas</a></li>
+<li class="chapter" data-level="1.3.2" data-path="modelos-lineales.html"><a href="modelos-lineales.html#en-función-de-la-variable-respuesta"><i class="fa fa-check"></i><b>1.3.2</b> En función de la variable respuesta</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="modelos-lineales.html"><a href="modelos-lineales.html#el-modelo-lineal-general"><i class="fa fa-check"></i><b>1.4</b> El modelo lineal general</a></li>
+</ul></li>
+<li class="part"><span><b>II Modelos de Regresión</b></span></li>
+<li class="chapter" data-level="2" data-path="regresión-lineal.html"><a href="regresión-lineal.html"><i class="fa fa-check"></i><b>2</b> Regresión Lineal</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="regresión-lineal.html"><a href="regresión-lineal.html#un-poco-de-história"><i class="fa fa-check"></i><b>2.1</b> Un poco de história</a></li>
+<li class="chapter" data-level="2.2" data-path="regresión-lineal.html"><a href="regresión-lineal.html#objetivos-del-análisis-de-regresión"><i class="fa fa-check"></i><b>2.2</b> Objetivos del análisis de regresión</a></li>
+<li class="chapter" data-level="2.3" data-path="regresión-lineal.html"><a href="regresión-lineal.html#el-algorítmo-de-regresión-lineal"><i class="fa fa-check"></i><b>2.3</b> El algorítmo de regresión lineal</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="regresión-lineal-simple.html"><a href="regresión-lineal-simple.html"><i class="fa fa-check"></i><b>3</b> Regresión lineal simple</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="regresión-lineal-simple.html"><a href="regresión-lineal-simple.html#solución-al-problema-de-regresión-lineal-simple"><i class="fa fa-check"></i><b>3.1</b> Solución al problema de regresión lineal simple</a></li>
+<li class="chapter" data-level="3.2" data-path="regresión-lineal-simple.html"><a href="regresión-lineal-simple.html#mínimos-cuadrados-ordinarios"><i class="fa fa-check"></i><b>3.2</b> Mínimos cuadrados ordinarios</a></li>
+<li class="chapter" data-level="3.3" data-path="regresión-lineal-simple.html"><a href="regresión-lineal-simple.html#pruebas-de-hipótesis"><i class="fa fa-check"></i><b>3.3</b> Pruebas de hipótesis</a></li>
+<li class="chapter" data-level="3.4" data-path="regresión-lineal-simple.html"><a href="regresión-lineal-simple.html#interpretación-de-los-parámetros"><i class="fa fa-check"></i><b>3.4</b> Interpretación de los parámetros</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html"><i class="fa fa-check"></i><b>4</b> Regresión lineal múltiple</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#solución-al-problema-de-regresión-lineal-múltiple-ecuaciones-normales"><i class="fa fa-check"></i><b>4.1</b> Solución al problema de regresión lineal múltiple: Ecuaciones normales</a></li>
+<li class="chapter" data-level="4.2" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#prueba-de-hipótesis"><i class="fa fa-check"></i><b>4.2</b> Prueba de hipótesis</a></li>
+<li class="chapter" data-level="4.3" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#interpretación-de-parámetros"><i class="fa fa-check"></i><b>4.3</b> Interpretación de parámetros</a></li>
+<li class="chapter" data-level="4.4" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#predicción-de-nuevos-valores"><i class="fa fa-check"></i><b>4.4</b> Predicción de nuevos valores</a></li>
+<li class="chapter" data-level="4.5" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#coeficiente-de-determinación"><i class="fa fa-check"></i><b>4.5</b> Coeficiente de determinación</a></li>
+<li class="chapter" data-level="4.6" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#evaluación-de-supuestos"><i class="fa fa-check"></i><b>4.6</b> Evaluación de supuestos</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#residuos"><i class="fa fa-check"></i><b>4.6.1</b> Residuos</a></li>
+<li class="chapter" data-level="4.6.2" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#linealidad-de-los-predictores"><i class="fa fa-check"></i><b>4.6.2</b> Linealidad de los predictores</a></li>
+<li class="chapter" data-level="4.6.3" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#supuestos-sobre-los-errores"><i class="fa fa-check"></i><b>4.6.3</b> Supuestos sobre los errores</a></li>
+<li class="chapter" data-level="4.6.4" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#puntos-palanca"><i class="fa fa-check"></i><b>4.6.4</b> Puntos palanca</a></li>
+<li class="chapter" data-level="4.6.5" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#multicolinealidad"><i class="fa fa-check"></i><b>4.6.5</b> Multicolinealidad</a></li>
+<li class="chapter" data-level="4.6.6" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#relación-funcional"><i class="fa fa-check"></i><b>4.6.6</b> Relación funcional</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#aplicación-en-r"><i class="fa fa-check"></i><b>4.7</b> Aplicación en R</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Modelos Lineales</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="modelos-lineales" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Modelos lineales</h1>
+<p>Los modelos lineales son una de las herramientas más importantes del análisis cuantitativo. En forma general, estos modelos se utilizan cuando se busca predecir o explicar una variable dependiente a partir de una o más variables independientes. Dependiendo de las características de las variables disponibles, la herramienta estadística más a apropiada para construir el modelo puede variar. Es por esta razón que cuando se construye un modelo estadístico es necesario tener en cuenta los principios de modelización y las caracteristicas de las variables.</p>
+<div id="principios-de-la-modelización-estadística" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Principios de la modelización estadística</h2>
+<ul>
+<li><p>Dado un conjunto de variables, cada una de las cuales es un vector de lecturas de un rasgo específico de las muestras en un experimento.</p></li>
+<li><p><strong>Problema:</strong> ¿De qué manera una variable <span class="math inline">\(Y\)</span> depende de otras variables <span class="math inline">\(X_1,...,X_n\)</span> en el estudio?</p></li>
+<li><p>Un <strong>modelo estadístico</strong> define una relación matemática entre los <span class="math inline">\(X_i\)</span> y <span class="math inline">\(Y\)</span>. El modelo es una representación del real <span class="math inline">\(Y\)</span> que pretende reemplazarlo en la medida de lo posible. Al menos el modelo debería capturar la dependencia de <span class="math inline">\(Y\)</span> de los <span class="math inline">\(X_i\)</span>.</p></li>
+</ul>
+</div>
+<div id="identificar-y-caracterizar-variables" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Identificar y Caracterizar Variables</h2>
+<p>Este es el primer paso en el modelado:</p>
+<ul>
+<li><p>Qué variable es la variable de respuesta;</p></li>
+<li><p>Qué variables son las variables explicativas;</p></li>
+<li><p>¿Son las variables explicativas continuas, categóricas o una mezcla de ambas?</p></li>
+<li><p>¿Cuál es la naturaleza de la variable de respuesta? ¿Es una medición contínua, un conteo, una proporción, una categoría o un tiempo hasta un evento?</p></li>
+</ul>
+</div>
+<div id="tipos-de-variables-y-tipo-de-modelo" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Tipos de variables y tipo de modelo</h2>
+<div id="en-función-de-las-variables-explicativas" class="section level3" number="1.3.1">
+<h3><span class="header-section-number">1.3.1</span> En función de las variables explicativas</h3>
+<table>
+<colgroup>
+<col width="58%" />
+<col width="41%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Variables Explicativas</th>
+<th align="center">Modelo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Todas las variables <br>explicativas continuas</td>
+<td align="center">Regresión</td>
+</tr>
+<tr class="even">
+<td align="center">Todas las variables <br>explicativas categóricas</td>
+<td align="center">Análisis de Varianza (ANOVA)</td>
+</tr>
+<tr class="odd">
+<td align="center">Variables explicativas <br>tanto continuas como categóricas</td>
+<td align="center">Regresión, Análisis de Covarianza (ANCOVA)</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="en-función-de-la-variable-respuesta" class="section level3" number="1.3.2">
+<h3><span class="header-section-number">1.3.2</span> En función de la variable respuesta</h3>
+<table>
+<thead>
+<tr class="header">
+<th align="center">Variable de respuesta</th>
+<th align="center">Tipo de modelo</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Continua</td>
+<td align="center">Regresión normal, ANOVA, ANCOVA</td>
+</tr>
+<tr class="even">
+<td align="center">Proporción</td>
+<td align="center">Regresión logística</td>
+</tr>
+<tr class="odd">
+<td align="center">Conteos</td>
+<td align="center">Modelo log-lineal (regresión Poisson)</td>
+</tr>
+<tr class="even">
+<td align="center">Binario</td>
+<td align="center">Regresión logística binaria</td>
+</tr>
+<tr class="odd">
+<td align="center">Tiempo hasta evento</td>
+<td align="center">Análisis de supervivencia</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="el-modelo-lineal-general" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> El modelo lineal general</h2>
+<p>Como se mencionó, un modelo lineal, es un modelo para el <strong>análisis de regresión</strong>, que tiene como objetivo determinar una función matemática que describa el comportamiento de una variable dados los valores de otra u otras variables.</p>
+<p>En particular el <strong>análisis de regresión simple</strong>, pretende estudiar y explicar el comportamiento de una variable que notamos <span class="math inline">\(y\)</span>, y que llamaremos <strong>variable respuesta</strong>, <strong>variable dependiente</strong> o <strong>variable de interés</strong>, a partir de otra variable, que notamos <span class="math inline">\(x\)</span>, y que llamamos <strong>variable explicativa</strong>, <strong>variable independiente</strong>, <strong>covariable</strong> o <strong>regresor</strong>.</p>
+<p>El principal objetivo de la regresión es encontrar la función que mejor explique la relación entre la variable dependiente y las independientes.</p>
+<ul>
+<li>Una forma muy general para el modelo sería</li>
+</ul>
+<p><span class="math display">\[
+      y = f(x_1,x_2,...,x_p) + \epsilon,
+\]</span></p>
+<p>donde <span class="math inline">\(f\)</span> es una función desconocida y <span class="math inline">\(\epsilon\)</span> es el error en esta representación.
+Puesto que normalmente no tenemos suficientes datos para intentar estimar <span class="math inline">\(f\)</span> directamente, normalmente tenemos que asumir que tiene alguna forma restringida.</p>
+<ul>
+<li>La forma más simple y común es el <strong>modelo lineal (LM)</strong>.</li>
+</ul>
+<p><span class="math display">\[
+    y = \beta_0 + \beta_1 x_1 + \beta_2 x_z + \epsilon,
+\]</span></p>
+<p>donde <span class="math inline">\(\beta_i\)</span> <span class="math inline">\(i=0,1,2\)</span> son parámetros <em>desconocidos</em>.</p>
+<p><span class="math inline">\(\beta_0\)</span> se llama el término de intercepción. Por lo tanto, el problema se reduce a la estimación de cuatro valores en lugar de los complicados e infinitos <span class="math inline">\(f\)</span> dimensionales.</p>
+<ul>
+<li>Un modelo lineal simple con una sola variable exploratoria se define como:</li>
+</ul>
+<p><span class="math display">\[
+         \hat{y} = \hat{\beta}_0 + \hat{\beta}_1 x
+\]</span></p>
+<p>donde <span class="math inline">\(\hat y\)</span> son los valores ajustados para <span class="math inline">\(\hat{beta}_0\)</span> (intercepto) y <span class="math inline">\(\hat{\beta}_1\)</span> (pendiente). Luego por un <span class="math inline">\(x_i\)</span> dado obtenemos un <span class="math inline">\(\hat{y}_i\)</span> que se aproxima a <span class="math inline">\(y_i\)</span>.</p>
+<p>Todos los modelos mencionados en la sección 1.3 pueden escribirse en términos del modelo lineal general. Es posible apreciar que el tema de modelos lineales es bastante amplio y en este curso sólo nos enfocaremos en los modelos de regresión normal múltiple, análisis de varianza y modelos dinámicos.</p>
+
+</div>
+</div>
+
+
+
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="regresión-lineal.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
