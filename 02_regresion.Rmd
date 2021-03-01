@@ -106,6 +106,15 @@ modelo, si tiene sentido que $x$ tome el valor cero, de lo contrario, no tiene u
 
 - $\hat{\beta_1}$ es el cambio promedio o cambio esperado en $y$ por unidad de cambio en $x$.
 
+## Ejercicios
+
+Para usar los ejercicios del capítulo de regresión lineal simple corra la siguiente línea de código en su sesión de R:
+
+```{r, echo=TRUE, eval=FALSE}
+learnr::run_tutorial("regresion_lineal_simple", package = "ModelosLinealesFC")
+```
+
+
 # Regresión lineal múltiple
 
 La mayoría de los fenómenos reales son multicausales, por esta razón, un modelo de regresión más acorde a estudios reales es el modelo de regresión lineal múltiple, que es la generalización del modelo simple. 

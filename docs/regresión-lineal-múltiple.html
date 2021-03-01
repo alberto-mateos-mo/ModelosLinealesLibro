@@ -56,6 +56,69 @@
 <link href="libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
 
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
 
 </head>
 
@@ -71,7 +134,12 @@
 <ul class="summary">
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Modelos Lineales 2021-2</a>
 <ul>
-<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#detalles-técnicos"><i class="fa fa-check"></i><b>0.1</b> Detalles técnicos</a></li>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#detalles"><i class="fa fa-check"></i><b>0.1</b> Detalles</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#complementos"><i class="fa fa-check"></i><b>0.2</b> Complementos</a>
+<ul>
+<li class="chapter" data-level="0.2.1" data-path="index.html"><a href="index.html#ejercicios-interactivos"><i class="fa fa-check"></i><b>0.2.1</b> Ejercicios Interactivos</a></li>
+<li class="chapter" data-level="0.2.2" data-path="index.html"><a href="index.html#aplicación-de-análisis-de-datos"><i class="fa fa-check"></i><b>0.2.2</b> Aplicación de análisis de datos</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#licencia"><i class="fa fa-check"></i>Licencia</a></li>
 </ul></li>
 <li class="part"><span><b>I Introduccion</b></span></li>
@@ -99,6 +167,7 @@
 <li class="chapter" data-level="3.2" data-path="regresión-lineal-simple.html"><a href="regresión-lineal-simple.html#mínimos-cuadrados-ordinarios"><i class="fa fa-check"></i><b>3.2</b> Mínimos cuadrados ordinarios</a></li>
 <li class="chapter" data-level="3.3" data-path="regresión-lineal-simple.html"><a href="regresión-lineal-simple.html#pruebas-de-hipótesis"><i class="fa fa-check"></i><b>3.3</b> Pruebas de hipótesis</a></li>
 <li class="chapter" data-level="3.4" data-path="regresión-lineal-simple.html"><a href="regresión-lineal-simple.html#interpretación-de-los-parámetros"><i class="fa fa-check"></i><b>3.4</b> Interpretación de los parámetros</a></li>
+<li class="chapter" data-level="3.5" data-path="regresión-lineal-simple.html"><a href="regresión-lineal-simple.html#ejercicios"><i class="fa fa-check"></i><b>3.5</b> Ejercicios</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html"><i class="fa fa-check"></i><b>4</b> Regresión lineal múltiple</a>
 <ul>
@@ -257,18 +326,18 @@ Una <span class="math inline">\(R^2\)</span> cercana a uno implicaría que mucha
 <p>Estos residuos se utilizan en los distintos procedimientos para evaluar los supuestos y lo adecuado del ajuste del modelo. La mayoría de las pruebas conocidas para la verificación de los supuestos, son pruebas gráficas.</p>
 <p>Indudablemente, la prueba más importante es sobre la normalidad de los errores, ya que sobre este supuesto descansan todas la inferencias de este modelo.</p>
 <p>La manera de verificarlo es a través de la gráfica conocida como QQ-plot o QQ-norm, que grafica los cuantiles teóricos de una distribución normal (eje x) vs. los cuantiles asociados a los residuos. Entonces, si los residuos realmente provienen de una normal, la gráfica debe mostrar la función identidad. Fuertes desviaciones de esta línea darían evidencia de que los errores no se distribuyen normal.</p>
-<p><img src="_main_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 </div>
 <div id="linealidad-de-los-predictores" class="section level3" number="4.6.2">
 <h3><span class="header-section-number">4.6.2</span> Linealidad de los predictores</h3>
 <p>La manera estándar de evaluar la linealidad de las variables explicativas es a través de la gráfica de cada una de ellas contra los residuos. Si la variable en cuestión ingresa al modelo de manera lineal, esta gráfica debe mostrar un patrón totalmente aleatorio entre los puntos dispuestos en ella.</p>
 <p>Cuando la variable explicativa es politómica, este tipo de gráficas son poco ilustrativas en este sentido.</p>
-<p><img src="_main_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 </div>
 <div id="supuestos-sobre-los-errores" class="section level3" number="4.6.3">
 <h3><span class="header-section-number">4.6.3</span> Supuestos sobre los errores</h3>
 <p>Si la gráfica entre los valores ajustados y los residuos estandarizados, muestra un patrón aleatorio, es simétrica alrededor del cero y los puntos están comprendidos entre los valores -2 y 2, entonces se tendrá evidencia de que los errores tienen media cero, varianza constante y no están correlacionados.</p>
-<p><img src="_main_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <p>Los métodos mostrados hasta ahora, permiten evaluar el modelo de manera global y no por cada observación dentro del mismo. Dado que una observación puede resultar determinante sobre alguna(s) característica(s) del modelo, es conveniente verificar el impacto que cada observación pueda tener en los distintos aspectos del modelo. Las estadísticas para evaluar el impacto que tiene una observación sobre todo el vector de parámetros, alguno de los regresores y sobre los valores predichos, se basan en la misma idea, que consiste en cuantificar el cambio en la característica de interés con y sin la observación que se está evaluando.</p>
 </div>
 <div id="puntos-palanca" class="section level3" number="4.6.4">
@@ -289,13 +358,13 @@ Con <span class="math inline">\(h_i\)</span> el i-ésimo elemento de la diagonal
 <li>Dffits</li>
 </ul>
 <p><strong>Distancia de Cook</strong>: Sirve para determinar si una observación es influyente en todo el vector de parámetros. Una observación se considera influyente, si su distancia de Cook sobrepasa el valor uno.</p>
-<p><img src="_main_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p><strong>Dfbetas</strong>: Sirven para determinar si una observación es influyente en alguno de los coeficientes de regresión. Hay un dfbeta por cada parámetro dentro del modelo, incluido, por supuesto, el de la ordenada al origen. La regla de dedo es que la observación <span class="math inline">\(i\)</span> es influyente en el j-ésimo coeficiente de regresión si:</p>
 <p><span class="math display">\[|Dfbetas_{j,i}|&gt;\frac{2}{\sqrt{n}}\]</span></p>
-<p><img src="_main_files/figure-html/unnamed-chunk-9-1.png" width="672" /><img src="_main_files/figure-html/unnamed-chunk-9-2.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-13-1.png" width="672" /><img src="_main_files/figure-html/unnamed-chunk-13-2.png" width="672" /></p>
 <p><strong>Dffits</strong>: Se utilizan para determinar si una observación es influyente en la predicción de <span class="math inline">\(y\)</span>. Se dice que la i-ésima observación es influyente para predecir <span class="math inline">\(y\)</span>, si:</p>
 <p><span class="math display">\[|Dffits_i|&gt;2\sqrt{\frac{p}{n}}\]</span></p>
-<p><img src="_main_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 </div>
 <div id="multicolinealidad" class="section level3" number="4.6.5">
 <h3><span class="header-section-number">4.6.5</span> Multicolinealidad</h3>
@@ -335,7 +404,7 @@ Si el índice de condición es menor que 10, no hay ningún problema. Si está e
 <p>Primero, ya dijimos que este supuesto se evalúa realizando la gráfica de dispersión entre los residuos del modelo y los valores de la variable en cuestión. Cuando no hay una asociación lineal entre la respuesta y la covariable, generalmente este diagrama de dispersión muestra un patrón (tendencia) que sugiere qué tipo de transformación se debería hacer a la covariable para lograr linealidad con la respuesta.</p>
 <p>Debe quedar claro que la transformación puede realizarse a la variable explicativa o a la variable de respuesta.</p>
 <p>A muchos investigadores no les gusta transformar la respuesta porque argumentan que pierden <em>interpretabilidad</em> del modelo. Aunque esto puede ser cierto, existen transformaciones de la respuesta que pueden <em>regresarse</em> para interpretar el modelo con la respuesta original.</p>
-<p><img src="_main_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <p>Un problema asociado a esta identificación por parte del usuario, es que debe tener experiencia para asociar estas formas a una función analítica específica; hecho no necesariamente cierto. Por lo tanto, requiere de alguna herramienta técnica que pudiera auxiliarlo en esta labor.</p>
 <p>Un buen auxiliar, en el caso de que se crea que es necesario transformar la respuesta, es usar la llamada trasformación Box-Cox.</p>
 <div id="transformación-box-cox" class="section level4" number="4.6.6.1">

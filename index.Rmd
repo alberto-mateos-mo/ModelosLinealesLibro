@@ -23,7 +23,7 @@ library(devtools)
 
 Primera edición del libro de texto para el curso _Modelos Lineales_ de la Facultad de Ciencias.
 
-## Detalles técnicos
+## Detalles
 
 Este libro fue escrito con [bookdown](http://bookdown.org/) usando [RStudio](http://www.rstudio.com/ide/).
 
@@ -35,6 +35,39 @@ all_pkgs <- renv::dependencies(path = "DESCRIPTION") %>%
 session <- devtools::session_info(pkgs = all_pkgs)
 session$platform
 ```
+
+## Complementos
+
+### Ejercicios Interactivos
+
+Los ejercicios/ejemplos que acompañan este libro están disponibles a través de un paquete de R cuya instalación se hace de la siguiente manera:
+
+```{r, eval=FALSE}
+# install.packages("devtools")
+devtools::install_github("alberto-mateos-mo/ModelosLinealesFC")
+```
+
+Los ejercicios contenidos en el paquete están construidos con [learnr](https://rstudio.github.io/learnr/) y las indicaciones para abrirlos se dan al final de cada capítulo del libro.
+
+El objetivo de los mismos es proveer al estudiante de los elementos prácticos necesarios para aplicar los diferentes modelos estudiados usando `R` y al mismo tiempo aprender a interpretar/usar los resultados obtenidos.
+
+### Aplicación de análisis de datos
+
+Hemos desarrollado una aplicación para realizar algunos análisis estadísticos a través de una interfaz gráfica que usaremos como recurso didáctico y que podrán usar para experimentar con algunos modelos sin la necesidad de escribir código.
+
+La instalación de la app se hace con el siguiente comando:
+
+```{r, eval=FALSE}
+# install.packages("devtools")
+devtools::install_github("alberto-mateos-mo/data.analyseR")
+```
+
+Para lanzar la app debe usarse el siguiente comando:
+
+```{r, eval=FALSE}
+data.analyseR::run_app()
+```
+
 
 ## Licencia {-}
 
