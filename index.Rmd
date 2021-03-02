@@ -51,6 +51,14 @@ Los ejercicios contenidos en el paquete están construidos con [learnr](https://
 
 El objetivo de los mismos es proveer al estudiante de los elementos prácticos necesarios para aplicar los diferentes modelos estudiados usando `R` y al mismo tiempo aprender a interpretar/usar los resultados obtenidos.
 
+### Libro sobre R
+
+Aunque en los ejercicios interactivos disponibles se abordan las aplicaciones en R, éstos no son exhaustivos en el estudio del lenguaje como tal.
+
+Para ello, hemos diseñado un libro dedicado al aprendizaje de R.
+
+Este libro puede ser consultado en [esta liga.](https://carlosfernandovg.github.io/RBookdown)
+
 ### Aplicación de análisis de datos
 
 Hemos desarrollado una aplicación para realizar algunos análisis estadísticos a través de una interfaz gráfica que usaremos como recurso didáctico y que podrán usar para experimentar con algunos modelos sin la necesidad de escribir código.
