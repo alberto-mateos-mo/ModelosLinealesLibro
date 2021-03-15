@@ -457,3 +457,249 @@ Definiendo como $X_j^{\gamma_j}$ la correspondiente transformación Box-Tidwell 
 La tabla anterior para las transfomaciones analíticas de la respuesta, también aplican para estas transformaciones de los predictores.
 
 ## Aplicación en R
+
+### Ejemplo: Predicción de esperanza de vida
+
+Un estudio quiere generar un modelo que permita predecir la esperanza de vida media de los habitantes de una ciudad en función de diferentes variables. Se dispone de información sobre: habitantes, analfabetismo, ingresos, esperanza de vida, asesinatos, nivel de estudios, presencia de heladas, área y densidad poblacional.
+
+Usaremos los datos `state.x77` disponibles dentro de R que contiene estadísticas para los 50 estados de Estados Unidos.
+
+Primero modificamos los nombres de las variables para que sean más amigables y creamos una nueva variable calculada que represente la densidad poblacional del estado.
+
+```{r, include=FALSE}
+library(dplyr)
+library(psych)
+library(car)
+library(corrplot)
+
+datos <- as.data.frame(state.x77)
+
+datos <- rename(habitantes = Population, analfabetismo = Illiteracy,
+                ingresos = Income, esp_vida = `Life Exp`, asesinatos = Murder,
+                estudios = `HS Grad`, heladas = Frost, area = Area,
+                .data = datos)
+
+datos <- mutate(.data = datos, densidad_pobl = habitantes * 1000 / area)
+```
+
+#### Analizar la relación entre variables
+
+El primer paso a la hora de establecer un modelo lineal múltiple es estudiar la relación que existe entre variables. Esta información es crítica a la hora de identificar cuáles pueden ser los mejores predictores para el modelo, qué variables presentan relaciones de tipo no lineal (por lo que no pueden ser incluidas) y para identificar colinealidad entre predictores. A modo complementario, es recomendable representar la distribución de cada variable mediante histogramas.
+
+Las dos formas principales de hacerlo son mediante representaciones gráficas (gráficos de dispersión) y el cálculo del coeficiente de correlación de cada par de variables.
+
+```{r}
+round(cor(x = datos), 2)
+```
+
+```{r}
+multi.hist(x = datos, dcol = c("blue", "red"), dlty = c("dotted", "solid"), main = "")
+```
+
+Otros paquetes permiten representar a la vez los diagramas de dispersión, los valores de correlación para cada par de variables y la distribución de cada una de las variables, ese es el caso de la función `ggpairs`.
+
+```{r setup, message=FALSE}
+library(GGally)
+  
+ggpairs(datos, lower = list(continuous = "smooth"),
+        diag = list(continuous = "barDiag"), axisLabels = "none")
+```
+
+Del análisis preliminar se pueden extraer las siguientes conclusiones:
+
+Las variables que tienen una mayor relación lineal con la esperanza de vida son: asesinatos ($r=-0.78$), analfabetismo ($r=-0.59$) y estudios ($r=0.58$).
+
+Asesinatos y analfabetismo están medianamente correlacionadas ($r = 0.7$) por lo que posiblemente no sea útil introducir ambos predictores en el modelo.
+
+Las variables habitantes, área y densidad poblacional muestran una distribución exponencial, una transformación logarítmica posiblemente haría más normal su distribución.
+
+#### Generar el modelo
+
+Sabemos que hay diferentes formas (algoritmos) para llegar al modelo final más adecuado. En este caso se va a emplear el método mixto iniciando el modelo con todas las variables como predictores y realizando la selección de los mejores predictores con la medición Akaike(AIC).
+
+```{r}
+modelo <- lm(esp_vida ~ habitantes + ingresos + analfabetismo + asesinatos +
+               estudios + heladas + area + densidad_pobl, data = datos )
+summary(modelo)
+```
+
+El modelo con todas las variables introducidas como predictores tiene una $R^2$ alta ($0.7501$), i.e. es capaz de explicar el $75.01%$ de la variabilidad observada en la esperanza de vida. 
+
+El p-value del modelo es significativo ($3.787e-10$) por lo que se puede aceptar que el modelo no es por azar, al menos uno de los coeficientes parciales de regresión es distinto de 0. Muchos de ellos no son significativos, lo que es un indicativo de que podrían no contribuir al modelo.
+
+#### Selección de los mejores predictores
+
+En este caso se van a emplear la estrategia de stepwise mixto. El valor matemático empleado para determinar la calidad del modelo va a ser Akaike(AIC).
+
+```{r}
+step(object = modelo, direction = "both", trace = 1)
+```
+
+El mejor modelo resultante del proceso de selección ha sido:
+
+```{r}
+modelo <- lm(formula = esp_vida ~ habitantes + asesinatos + estudios +
+                heladas, data = datos)
+summary(modelo)
+```
+
+Es recomendable mostrar el intervalo de confianza para cada uno de los coeficientes parciales de regresión:
+
+```{r}
+confint(lm(formula = esp_vida ~ habitantes + asesinatos + estudios +
+             heladas, data = datos))
+```
+
+Cada una de las pendientes de un modelo de regresión lineal múltiple (coeficientes parciales de regresión de los predictores) se define del siguiente modo: Si el resto de variables se mantienen constantes, por cada unidad que aumenta el predictor en cuestión, la variable (Y) varía en promedio tantas unidades como indica la pendiente. 
+
+Para este ejemplo, por cada unidad que aumenta el predictor estudios, la esperanza de vida aumenta en promedio 0.04658 unidades, manteniéndose constantes el resto de predictores.
+
+#### Validación de condiciones para la regresión múltiple lineal
+
+##### Relación lineal entre los predictores numéricos y la variable respuesta
+  
+Esta condición se puede validar bien mediante diagramas de dispersión entre la variable dependiente y cada uno de los predictores (como se ha hecho en el análisis preliminar) o con diagramas de dispersión entre cada uno de los predictores y los residuos del modelo. Si la relación es lineal, los residuos deben de distribuirse aleatoriamente en torno a 0 con una variabilidad constante a lo largo del eje X. Esta última opción suele ser más indicada ya que permite identificar posibles datos atípicos.
+
+```{r,message=FALSE}
+library(ggplot2)
+library(gridExtra)
+
+plot1 <- ggplot(data = datos, aes(habitantes, modelo$residuals)) +
+  geom_point() + geom_smooth(color = "firebrick") + geom_hline(yintercept = 0) +
+  theme_bw()
+
+plot2 <- ggplot(data = datos, aes(asesinatos, modelo$residuals)) +
+  geom_point() + geom_smooth(color = "firebrick") + geom_hline(yintercept = 0) +
+  theme_bw()
+
+plot3 <- ggplot(data = datos, aes(estudios, modelo$residuals)) +
+  geom_point() + geom_smooth(color = "firebrick") + geom_hline(yintercept = 0) +
+  theme_bw()
+
+plot4 <- ggplot(data = datos, aes(heladas, modelo$residuals)) +
+  geom_point() + geom_smooth(color = "firebrick") + geom_hline(yintercept = 0) +
+  theme_bw()
+
+grid.arrange(plot1, plot2, plot3, plot4)
+```
+
+Analizando las gráficas no se observa evidencia suficiente para sospechar que no se cumple la linealidad para todos los predictores.
+
+##### Distribución normal de los residuos:
+
+```{r}
+qqnorm(modelo$residuals)
+qqline(modelo$residuals)
+```
+
+```{r}
+shapiro.test(modelo$residuals)
+```
+
+Tanto el análisis gráfico como es test de hipótesis confirman la normalidad.
+
+##### Variabilidad constante de los residuos (homocedasticidad):
+  
+Al representar los residuos frente a los valores ajustados por el modelo, los primeros se tienen que distribuir de forma aleatoria en torno a cero, manteniendo aproximadamente la misma variabilidad a lo largo del eje X. 
+
+Si se observa algún patrón específico, por ejemplo forma cónica o mayor dispersión en los extremos, significa que la variabilidad es dependiente del valor ajustado y por lo tanto no hay homocedasticidad.
+
+```{r, message=FALSE}
+ggplot(data = datos, aes(modelo$fitted.values, modelo$residuals)) +
+  geom_point() +
+  geom_smooth(color = "firebrick", se = FALSE) +
+  geom_hline(yintercept = 0) +
+  theme_bw()
+```
+
+```{r}
+library(lmtest)
+bptest(modelo)
+```
+
+De nuevo, tanto el gráfico como la prueba concluyen que no hay evidencias de falta de homocedasticidad.
+
+##### Multicolinealidad:
+  
+__Matriz de correlación entre predictores:__
+
+```{r}
+corrplot(cor(dplyr::select(datos, habitantes, asesinatos,estudios,heladas)),
+         method = "number", tl.col = "black")
+```
+
+
+__Análisis de Inflación de Varianza (VIF):__
+
+```{r}
+vif(modelo)
+```
+
+No hay predictores que muestren una correlación lineal muy alta ni inflación de varianza.
+
+__Autocorrelación:__
+
+```{r}
+dwt(modelo, alternative = "two.sided")
+```
+
+No hay evidencia de autocorrelación
+
+##### Identificación de posibles valores atípicos o influyentes
+
+```{r}
+datos$studentized_residual <- rstudent(modelo)
+
+ggplot(data = datos, aes(x = predict(modelo), y = abs(studentized_residual))) +
+  geom_hline(yintercept = 3, color = "grey", linetype = "dashed") +
+  # se identifican en rojo observaciones con residuos estandarizados absolutos > 3
+  geom_point(aes(color = ifelse(abs(studentized_residual) > 3, 'red', 'black'))) +
+  scale_color_identity() +
+  labs(title = "Distribución de los residuos studentized",
+       x = "predicción modelo") + 
+  theme_bw() + theme(plot.title = element_text(hjust = 0.5))
+```
+
+```{r}
+which(abs(datos$studentized_residual) > 3)
+```
+
+No se identifica ninguna observación atípica.
+
+```{r}
+summary(influence.measures(modelo))
+```
+
+En la tabla generada se recogen las observaciones que son significativamente influyentes en al menos uno de los predictores (una columna para cada predictor). Las tres últimas columnas son 3 medidas distintas para cuantificar la influencia. 
+
+A modo de guía se pueden considerar excesivamente influyentes aquellas observaciones para las que:
+
+- __Leverages (hat):__ Se consideran observaciones influyentes aquellas cuyos valores hat superen $2.5(\frac{p+1}{n})$, siendo $p$ el número de predictores y $n$ el número de observaciones.
+
+- __Distancia Cook (cook.d):__ Se consideran influyentes valores superiores a 1.
+
+La visualización gráfica de las influencias se obtiene del siguiente modo:
+  
+```{r}
+influencePlot(modelo)
+```
+
+Los análisis muestran varias observaciones influyentes (estados California y Hawaii) que exceden los límites de preocupación para los valores de Leverages o Distancia Cook. Estudios más exhaustivos consistirían en rehacer el modelo sin las observaciones y ver el impacto.
+
+#### Conclusión
+
+- El modelo lineal múltiple $$Esperanza de vida=5.014e−05habitantes−3.001e−01asesinatos+4.658e−02universitarios−5.943e−03heladas$$ es capaz de explicar el $73.6%$ de la variabilidad observada en la esperanza de vida ($R2: 0.736, R2-Adjusted: 0.7126$). 
+
+- El test F muestra que es significativo (p-value: $1.696e-12$). 
+
+- Se satisfacen todas las condiciones para este tipo de regresión múltiple. 
+
+- Dos observaciones (posición California y Hawaii) podrían estar influyendo de forma notable en el modelo.
+
+### Ejercicio interactivo: regresión lineal multiple aplicada a marketing
+
+Use el siguiente código para iniciar el ejercicio interactivo
+
+```{r, echo=TRUE, eval=FALSE}
+learnr::run_tutorial("regresion_lineal_multiple", package = "ModelosLinealesFC")
+```
