@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>5 ANOVA | Modelos Lineales</title>
+  <meta name="description" content="Material para el curso Modelos Lineales de la Facultad de Ciencias, Universidad Nacional Autónoma de México" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="5 ANOVA | Modelos Lineales" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Material para el curso Modelos Lineales de la Facultad de Ciencias, Universidad Nacional Autónoma de México" />
+  <meta name="github-repo" content="alberto-mateos-mo/ModelosLinealesLibro" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="5 ANOVA | Modelos Lineales" />
+  
+  <meta name="twitter:description" content="Material para el curso Modelos Lineales de la Facultad de Ciencias, Universidad Nacional Autónoma de México" />
+  
+
+<meta name="author" content="Sofía Villers Gómez" />
+<meta name="author" content="David Alberto Mateos Montes de Oca" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="regresión-lineal-múltiple.html"/>
+
+<script src="libs/header-attrs-2.7/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Modelos Lineales 2021-2</a>
+<ul>
+<li class="chapter" data-level="0.1" data-path="index.html"><a href="index.html#detalles"><i class="fa fa-check"></i><b>0.1</b> Detalles</a></li>
+<li class="chapter" data-level="0.2" data-path="index.html"><a href="index.html#complementos"><i class="fa fa-check"></i><b>0.2</b> Complementos</a>
+<ul>
+<li class="chapter" data-level="0.2.1" data-path="index.html"><a href="index.html#ejercicios-interactivos"><i class="fa fa-check"></i><b>0.2.1</b> Ejercicios Interactivos</a></li>
+<li class="chapter" data-level="0.2.2" data-path="index.html"><a href="index.html#libro-sobre-r"><i class="fa fa-check"></i><b>0.2.2</b> Libro sobre R</a></li>
+<li class="chapter" data-level="0.2.3" data-path="index.html"><a href="index.html#aplicación-de-análisis-de-datos"><i class="fa fa-check"></i><b>0.2.3</b> Aplicación de análisis de datos</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#licencia"><i class="fa fa-check"></i>Licencia</a></li>
+</ul></li>
+<li class="part"><span><b>I Introduccion</b></span></li>
+<li class="chapter" data-level="1" data-path="modelos-lineales.html"><a href="modelos-lineales.html"><i class="fa fa-check"></i><b>1</b> Modelos lineales</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="modelos-lineales.html"><a href="modelos-lineales.html#principios-de-la-modelización-estadística"><i class="fa fa-check"></i><b>1.1</b> Principios de la modelización estadística</a></li>
+<li class="chapter" data-level="1.2" data-path="modelos-lineales.html"><a href="modelos-lineales.html#identificar-y-caracterizar-variables"><i class="fa fa-check"></i><b>1.2</b> Identificar y Caracterizar Variables</a></li>
+<li class="chapter" data-level="1.3" data-path="modelos-lineales.html"><a href="modelos-lineales.html#tipos-de-variables-y-tipo-de-modelo"><i class="fa fa-check"></i><b>1.3</b> Tipos de variables y tipo de modelo</a>
+<ul>
+<li class="chapter" data-level="1.3.1" data-path="modelos-lineales.html"><a href="modelos-lineales.html#en-función-de-las-variables-explicativas"><i class="fa fa-check"></i><b>1.3.1</b> En función de las variables explicativas</a></li>
+<li class="chapter" data-level="1.3.2" data-path="modelos-lineales.html"><a href="modelos-lineales.html#en-función-de-la-variable-respuesta"><i class="fa fa-check"></i><b>1.3.2</b> En función de la variable respuesta</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="modelos-lineales.html"><a href="modelos-lineales.html#el-modelo-lineal-general"><i class="fa fa-check"></i><b>1.4</b> El modelo lineal general</a></li>
+</ul></li>
+<li class="part"><span><b>II Modelos de Regresión</b></span></li>
+<li class="chapter" data-level="2" data-path="regresión-lineal.html"><a href="regresión-lineal.html"><i class="fa fa-check"></i><b>2</b> Regresión Lineal</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="regresión-lineal.html"><a href="regresión-lineal.html#un-poco-de-história"><i class="fa fa-check"></i><b>2.1</b> Un poco de história</a></li>
+<li class="chapter" data-level="2.2" data-path="regresión-lineal.html"><a href="regresión-lineal.html#objetivos-del-análisis-de-regresión"><i class="fa fa-check"></i><b>2.2</b> Objetivos del análisis de regresión</a></li>
+<li class="chapter" data-level="2.3" data-path="regresión-lineal.html"><a href="regresión-lineal.html#el-algorítmo-de-regresión-lineal"><i class="fa fa-check"></i><b>2.3</b> El algorítmo de regresión lineal</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="regresión-lineal-simple.html"><a href="regresión-lineal-simple.html"><i class="fa fa-check"></i><b>3</b> Regresión lineal simple</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="regresión-lineal-simple.html"><a href="regresión-lineal-simple.html#solución-al-problema-de-regresión-lineal-simple"><i class="fa fa-check"></i><b>3.1</b> Solución al problema de regresión lineal simple</a></li>
+<li class="chapter" data-level="3.2" data-path="regresión-lineal-simple.html"><a href="regresión-lineal-simple.html#mínimos-cuadrados-ordinarios"><i class="fa fa-check"></i><b>3.2</b> Mínimos cuadrados ordinarios</a></li>
+<li class="chapter" data-level="3.3" data-path="regresión-lineal-simple.html"><a href="regresión-lineal-simple.html#pruebas-de-hipótesis"><i class="fa fa-check"></i><b>3.3</b> Pruebas de hipótesis</a></li>
+<li class="chapter" data-level="3.4" data-path="regresión-lineal-simple.html"><a href="regresión-lineal-simple.html#interpretación-de-los-parámetros"><i class="fa fa-check"></i><b>3.4</b> Interpretación de los parámetros</a></li>
+<li class="chapter" data-level="3.5" data-path="regresión-lineal-simple.html"><a href="regresión-lineal-simple.html#ejercicios"><i class="fa fa-check"></i><b>3.5</b> Ejercicios</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html"><i class="fa fa-check"></i><b>4</b> Regresión lineal múltiple</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#solución-al-problema-de-regresión-lineal-múltiple-ecuaciones-normales"><i class="fa fa-check"></i><b>4.1</b> Solución al problema de regresión lineal múltiple: Ecuaciones normales</a></li>
+<li class="chapter" data-level="4.2" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#prueba-de-hipótesis"><i class="fa fa-check"></i><b>4.2</b> Prueba de hipótesis</a></li>
+<li class="chapter" data-level="4.3" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#interpretación-de-parámetros"><i class="fa fa-check"></i><b>4.3</b> Interpretación de parámetros</a></li>
+<li class="chapter" data-level="4.4" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#predicción-de-nuevos-valores"><i class="fa fa-check"></i><b>4.4</b> Predicción de nuevos valores</a></li>
+<li class="chapter" data-level="4.5" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#coeficiente-de-determinación"><i class="fa fa-check"></i><b>4.5</b> Coeficiente de determinación</a></li>
+<li class="chapter" data-level="4.6" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#evaluación-de-supuestos"><i class="fa fa-check"></i><b>4.6</b> Evaluación de supuestos</a>
+<ul>
+<li class="chapter" data-level="4.6.1" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#residuos"><i class="fa fa-check"></i><b>4.6.1</b> Residuos</a></li>
+<li class="chapter" data-level="4.6.2" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#linealidad-de-los-predictores"><i class="fa fa-check"></i><b>4.6.2</b> Linealidad de los predictores</a></li>
+<li class="chapter" data-level="4.6.3" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#supuestos-sobre-los-errores"><i class="fa fa-check"></i><b>4.6.3</b> Supuestos sobre los errores</a></li>
+<li class="chapter" data-level="4.6.4" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#puntos-palanca"><i class="fa fa-check"></i><b>4.6.4</b> Puntos palanca</a></li>
+<li class="chapter" data-level="4.6.5" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#multicolinealidad"><i class="fa fa-check"></i><b>4.6.5</b> Multicolinealidad</a></li>
+<li class="chapter" data-level="4.6.6" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#relación-funcional"><i class="fa fa-check"></i><b>4.6.6</b> Relación funcional</a></li>
+</ul></li>
+<li class="chapter" data-level="4.7" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#aplicación-en-r"><i class="fa fa-check"></i><b>4.7</b> Aplicación en R</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#ejemplo-predicción-de-esperanza-de-vida"><i class="fa fa-check"></i><b>4.7.1</b> Ejemplo: Predicción de esperanza de vida</a></li>
+<li class="chapter" data-level="4.7.2" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#ejercicio-interactivo-regresión-lineal-multiple-aplicada-a-marketing"><i class="fa fa-check"></i><b>4.7.2</b> Ejercicio interactivo: regresión lineal multiple aplicada a marketing</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>III Analisis de varianza</b></span></li>
+<li class="chapter" data-level="5" data-path="anova.html"><a href="anova.html"><i class="fa fa-check"></i><b>5</b> ANOVA</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="anova.html"><a href="anova.html#introducción"><i class="fa fa-check"></i><b>5.1</b> Introducción</a></li>
+<li class="chapter" data-level="5.2" data-path="anova.html"><a href="anova.html#modelo-de-una-vía"><i class="fa fa-check"></i><b>5.2</b> Modelo de una vía</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="anova.html"><a href="anova.html#estimación-de-parámetros"><i class="fa fa-check"></i><b>5.2.1</b> Estimación de parámetros</a></li>
+<li class="chapter" data-level="5.2.2" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#residuos"><i class="fa fa-check"></i><b>5.2.2</b> Residuos</a></li>
+<li class="chapter" data-level="5.2.3" data-path="anova.html"><a href="anova.html#propiedades-de-los-estimadores-máximo-verosímiles"><i class="fa fa-check"></i><b>5.2.3</b> Propiedades de los estimadores máximo verosímiles</a></li>
+<li class="chapter" data-level="5.2.4" data-path="anova.html"><a href="anova.html#descomposición-de-la-variabilidad"><i class="fa fa-check"></i><b>5.2.4</b> Descomposición de la variabilidad</a></li>
+<li class="chapter" data-level="5.2.5" data-path="anova.html"><a href="anova.html#ejemplo"><i class="fa fa-check"></i><b>5.2.5</b> Ejemplo</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Modelos Lineales</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="anova" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> ANOVA</h1>
+<div id="introducción" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> Introducción</h2>
+<p>El análisis de la varianza fue desarrollado por Fisher en 1925 con el objetivo de comparar entre sí varios grupos o tratamientos. Normalmente es de interés estudiar cómo se diferencian estos grupos (o tratamientos), teniendo en cuenta la incidencia de otros factores cualitativos o cuantitativos (factores ambientales), cuya influencia es eliminada mediante una adecuada descomposición de la variabilidad total de un experimento en componentes independientes que puedan atribuirse a distintas causas.</p>
+<p>Por ejemplo, una compañía agricola que emplea diversos fertilizantes desea comprobar si éstos tienen efectos diferentes sobre el rendimiento de la planta de jitomate en donde se usan estos fertilizantes. La compañía tiene a su disposición 5 tipos de fertilizantes y para comparar su eficacia fumiga, con cada uno de los fertilizantes, un cierto número de parcelas de terreno de la misma calidad y de igual superficie. Cabe mencionar que el número de parcelas a las que les corresponde cada fertilizante no ncesariamnete deben ser las mismas, es decir el fertilizante 1 se aplica a 8 parcelas mientras que el fertilizante 2 se aplicó sólo en 6. Al recoger la cosecha se mide el rendimiento de la semilla en peso de jitomates por unidad de superficie. Este peso de jitomates nos permitirá saber si los fertilizantes están teniendo efecto sobre el rendimiento. En este ejemplo se esta tratando de controlar los efectos de los otros factores al tener parcelas de igual superficie, en condiciones lo más homogéneas posible y con la planta derivada de la misma semilla, de esta maner se espera que de observarse diferencias en las cosechas se puedan atrubuir solamente al fertilizante.</p>
+<p>Esencialmente el análisis de varianza determina si la discrepancia entre las medias de los tratamientos es mayor de lo que podría esperarse razonablemente de la discrepancia existente dentro de los tratamientos. En este tipo de modelos, la variable respuesta se considera del tipo continuo, mientras que las variables experimentales o factores son variables categóricas o categorizadas en niveles.</p>
+<p>Similar al proceso de inferencia, para llegar a conclusiones estadísticas correctas es necesario observar el resultado tras la repetición del experimento en varias unidades experimentales para cada una de las diversas condiciones que indica el diseño pero lo más homogéneas posibles dentro de cada una. Esto reducirá la variabilidad y, por tanto, aumentará la capacidad estadística de detectar cambios o identificar variables influyentes. Ya que con una variabilidad muy grande respecto al error experimental no se pueden detectar diferencias entre tratamientos.</p>
+<p>En general, en todo análisis de varianza es necesario considerar tres etapas:</p>
+<ul>
+<li><p>Diseño del experimento a fin de obtener observaciones de una variable Y, combinando adecuadamente los factores incidentes.</p></li>
+<li><p>Planteamiento de hipótesis, cálculo de sumas de cuadrados (residuales, de desviación de la hipótesis, etc.) y obtención de los cocientes F. Esta parte del análisis se formula mediante la teoría de los modelos lineales.</p></li>
+<li><p>Toma de decisiones e interpretación de los resultados. Planteamiento “a posteriori” de nuevas hipótesis.</p></li>
+</ul>
+</div>
+<div id="modelo-de-una-vía" class="section level2" number="5.2">
+<h2><span class="header-section-number">5.2</span> Modelo de una vía</h2>
+<p>Supongamos que una variable <span class="math inline">\(Y\)</span> ha sido observada bajo <span class="math inline">\(k\)</span> condiciones experimentales distintas. Puede ser que las observaciones provengan de <span class="math inline">\(k\)</span> poblaciones, o bien tratarse de réplicas para cada uno de los <span class="math inline">\(k\)</span> niveles de un factor.</p>
+<p>Indiquemos por <span class="math inline">\(y_{ij}\)</span> la réplica <span class="math inline">\(j (j = 1, . . . , n_i)\)</span> en la población o nivel <span class="math inline">\(i (i = 1, . . . , k)\)</span>, donde <span class="math inline">\(n_i\)</span> es el número de réplicas en la población o nivel <span class="math inline">\(i\)</span>. Entonce el conjunto de datos se puede ver como:</p>
+<p><span class="math display">\[\begin{align*}
+Nivel 1 \quad y_{11}, y_{12}, . . . , y_{1n_1}\\
+Nivel 2 \quad y_{21}, y_{22}, . . . , y_{2n_2}\\
+.\\
+.\\
+.\\
+Nivel k \quad y_{k1}, y_{k2}, . . . , y_{kn_k}
+\end{align*}\]</span></p>
+<p>Con estos datos se pueden calcular las siguientes medias:</p>
+<p>Media en la población o nivel <span class="math inline">\(i\)</span>:</p>
+<p><span class="math display">\[y_{i.} =\frac{1}{n_i}\sum_{j=1}^{n_i}y_{ij}\]</span></p>
+<p>Media general:</p>
+<p><span class="math display">\[\bar{y} = y_{\cdot\cdot} =\frac{1}{n}\sum_{i=1}^{k}\sum_{j=1}^{n_i}y_{ij}\]</span></p>
+<p>donde <span class="math inline">\(n=\sum_{i=1}^{k}n_i\)</span> es el número total de observaciones.</p>
+<p>El objetivo es estimar los efectos de los distintos <span class="math inline">\(k\)</span> niveles y contrastar la hipótesis de que todos los niveles del factor producen el mismo efecto, frente a la alternativa de que al menos dos difieren significativamente entre sí.</p>
+<p>Es importante mencionar que con este diseño de los datos es posible proponer distintos modelos lineales que en teoría o en la formulación matemática se adaptan al diseño de los datos antes mencionado. Por ejemplo se puede proponer el siguiente modelo lineal.</p>
+<p><span class="math display">\[y_{ij}=\mu_i+\epsilon_{ij},\ i=1,...,k;\ j=1,...,n_i\]</span></p>
+<p>siendo <span class="math inline">\((\mu_1,\mu_2,...\mu_k)&#39;\)</span> el vector de parámetros y <span class="math inline">\(\epsilon_{ij}\)</span> siendo las variables aleatorias que agrupan información proveniente de la combinación del factor y la observación (o lo no considerado en <span class="math inline">\(\mu_i\)</span>). En este modelo podemos considerar la matriz <span class="math inline">\(X\)</span> definida por una matriz identidad de <span class="math inline">\(k\)</span>x<span class="math inline">\(k\)</span> y entonce nos lleva a un modelo de la forma
+<span class="math display">\[Y=\mu X+\epsilon\]</span></p>
+<p>Esta es la representación matricial del modelo de regresión lineal simple ya conocido. Y por lo tanto sabemos que un estimador del vector de parámetros <span class="math inline">\(\mu\)</span> es <span class="math inline">\(\hat\mu=y_{i.}\)</span></p>
+<p>Asimismo podriamos expresar <span class="math inline">\(\mu_{i}\)</span> como la suma de dos términos <span class="math inline">\(\mu\)</span>, común a todas las observaciones, y <span class="math inline">\(\tau_{i}\)</span> específica a cada nivel, entonces el modelo propuesto sería:</p>
+<p><span class="math display">\[y_{ij}=\mu+\tau_i+\epsilon_{ij},\ i=1,...,k;\ j=1,...,n_i\]</span></p>
+<p>donde</p>
+<p><span class="math inline">\(y_{ij}\)</span> es la variable aleatoria que representa la observación j-ésima del i-ésimo tratamiento (nivel i-ésimo del factor).</p>
+<p><span class="math inline">\(\mu\)</span> es un efecto constante, común a todos los niveles, denominado media global.</p>
+<p><span class="math inline">\(\tau_i\)</span> es la parte de <span class="math inline">\(y_{ij}\)</span> debida a la acción del nivel i-ésimo, que será común a todos los elementos sometidos a ese nivel del factor. Los efectos de los factores <span class="math inline">\(\tau_{i}\)</span> son las desviaciones de la media de cada nivel con respecto a la media general, por esta razón se debe verificar la relación <span class="math inline">\(\sum_{i=1}^k\tau_{i}=0\)</span>.</p>
+<p><span class="math inline">\(\epsilon_{ij}\)</span> son variables aleatorias que engloban un conjunto de factores, cada uno de los cuales influye en la respuesta sólo en pequeña magnitud pero que de forma conjunta debe tenerse en cuenta en la especificación y tratamiento del modelo; es decir, las perturbaciones o error experimental pueden interpretarse como las variaciones causadas por todos los factores no analizados y que dentro del mismo tratamiento variarán de unos elementos a otros.</p>
+<p>Para este modelo lineal supondremos que los errores <span class="math inline">\(\epsilon_{ij}\)</span>:</p>
+<ul>
+<li><p>Tienen media cero</p></li>
+<li><p>Tienen varianza constante (hipótesis de homocedasticidad)</p></li>
+<li><p>Son estadísticamente independientes entre sí</p></li>
+<li><p>Su distribución es normal</p></li>
+</ul>
+<p>Analogamente al modelo anterior, se trata de contrastar si todos los niveles del factor producen el mismo efecto versus al menos un nivel del factor produce un efecto distinto.</p>
+<p>En ambos casos si la hipótesis de que todos los nivels producen el mismo efecto es cierta, entonces todos los niveles tienen la misma media, <span class="math inline">\(\mu\)</span>, y la pertenencia a un grupo u otro es irrelevante, y podemos considerar todas las observaciones como provenientes de una única población.</p>
+<div id="estimación-de-parámetros" class="section level3" number="5.2.1">
+<h3><span class="header-section-number">5.2.1</span> Estimación de parámetros</h3>
+<p>La hipótesis de normalidad sobre los términos de error conlleva el hecho de que las variables <span class="math inline">\(y_{ij}\)</span> sean normales e independientes, por lo que es inmediato construir la función de verosimilitud asociada a la muestra
+<span class="math inline">\(y=(y_{11},...,y_{1n_1},y_{21},...,y_{2n_2},...,y_{k1},...,y_{kn_k})\)</span></p>
+<p><span class="math display">\[L(\mu,\tau_i,\sigma^2)=(2\pi\sigma^2)^{n/2}exp \left( -\frac{1}{2\sigma^2}\sum_{i=1}^{k}\sum_{j=1}^{n_i}[y_{ij}-\mu-\tau_i]^2 \right)\]</span></p>
+<p>Los estimadores máximo-verosímiles para los parámetros <span class="math inline">\(\mu,\tau_{i},\sigma^2\)</span> son los valores para los cuales la función de verosimilitud alcanza su máximo. Por conveniencia, en vez de maximizar la función de verosimilitud, se maximiza el logaritmo de esta. En este caso,</p>
+<p><span class="math display">\[ln(L(\mu,\tau_i,\sigma^2))=-\frac{n}{2}ln(2\pi)-\frac{n}{2}ln(\sigma^2)-\frac{1}
+{2\sigma^2}\sum_{i=1}^{k}\sum_{j=1}^{n_i}[y_{ij}-\mu-\tau_i]^2\]</span></p>
+<p>Las derivadas parciales respecto de los parámetros del modelo son:</p>
+<p><span class="math display">\[\frac{\partial lnL}{\partial \mu}= \frac{1}
+{2}\sum_{i=1}^{k}\sum_{j=1}^{n_i}[y_{ij}-\mu-\tau_i]  \]</span></p>
+<p><span class="math display">\[\frac{\partial lnL}{\partial \tau_i}= \frac{1}
+{\sigma^2}\sum_{j=1}^{n_i}[y_{ij}-\mu-\tau_i] \quad i=1,...,k \]</span></p>
+<p><span class="math display">\[\frac{\partial lnL}{\partial \sigma^2}= \frac{N}{2\sigma^2}+\frac{1}
+{2(\sigma^2)^2}\sum_{i=1}^{k}\sum_{j=1}^{n_i}[y_{ij}-\mu-\tau_i]^2\]</span></p>
+<p>Igualando a cero y despejando los parámteros obtenemos los siguientes estimadores máximo verosimiles:</p>
+<p><span class="math display">\[\hat\mu=\bar y_{..}\]</span></p>
+<p><span class="math display">\[\hat\tau_i=\bar y_{i.}-\bar y{..}\]</span></p>
+<p><span class="math display">\[\hat\sigma^2=\frac{1}{n}\sum_{i=1}^{k}\sum_{j=1}^{n_i}[y_{ij}-\hat\mu-\hat\tau_i]^2=\frac{1}{n}\sum_{i=1}^{k}\sum_{j=1}^{n_i}[y_{ij}-\bar y_{i.}]^2=\frac{1}{n}\sum_{i=1}^{k}n_is_i^2\]</span></p>
+<p>donde <span class="math inline">\(s_i^2\)</span> es la varianza muestral del i-ésimo nivel.</p>
+</div>
+<div id="residuos" class="section level3" number="5.2.2">
+<h3><span class="header-section-number">5.2.2</span> Residuos</h3>
+<p>Los residuos se definen como las diferencias entre los valores observados <span class="math inline">\(y_{ij}\)</span> y los valores previstos por el modelo <span class="math inline">\(\hat y_{ij}\)</span> y los denotamos por</p>
+<p><span class="math display">\[e_{ij}=y_{ij}-\hat y_{ij}=y_{ij}-\hat\mu-\hat \tau_{i}=y_{ij}-\bar y_{i.}\]</span></p>
+<p>Los residuos son los estimadores de los errores aleatorios <span class="math inline">\(\epsilon_{ij}=y_{ij}-\mu-\tau_i\)</span>, los cuales son variables aleatorias no observables. Y es posible verificar que la suma de los residuos es cero.</p>
+<p>Por otro lado con esta definición de los residuos, tenemos que el estimador máximo-verosimil <span class="math inline">\(\hat \sigma^2\)</span> se puede escribir en términos de la suma de los residuos.</p>
+<p><span class="math display">\[\hat \sigma^2=\frac{\sum_{ij}e_{ij}^2}{n}\]</span></p>
+</div>
+<div id="propiedades-de-los-estimadores-máximo-verosímiles" class="section level3" number="5.2.3">
+<h3><span class="header-section-number">5.2.3</span> Propiedades de los estimadores máximo verosímiles</h3>
+<p>Recordaremos algunas de las propiedades de los estimadores máximo verosímiles de <span class="math inline">\(\mu, \tau_{i}, \sigma^2\)</span>, estas propiedades son de utilidad para la descomposición de la varianza y las pruebas de hipótesis que se verán mas adelante.</p>
+<div id="propiedades-de-hat-mu" class="section level4" number="5.2.3.1">
+<h4><span class="header-section-number">5.2.3.1</span> Propiedades de <span class="math inline">\(\hat \mu\)</span></h4>
+<ul>
+<li><p><span class="math inline">\(\hat\mu\)</span> es un estimador insesgado de <span class="math inline">\(\mu\)</span></p></li>
+<li><p>La varianza de <span class="math inline">\(\hat\mu\)</span> es <span class="math inline">\(\frac {\sigma^2}{n}\)</span></p></li>
+<li><p><span class="math inline">\(\hat\mu\)</span> tiene distribución normal, puesto que dicho estimador es combinación lineal de las variables <span class="math inline">\(y_{ij}\)</span> y éstas son variables aleatorias independientes con distribución normal.</p></li>
+</ul>
+</div>
+<div id="propiedades-de-hat-tau_i" class="section level4" number="5.2.3.2">
+<h4><span class="header-section-number">5.2.3.2</span> Propiedades de <span class="math inline">\(\hat \tau_{i}\)</span></h4>
+<ul>
+<li><p><span class="math inline">\(\hat\tau_{i}\)</span> es un estimador insesgado de <span class="math inline">\(\tau_{i}\)</span></p></li>
+<li><p>La varianza de <span class="math inline">\(\hat\tau_{i}\)</span> es <span class="math inline">\((n-n_i)\frac {\sigma^2}{nn_i}\)</span></p></li>
+<li><p><span class="math inline">\(\hat\tau_{i}\)</span> tiene distribución normal, puesto que dicho estimador es combinación lineal de las variables <span class="math inline">\(y_{ij}\)</span> y éstas son variables aleatorias independientes con distribución normal.</p></li>
+</ul>
+</div>
+<div id="propiedades-de-hat-sigma2" class="section level4" number="5.2.3.3">
+<h4><span class="header-section-number">5.2.3.3</span> Propiedades de <span class="math inline">\(\hat \sigma^2\)</span></h4>
+<ul>
+<li><p><span class="math inline">\(\hat \sigma^2\)</span> NO es un estimador insesgado de <span class="math inline">\(\sigma^2\)</span></p></li>
+<li><p><span class="math inline">\(\frac {n\hat \sigma^2}{\sigma^2}\sim\chi^2_{(n-k)}\)</span></p></li>
+</ul>
+</div>
+</div>
+<div id="descomposición-de-la-variabilidad" class="section level3" number="5.2.4">
+<h3><span class="header-section-number">5.2.4</span> Descomposición de la variabilidad</h3>
+<p>Para comparar los efectos de los distintos niveles de un factor se emplea la técnica estadística denominada análisis de la varianza, abreviadamente ANOVA, que está basada en la descomposición de la variabilidad total de los datos en distintas componentes.</p>
+<p>Se considera la siguiente identidad:</p>
+<p><span class="math display">\[y_{ij}-\overline{y}=(y_{i.}-\overline{y})+(y_{ij}-y_{i.})\]</span></p>
+<p>Elevando al cuadrado y sumando se obtiene:</p>
+<p><span class="math display">\[\sum_{ij}(y_{ij}-\overline{y})^2=\sum_{ij}(y_{i.}-\overline{y})^2+\sum_{ij}(y_{ij}-y_{i.})^2+2\sum_{ij}(y_{i.}-\overline{y})(y_{ij}-y_{i.})\]</span></p>
+<p>Considerando que</p>
+<p><span class="math display">\[\sum_{ij}(y_{i.}-\overline{y})(y_{ij}-y_{i.})=\sum_{ij}(y_{ij}-y_{i.})y_{i.}-\sum_{ij}(y_{ij}-y_{i.})\overline{y}=0\]</span></p>
+<p>La igualdad se da por que <span class="math inline">\(\hat y_{ij}=\hat\mu_i=y_{i.}\)</span> entonces <span class="math inline">\(\sum_{ij}(y_{ij}-y_{i.})\)</span> representa la suma de los residuales la cual es cero.</p>
+<p>Por lo tanto la ecuación queda como:</p>
+<p><span class="math display">\[\sum_{ij}(y_{ij}-\overline{y})^2=\sum_{ij}(y_{i.}-\overline{y})^2+\sum_{ij}(y_{ij}-y_{i.})^2\]</span></p>
+<p>Generalmente se hace un cambio de notación:</p>
+<ul>
+<li><p><span class="math inline">\(SC_{T}\)</span> es la suma de cuadrados total, mide la variabilidad de las observaciones del total respecto a la media global y es denotado por <span class="math inline">\(SC_{T}=\sum_{ij}(y_{ij}-\overline{y})^2\)</span></p></li>
+<li><p><span class="math inline">\(SC_{E}\)</span> es la suma de cuadrados entre grupos, es denotado por <span class="math inline">\(SC_{E}=\sum_{ij}(y_{i.}-\overline{y})^2=\sum_{j}n_{i}(y_{i.}-\overline{y})^2\)</span></p></li>
+<li><p><span class="math inline">\(SC_{D}\)</span> es la suma de cuadrados dentro de grupos o intragrupos, es denotado por <span class="math inline">\(SC_{D}=\sum_{ij}(y_{ij}-y_{i.})^2\)</span></p></li>
+</ul>
+<p>De esta forma se tiene la siguiente igualdad:</p>
+<p><span class="math display">\[SC_{T}=SC_{E}+SC_{D}\]</span></p>
+<p>Además se observa que:</p>
+<ul>
+<li><p><span class="math inline">\(SC_{T}\)</span> tiene <span class="math inline">\(n-1\)</span> grados de libertad, ya que la suma <span class="math inline">\(\sum_{ij}(y_{ij}-\overline{y})^2\)</span> es la parte central del estimador de la varianza <span class="math inline">\((n-1)S^2=\frac{\sum_{ij}(y_{ij}-\overline{y})^2}{n-1}\)</span> en el cual al estimar media global con <span class="math inline">\(\overline{y}\)</span> pierde un grado de libertad.</p></li>
+<li><p><span class="math inline">\(SC_{E}\)</span> tiene <span class="math inline">\(k-1\)</span> grado de libertad,ya que <span class="math inline">\(SC_{E}=\sum_{j}n_{i}(y_{i.}-\overline{y})^2\)</span> la suma es sobre los <span class="math inline">\(k\)</span> factores y se esta estimando la media global con <span class="math inline">\(\overline{y}\)</span>.</p></li>
+<li><p><span class="math inline">\(SC_{D}\)</span> tiene <span class="math inline">\(n-k\)</span> grados de libertad, ya que la regresión <span class="math inline">\(SC_{D}=SC_{T}-SC_{E},\)</span> en el cual se ha visto que <span class="math inline">\(SC_{T}\)</span> y <span class="math inline">\(SC_{E}\)</span> tienen <span class="math inline">\(n-1\)</span> y <span class="math inline">\(k-1\)</span> grado de libertad, respectivamente, así los grados de libertad de <span class="math inline">\(SC_{D}=n-1-(k-1),\)</span> entonces <span class="math inline">\(SC_{D}\)</span> tienen n-k grados de libertad.</p></li>
+</ul>
+<p>Sabemos que el modelo propuesto considera que los errores tienen distribución normal, por lo tanto dado que <span class="math inline">\(\epsilon_{ij} \sim N(0,\sigma^2)\)</span>:</p>
+<ul>
+<li><p><span class="math inline">\(\frac{SC_{D}}{\sigma^2}\sim \chi^2_{(n-k)}.\)</span></p></li>
+<li><p>Bajo el supuesto de que las medias de las <span class="math inline">\(k\)</span> poblaciones son iguales entonces <span class="math inline">\(SC_{E}/(k-1)\)</span> es otro estimador insesgado de <span class="math inline">\(\sigma^2\)</span> y <span class="math inline">\(\frac{SC_{E}}{\sigma^2}\sim\chi^2_{(k-1)}\)</span></p></li>
+<li><p>Debido a un resultado de probabilidad se sabe que si <span class="math inline">\(x \sim \chi^2_{(n)}\)</span> y <span class="math inline">\(y \sim \chi^2_{(m)}\)</span> y si <span class="math inline">\(x\)</span> es independiente a <span class="math inline">\(y\)</span> entonces:</p></li>
+</ul>
+<p><span class="math display">\[\frac{x/n}{y/m}\sim F_{(n,m)}\]</span></p>
+<p>El contraste estadístico de interés en este modelo, como mencionamos al principio de esta sección, es el que tiene como hipótesis nula la igualdad de medias de los tratamientos, la cual se puede expresar de la siguiente forma:</p>
+<p><span class="math display">\[H_0: \mu_1=\mu_2=...=\mu_k=\mu\]</span></p>
+<p>o</p>
+<p><span class="math display">\[H_0: \tau_1=\tau_2=...=\tau_k=0\]</span></p>
+<p>Por lo tanto se puede aplicar la prueba <span class="math inline">\(F\)</span> de Fisher en el análisis de varianza para probar las hipótesis de que las medias de las <span class="math inline">\(k\)</span> poblaciones son iguales, quedando el estadístico F</p>
+<p><span class="math display">\[F=\frac{\frac{SC_{E}}{k-1}}{\frac{SC_{D}}{n-k}} \sim F_{(k-1,n-k)}\]</span></p>
+<p>El siguiente cuadro resume la información anterior, mejor conocida como <strong>Tabla ANOVA:</strong></p>
+<p><span class="math display">\[
+\begin{array}{|c| c| c| c| c|}
+\hline
+&amp;Grados\ de\ libertad &amp; Suma\ de\ Cuadrados &amp; Cuadrado\ Medio &amp; Prueba\ F \\
+\hline
+\hline
+Entre\ grupos &amp; k-1   &amp; SC_{E}=\sum_{j}n_{i}(y_{i.}-\overline{y})^2 &amp; \frac{SC_{E}}{k-1} &amp;\frac{SC_{E}/(k-1)}{SC_{D}/(n-k)} \\
+\hline
+Dentro\ grupos     &amp; n-k &amp; SC_{D}=\sum_{ij}(y_{ij}-y_{i.})^2&amp; \frac{SC_{D}}{n-k} &amp; -\\
+\hline 
+Total     &amp; n-1 &amp; SC_{T}=\sum_{ij}(y_{ij}-\overline{y})^2 &amp; - &amp; - \\
+\hline
+\end{array}
+\]</span></p>
+<p>En esta tabla tenemos entonces la descomposición de la varianza observada en los datos. En la columna de suma de cuadrados tenemos la suma de cuadrados totales que y la descomposición de esta en la diferencia observada entre los grupos y la diferencia observada dentro de los grupos. En la tabla ANOVA también se incluye el estadístico de prueba F que se usa para concluir estadisticamente si los distintos niveles o grupos en los que están clasificadas las observaciones son significativamente diferentes o no.</p>
+<p>Similar a lo estudiado en los modelos de regresión lineal, en este análisis de varianza también se tiene el coeficiente de determinación, el cual con frecuencia se le asocia a la proporción de la variación explicada por los grupos, ya que <span class="math inline">\(0&lt;SC_{E}&lt;SC_{T}\)</span> entonces los valores del coeficiente de determinación están entre <span class="math inline">\(0&lt;R^2&lt;1.\)</span></p>
+<p>Se define el coeficiente de determinación del modelo del como:</p>
+<p><span class="math display">\[R^2=\frac{SC_{E}}{SC_{T}}=1-\frac{SC_{D}}{SC_{T}}.\]</span></p>
+</div>
+<div id="ejemplo" class="section level3" number="5.2.5">
+<h3><span class="header-section-number">5.2.5</span> Ejemplo</h3>
+<p>Se desean comparar dos medicamentos D (diurético), B (betabloquedor) con un producto inocuo P (placebo). Se tomó una muestra de 15 individuos hipertensos cuyas condiciones iniciales eran suficientemente homogéneas y se asignaron los tratamientos al azar.</p>
+<p>El objetivo del estudio es ver cómo actuan los tres tratamientos frente a la hipertensión, concretamente si la disminuyen. Para cubrir con el objetivo, se ha elegido la variable observable “porcentaje de descenso de la presión arterial media.” Los datos obtenidos se presentan en la siguiente tabla:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">D</th>
+<th align="center">B</th>
+<th align="center">P</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">22</td>
+<td align="center">20</td>
+<td align="center">10</td>
+</tr>
+<tr class="even">
+<td align="center">28</td>
+<td align="center">28</td>
+<td align="center">5</td>
+</tr>
+<tr class="odd">
+<td align="center">30</td>
+<td align="center">35</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">15</td>
+<td align="center">19</td>
+<td align="center">14</td>
+</tr>
+<tr class="odd">
+<td align="center">17</td>
+<td align="center">33</td>
+<td align="center">18</td>
+</tr>
+</tbody>
+</table>
+<p>Primero calculamos las medias por medicamento <span class="math inline">\(y_{D.}\)</span>, <span class="math inline">\(y_{B.}\)</span> y <span class="math inline">\(y_{P.}\)</span> asi como la media global <span class="math inline">\(y_{..}\)</span></p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="anova.html#cb40-1" aria-hidden="true" tabindex="-1"></a>x<span class="ot">=</span><span class="fu">c</span>(<span class="dv">22</span>,<span class="dv">18</span>,<span class="dv">30</span>,<span class="dv">15</span>,<span class="dv">17</span>,<span class="dv">20</span>,<span class="dv">28</span>,<span class="dv">35</span>,<span class="dv">19</span>,<span class="dv">33</span>,<span class="dv">10</span>,<span class="dv">5</span>,<span class="dv">0</span>,<span class="dv">14</span>,<span class="dv">18</span>)</span>
+<span id="cb40-2"><a href="anova.html#cb40-2" aria-hidden="true" tabindex="-1"></a>y<span class="ot">=</span><span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;D&quot;</span>,<span class="dv">5</span>),<span class="fu">rep</span>(<span class="st">&quot;B&quot;</span>,<span class="dv">5</span>),<span class="fu">rep</span>(<span class="st">&quot;P&quot;</span>,<span class="dv">5</span>))</span>
+<span id="cb40-3"><a href="anova.html#cb40-3" aria-hidden="true" tabindex="-1"></a>A<span class="ot">=</span><span class="fu">data.frame</span>(x,y)</span>
+<span id="cb40-4"><a href="anova.html#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="fu">aggregate</span>(A<span class="sc">$</span>x,<span class="at">by=</span><span class="fu">list</span>(A<span class="sc">$</span>y), <span class="at">FUN=</span>mean)</span></code></pre></div>
+<pre><code>##   Group.1    x
+## 1       B 27.0
+## 2       D 20.4
+## 3       P  9.4</code></pre>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="anova.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(A<span class="sc">$</span>x)</span></code></pre></div>
+<pre><code>## [1] 18.93333</code></pre>
+<p><span class="math display">\[y_{B.}=27.00\]</span></p>
+<p><span class="math display">\[y_{D.}=20.40\]</span></p>
+<p><span class="math display">\[y_{P.}=9.40\]</span></p>
+<p><span class="math display">\[y_{..}=18.93\]</span></p>
+<p>Ahora calculamos <span class="math inline">\(SC_E\)</span> y <span class="math inline">\(SC_T\)</span></p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="anova.html#cb44-1" aria-hidden="true" tabindex="-1"></a>SCE<span class="ot">=</span><span class="dv">5</span><span class="sc">*</span>(<span class="dv">27</span><span class="fl">-18.93</span>)<span class="sc">^</span><span class="dv">2</span><span class="sc">+</span><span class="dv">5</span><span class="sc">*</span>(<span class="fl">20.4-18.93</span>)<span class="sc">^</span><span class="dv">2</span><span class="sc">+</span><span class="dv">5</span><span class="sc">*</span>(<span class="fl">9.4-18.93</span>)<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb44-2"><a href="anova.html#cb44-2" aria-hidden="true" tabindex="-1"></a>SCE</span></code></pre></div>
+<pre><code>## [1] 790.5335</code></pre>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="anova.html#cb46-1" aria-hidden="true" tabindex="-1"></a>SCT<span class="ot">=</span><span class="fu">sum</span>((x<span class="sc">-</span><span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb46-2"><a href="anova.html#cb46-2" aria-hidden="true" tabindex="-1"></a>SCT</span></code></pre></div>
+<pre><code>## [1] 1348.933</code></pre>
+<p>Por lo tanto <span class="math inline">\(SC_D\)</span> se puede calcular como la diferencia entre <span class="math inline">\(SC_T\)</span> y <span class="math inline">\(SC_E\)</span></p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="anova.html#cb48-1" aria-hidden="true" tabindex="-1"></a>SCD<span class="ot">=</span>SCT<span class="sc">-</span>SCE</span>
+<span id="cb48-2"><a href="anova.html#cb48-2" aria-hidden="true" tabindex="-1"></a>SCD</span></code></pre></div>
+<pre><code>## [1] 558.3998</code></pre>
+<p>La estadística <span class="math inline">\(F\)</span> tomará entonces el valor de</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="anova.html#cb50-1" aria-hidden="true" tabindex="-1"></a>Est_F<span class="ot">=</span>(SCE<span class="sc">/</span><span class="dv">2</span>)<span class="sc">/</span>(SCD<span class="sc">/</span><span class="dv">12</span>)</span>
+<span id="cb50-2"><a href="anova.html#cb50-2" aria-hidden="true" tabindex="-1"></a>Est_F</span></code></pre></div>
+<pre><code>## [1] 8.494274</code></pre>
+<p>Y su correspondiente p-value es</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="anova.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pf</span>(Est_F,<span class="dv">2</span>,<span class="dv">12</span>)</span></code></pre></div>
+<pre><code>## [1] 0.005031862</code></pre>
+<p>Aplicando las funciones de R que calculan el análisis de varianza obtenemos</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="anova.html#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(<span class="fu">lm</span>(x<span class="sc">~</span>y,<span class="at">data=</span>A))</span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: x
+##           Df Sum Sq Mean Sq F value   Pr(&gt;F)   
+## y          2 790.53  395.27  8.4943 0.005032 **
+## Residuals 12 558.40   46.53                    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="anova.html#cb56-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">aov</span>(x <span class="sc">~</span> y, <span class="at">data =</span> A)</span>
+<span id="cb56-2"><a href="anova.html#cb56-2" aria-hidden="true" tabindex="-1"></a>mod</span></code></pre></div>
+<pre><code>## Call:
+##    aov(formula = x ~ y, data = A)
+## 
+## Terms:
+##                        y Residuals
+## Sum of Squares  790.5333  558.4000
+## Deg. of Freedom        2        12
+## 
+## Residual standard error: 6.821535
+## Estimated effects may be unbalanced</code></pre>
+<p>De los resultados es posible concluir que la diferencia entre los tres fármacos es claramente significativa.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="regresión-lineal-múltiple.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

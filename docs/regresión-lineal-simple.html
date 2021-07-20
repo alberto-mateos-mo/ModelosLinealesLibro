@@ -51,7 +51,6 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
@@ -60,6 +59,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -192,6 +192,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.7.2" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#ejercicio-interactivo-regresión-lineal-multiple-aplicada-a-marketing"><i class="fa fa-check"></i><b>4.7.2</b> Ejercicio interactivo: regresión lineal multiple aplicada a marketing</a></li>
 </ul></li>
 </ul></li>
+<li class="part"><span><b>III Analisis de varianza</b></span></li>
+<li class="chapter" data-level="5" data-path="anova.html"><a href="anova.html"><i class="fa fa-check"></i><b>5</b> ANOVA</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="anova.html"><a href="anova.html#introducción"><i class="fa fa-check"></i><b>5.1</b> Introducción</a></li>
+<li class="chapter" data-level="5.2" data-path="anova.html"><a href="anova.html#modelo-de-una-vía"><i class="fa fa-check"></i><b>5.2</b> Modelo de una vía</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="anova.html"><a href="anova.html#estimación-de-parámetros"><i class="fa fa-check"></i><b>5.2.1</b> Estimación de parámetros</a></li>
+<li class="chapter" data-level="5.2.2" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#residuos"><i class="fa fa-check"></i><b>5.2.2</b> Residuos</a></li>
+<li class="chapter" data-level="5.2.3" data-path="anova.html"><a href="anova.html#propiedades-de-los-estimadores-máximo-verosímiles"><i class="fa fa-check"></i><b>5.2.3</b> Propiedades de los estimadores máximo verosímiles</a></li>
+<li class="chapter" data-level="5.2.4" data-path="anova.html"><a href="anova.html#descomposición-de-la-variabilidad"><i class="fa fa-check"></i><b>5.2.4</b> Descomposición de la variabilidad</a></li>
+<li class="chapter" data-level="5.2.5" data-path="anova.html"><a href="anova.html#ejemplo"><i class="fa fa-check"></i><b>5.2.5</b> Ejemplo</a></li>
+</ul></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -263,7 +276,7 @@ modelo, si tiene sentido que <span class="math inline">\(x\)</span> tome el valo
 <div id="ejercicios" class="section level2" number="3.5">
 <h2><span class="header-section-number">3.5</span> Ejercicios</h2>
 <p>Para usar los ejercicios del capítulo de regresión lineal simple corra la siguiente línea de código en su sesión de R:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="regresión-lineal-simple.html#cb6-1"></a>learnr<span class="op">::</span><span class="kw">run_tutorial</span>(<span class="st">&quot;regresion_lineal_simple&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;ModelosLinealesFC&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="regresión-lineal-simple.html#cb6-1" aria-hidden="true" tabindex="-1"></a>learnr<span class="sc">::</span><span class="fu">run_tutorial</span>(<span class="st">&quot;regresion_lineal_simple&quot;</span>, <span class="at">package =</span> <span class="st">&quot;ModelosLinealesFC&quot;</span>)</span></code></pre></div>
 </div>
 </div>
             </section>

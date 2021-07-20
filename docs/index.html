@@ -51,7 +51,6 @@
 
 
 
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 
@@ -60,6 +59,7 @@
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -192,6 +192,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="4.7.2" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#ejercicio-interactivo-regresión-lineal-multiple-aplicada-a-marketing"><i class="fa fa-check"></i><b>4.7.2</b> Ejercicio interactivo: regresión lineal multiple aplicada a marketing</a></li>
 </ul></li>
 </ul></li>
+<li class="part"><span><b>III Analisis de varianza</b></span></li>
+<li class="chapter" data-level="5" data-path="anova.html"><a href="anova.html"><i class="fa fa-check"></i><b>5</b> ANOVA</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="anova.html"><a href="anova.html#introducción"><i class="fa fa-check"></i><b>5.1</b> Introducción</a></li>
+<li class="chapter" data-level="5.2" data-path="anova.html"><a href="anova.html#modelo-de-una-vía"><i class="fa fa-check"></i><b>5.2</b> Modelo de una vía</a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="anova.html"><a href="anova.html#estimación-de-parámetros"><i class="fa fa-check"></i><b>5.2.1</b> Estimación de parámetros</a></li>
+<li class="chapter" data-level="5.2.2" data-path="regresión-lineal-múltiple.html"><a href="regresión-lineal-múltiple.html#residuos"><i class="fa fa-check"></i><b>5.2.2</b> Residuos</a></li>
+<li class="chapter" data-level="5.2.3" data-path="anova.html"><a href="anova.html#propiedades-de-los-estimadores-máximo-verosímiles"><i class="fa fa-check"></i><b>5.2.3</b> Propiedades de los estimadores máximo verosímiles</a></li>
+<li class="chapter" data-level="5.2.4" data-path="anova.html"><a href="anova.html#descomposición-de-la-variabilidad"><i class="fa fa-check"></i><b>5.2.4</b> Descomposición de la variabilidad</a></li>
+<li class="chapter" data-level="5.2.5" data-path="anova.html"><a href="anova.html#ejemplo"><i class="fa fa-check"></i><b>5.2.5</b> Ejemplo</a></li>
+</ul></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -214,7 +227,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p class="author"><em>Sofía Villers Gómez</em></p>
 <p class="author"><em>David Alberto Mateos Montes de Oca</em></p>
 </div>
-<div id="modelos-lineales-2021-2" class="section level1 unnumbered" number="">
+<div id="modelos-lineales-2021-2" class="section level1 unnumbered">
 <h1>Modelos Lineales 2021-2</h1>
 <p>Primera edición del libro de texto para el curso <em>Modelos Lineales</em> de la Facultad de Ciencias.</p>
 <div id="detalles" class="section level2" number="0.1">
@@ -231,15 +244,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  collate  Spanish_Mexico.1252         
 ##  ctype    Spanish_Mexico.1252         
 ##  tz       America/Mexico_City         
-##  date     2021-03-14</code></pre>
+##  date     2021-07-19</code></pre>
 </div>
 <div id="complementos" class="section level2" number="0.2">
 <h2><span class="header-section-number">0.2</span> Complementos</h2>
 <div id="ejercicios-interactivos" class="section level3" number="0.2.1">
 <h3><span class="header-section-number">0.2.1</span> Ejercicios Interactivos</h3>
 <p>Los ejercicios/ejemplos que acompañan este libro están disponibles a través de un paquete de R cuya instalación se hace de la siguiente manera:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="index.html#cb3-1"></a><span class="co"># install.packages(&quot;devtools&quot;)</span></span>
-<span id="cb3-2"><a href="index.html#cb3-2"></a>devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;alberto-mateos-mo/ModelosLinealesFC&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="index.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;devtools&quot;)</span></span>
+<span id="cb3-2"><a href="index.html#cb3-2" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;alberto-mateos-mo/ModelosLinealesFC&quot;</span>)</span></code></pre></div>
 <p>Los ejercicios contenidos en el paquete están construidos con <a href="https://rstudio.github.io/learnr/">learnr</a> y las indicaciones para abrirlos se dan al final de cada capítulo del libro.</p>
 <p>El objetivo de los mismos es proveer al estudiante de los elementos prácticos necesarios para aplicar los diferentes modelos estudiados usando <code>R</code> y al mismo tiempo aprender a interpretar/usar los resultados obtenidos.</p>
 </div>
@@ -253,13 +266,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">0.2.3</span> Aplicación de análisis de datos</h3>
 <p>Hemos desarrollado una aplicación para realizar algunos análisis estadísticos a través de una interfaz gráfica que usaremos como recurso didáctico y que podrán usar para experimentar con algunos modelos sin la necesidad de escribir código.</p>
 <p>La instalación de la app se hace con el siguiente comando:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="index.html#cb4-1"></a><span class="co"># install.packages(&quot;devtools&quot;)</span></span>
-<span id="cb4-2"><a href="index.html#cb4-2"></a>devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;alberto-mateos-mo/data.analyseR&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="index.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages(&quot;devtools&quot;)</span></span>
+<span id="cb4-2"><a href="index.html#cb4-2" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">&quot;alberto-mateos-mo/data.analyseR&quot;</span>)</span></code></pre></div>
 <p>Para lanzar la app debe usarse el siguiente comando:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="index.html#cb5-1"></a>data.analyseR<span class="op">::</span><span class="kw">run_app</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="index.html#cb5-1" aria-hidden="true" tabindex="-1"></a>data.analyseR<span class="sc">::</span><span class="fu">run_app</span>()</span></code></pre></div>
 </div>
 </div>
-<div id="licencia" class="section level2 unnumbered" number="">
+<div id="licencia" class="section level2 unnumbered">
 <h2>Licencia</h2>
 <p>This work is licensed under a <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.</p>
 <center>
