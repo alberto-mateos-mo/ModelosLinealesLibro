@@ -1,0 +1,327 @@
+# (PART) Analisis de varianza {-}
+
+# ANOVA
+
+## Introducción
+
+El análisis de la varianza fue desarrollado por Fisher en 1925 con el objetivo de comparar entre sí varios grupos o tratamientos. Normalmente es de interés estudiar cómo se diferencian estos grupos (o tratamientos), teniendo en cuenta la incidencia de otros factores cualitativos o cuantitativos (factores ambientales), cuya influencia es eliminada mediante una adecuada descomposición de la variabilidad total de un experimento en componentes independientes que puedan atribuirse a distintas causas. 
+
+Por ejemplo, una compañía agricola que emplea diversos fertilizantes desea comprobar si éstos tienen efectos diferentes sobre el rendimiento de la planta de jitomate en donde se usan estos fertilizantes. La compañía tiene a su disposición 5 tipos de fertilizantes y para comparar su eficacia fumiga, con cada uno de los fertilizantes, un cierto número de parcelas de terreno de la misma calidad y de igual superficie. Cabe mencionar que el número de parcelas a las que les corresponde cada fertilizante no ncesariamnete deben ser las mismas, es decir el fertilizante 1 se aplica a 8 parcelas mientras que el fertilizante 2 se aplicó sólo en 6. Al recoger la cosecha se mide el rendimiento de la semilla en peso de jitomates por unidad de superficie. Este peso de jitomates nos permitirá saber si los fertilizantes están teniendo efecto sobre el rendimiento. En este ejemplo se esta tratando de controlar los efectos de los otros factores al tener parcelas de igual superficie, en condiciones lo más homogéneas posible y con la planta derivada de la misma semilla, de esta maner se espera que de observarse diferencias en las cosechas se puedan atrubuir solamente al fertilizante.
+
+Esencialmente el análisis de varianza determina si la discrepancia entre las medias de los tratamientos es mayor de lo que podría esperarse razonablemente de la discrepancia existente dentro de los tratamientos. En este tipo de modelos, la variable respuesta se considera del tipo continuo, mientras que las variables experimentales o factores son variables categóricas o categorizadas en niveles.
+
+Similar al proceso de inferencia, para llegar a conclusiones estadísticas correctas es necesario observar el resultado tras la repetición del experimento en varias unidades experimentales para cada una de las diversas condiciones que indica el diseño pero lo más homogéneas posibles dentro de cada una. Esto reducirá la variabilidad y, por tanto, aumentará la capacidad estadística de detectar cambios o identificar variables influyentes. Ya que con una variabilidad muy grande respecto al error experimental no se pueden detectar diferencias entre tratamientos.
+
+En general, en todo análisis de varianza es necesario considerar tres etapas: 
+
+- Diseño del experimento a fin de obtener observaciones de una variable Y, combinando adecuadamente los factores incidentes. 
+
+- Planteamiento de hipótesis, cálculo de sumas de cuadrados (residuales, de desviación de la hipótesis, etc.) y obtención de los cocientes F. Esta parte del análisis se formula mediante la teoría de los modelos lineales. 
+
+- Toma de decisiones e interpretación de los resultados. Planteamiento “a posteriori” de nuevas hipótesis.
+
+## Modelo de una vía
+
+Supongamos que una variable $Y$ ha sido observada bajo $k$ condiciones experimentales distintas. Puede ser que las observaciones provengan de $k$ poblaciones, o bien tratarse de réplicas para cada uno de los $k$ niveles de un factor.
+
+Indiquemos por $y_{ij}$ la réplica $j (j = 1, . . . , n_i)$ en la población o nivel $i (i = 1, . . . , k)$, donde $n_i$ es el número de réplicas en la población o nivel $i$. Entonce el conjunto de datos se puede ver como:
+
+\begin{align*}
+Nivel 1 \quad y_{11}, y_{12}, . . . , y_{1n_1}\\
+Nivel 2 \quad y_{21}, y_{22}, . . . , y_{2n_2}\\
+.\\
+.\\
+.\\
+Nivel k \quad y_{k1}, y_{k2}, . . . , y_{kn_k}
+\end{align*}
+
+Con estos datos se pueden calcular las siguientes medias:
+
+Media en la población o nivel $i$: 
+
+$$y_{i.} =\frac{1}{n_i}\sum_{j=1}^{n_i}y_{ij}$$
+
+Media general: 
+
+$$\bar{y} = y_{\cdot\cdot} =\frac{1}{n}\sum_{i=1}^{k}\sum_{j=1}^{n_i}y_{ij}$$
+
+donde $n=\sum_{i=1}^{k}n_i$ es el número total de observaciones.
+
+El objetivo es estimar los efectos de los distintos $k$ niveles y contrastar la hipótesis de que todos los niveles del factor producen el mismo efecto, frente a la alternativa de que al menos dos difieren significativamente entre sí.
+
+Es importante mencionar que con este diseño de los datos es posible proponer distintos modelos lineales que en teoría o en la formulación matemática se adaptan al diseño de los datos antes mencionado. Por ejemplo se puede proponer el siguiente modelo lineal.
+
+$$y_{ij}=\mu_i+\epsilon_{ij},\ i=1,...,k;\ j=1,...,n_i$$
+
+siendo $(\mu_1,\mu_2,...\mu_k)'$ el vector de parámetros y $\epsilon_{ij}$ siendo las variables aleatorias que agrupan información proveniente de la combinación del factor y la observación (o lo no considerado en $\mu_i$). En este modelo podemos considerar la matriz $X$ definida por una matriz identidad de $k$x$k$ y entonce nos lleva a un modelo de la forma
+$$Y=\mu X+\epsilon$$
+
+Esta es la representación matricial del modelo de regresión lineal simple ya conocido. Y por lo tanto sabemos que un estimador del vector de parámetros $\mu$ es $\hat\mu=y_{i.}$
+
+Asimismo podriamos expresar $\mu_{i}$ como la suma de dos términos $\mu$, común a todas las observaciones, y $\tau_{i}$ específica a cada nivel, entonces el modelo propuesto sería:
+
+$$y_{ij}=\mu+\tau_i+\epsilon_{ij},\ i=1,...,k;\ j=1,...,n_i$$
+
+donde
+
+$y_{ij}$ es la variable aleatoria que representa la observación j-ésima del i-ésimo tratamiento (nivel i-ésimo del factor).
+
+$\mu$ es un efecto constante, común a todos los niveles, denominado media global.
+
+$\tau_i$ es la parte de $y_{ij}$ debida a la acción del nivel i-ésimo, que será común a todos los elementos sometidos a ese nivel del factor.  Los efectos de los factores $\tau_{i}$ son las desviaciones de la media de cada nivel con respecto a la media general, por esta razón se debe verificar la relación $\sum_{i=1}^k\tau_{i}=0$.
+
+$\epsilon_{ij}$ son variables aleatorias que engloban un conjunto de factores, cada uno de los cuales influye en la respuesta sólo en pequeña magnitud pero que de forma conjunta debe tenerse en cuenta en la especificación y tratamiento del modelo; es decir, las perturbaciones o error experimental pueden interpretarse como las variaciones causadas por todos los factores no analizados y que dentro del mismo tratamiento variarán de unos elementos a otros.
+
+Para este modelo lineal supondremos que los errores $\epsilon_{ij}$:
+
+- Tienen media cero
+
+- Tienen varianza constante (hipótesis de homocedasticidad)
+
+- Son estadísticamente independientes entre sí
+
+- Su distribución es normal
+
+
+Analogamente al modelo anterior, se trata de contrastar si todos los niveles del factor producen el mismo efecto versus al menos un nivel del factor produce un efecto distinto. 
+
+En ambos casos si la hipótesis de que todos los nivels producen el mismo efecto es cierta, entonces todos los niveles tienen la misma media, $\mu$,  y la pertenencia a un grupo u otro es irrelevante, y podemos considerar todas las observaciones como provenientes de una única población.
+
+### Estimación de parámetros
+
+La hipótesis de normalidad sobre los términos de error conlleva el hecho de que las variables $y_{ij}$ sean normales e independientes, por lo que es inmediato construir la función de verosimilitud asociada a la muestra
+$y=(y_{11},...,y_{1n_1},y_{21},...,y_{2n_2},...,y_{k1},...,y_{kn_k})$
+
+$$L(\mu,\tau_i,\sigma^2)=(2\pi\sigma^2)^{n/2}exp \left( -\frac{1}{2\sigma^2}\sum_{i=1}^{k}\sum_{j=1}^{n_i}[y_{ij}-\mu-\tau_i]^2 \right)$$
+
+Los estimadores máximo-verosímiles para los parámetros $\mu,\tau_{i},\sigma^2$ son los valores para los cuales la función de verosimilitud alcanza su máximo. Por conveniencia, en vez de maximizar la función de verosimilitud, se maximiza el logaritmo de esta. En este caso,
+
+$$ln(L(\mu,\tau_i,\sigma^2))=-\frac{n}{2}ln(2\pi)-\frac{n}{2}ln(\sigma^2)-\frac{1}
+{2\sigma^2}\sum_{i=1}^{k}\sum_{j=1}^{n_i}[y_{ij}-\mu-\tau_i]^2$$
+
+Las derivadas parciales respecto de los parámetros del modelo son:
+
+$$\frac{\partial lnL}{\partial \mu}= \frac{1}
+{2}\sum_{i=1}^{k}\sum_{j=1}^{n_i}[y_{ij}-\mu-\tau_i]  $$
+
+$$\frac{\partial lnL}{\partial \tau_i}= \frac{1}
+{\sigma^2}\sum_{j=1}^{n_i}[y_{ij}-\mu-\tau_i] \quad i=1,...,k $$
+
+$$\frac{\partial lnL}{\partial \sigma^2}= \frac{N}{2\sigma^2}+\frac{1}
+{2(\sigma^2)^2}\sum_{i=1}^{k}\sum_{j=1}^{n_i}[y_{ij}-\mu-\tau_i]^2$$
+
+Igualando a cero y despejando los parámteros obtenemos los siguientes estimadores máximo verosimiles:
+
+$$\hat\mu=\bar y_{..}$$
+
+$$\hat\tau_i=\bar y_{i.}-\bar y{..}$$
+
+$$\hat\sigma^2=\frac{1}{n}\sum_{i=1}^{k}\sum_{j=1}^{n_i}[y_{ij}-\hat\mu-\hat\tau_i]^2=\frac{1}{n}\sum_{i=1}^{k}\sum_{j=1}^{n_i}[y_{ij}-\bar y_{i.}]^2=\frac{1}{n}\sum_{i=1}^{k}n_is_i^2$$
+
+donde $s_i^2$ es la varianza muestral del i-ésimo nivel.
+
+### Residuos
+
+Los residuos se definen como las diferencias entre los valores observados $y_{ij}$ y los valores previstos por el modelo $\hat y_{ij}$ y los denotamos por 
+
+$$e_{ij}=y_{ij}-\hat y_{ij}=y_{ij}-\hat\mu-\hat \tau_{i}=y_{ij}-\bar y_{i.}$$
+
+Los residuos son los estimadores de los errores aleatorios $\epsilon_{ij}=y_{ij}-\mu-\tau_i$, los cuales son variables aleatorias no observables. Y es posible verificar que la suma de los residuos es cero.
+
+Por otro lado con esta definición de los residuos, tenemos que el estimador máximo-verosimil $\hat \sigma^2$ se puede escribir en términos de la suma de los residuos.
+
+$$\hat \sigma^2=\frac{\sum_{ij}e_{ij}^2}{n}$$
+
+### Propiedades de los estimadores máximo verosímiles
+
+Recordaremos algunas de las propiedades de los estimadores máximo verosímiles de $\mu, \tau_{i}, \sigma^2$, estas propiedades son de utilidad para la descomposición de la varianza y las pruebas de hipótesis que se verán mas adelante.
+
+#### Propiedades de $\hat \mu$ 
+
+- $\hat\mu$ es un estimador insesgado de $\mu$
+
+- La varianza de $\hat\mu$ es $\frac {\sigma^2}{n}$
+
+- $\hat\mu$ tiene distribución normal, puesto que dicho estimador es combinación lineal de las variables $y_{ij}$ y éstas son variables aleatorias independientes con distribución normal.
+
+
+#### Propiedades de $\hat \tau_{i}$ 
+
+
+- $\hat\tau_{i}$ es un estimador insesgado de $\tau_{i}$
+
+- La varianza de $\hat\tau_{i}$ es $(n-n_i)\frac {\sigma^2}{nn_i}$
+
+- $\hat\tau_{i}$ tiene distribución normal, puesto que dicho estimador es combinación lineal de las variables $y_{ij}$ y éstas son variables aleatorias independientes con distribución normal.
+
+
+#### Propiedades de $\hat \sigma^2$ 
+
+
+
+- $\hat \sigma^2$ NO es un estimador insesgado de $\sigma^2$
+
+- $\frac {n\hat \sigma^2}{\sigma^2}\sim\chi^2_{(n-k)}$
+
+
+### Descomposición de la variabilidad
+
+Para comparar los efectos de los distintos niveles de un factor se emplea la técnica estadística denominada análisis de la varianza, abreviadamente ANOVA, que está basada en la descomposición de la variabilidad total de los datos en distintas componentes.
+
+Se considera la siguiente identidad:
+
+$$y_{ij}-\overline{y}=(y_{i.}-\overline{y})+(y_{ij}-y_{i.})$$
+
+Elevando al cuadrado y sumando se obtiene:
+
+$$\sum_{ij}(y_{ij}-\overline{y})^2=\sum_{ij}(y_{i.}-\overline{y})^2+\sum_{ij}(y_{ij}-y_{i.})^2+2\sum_{ij}(y_{i.}-\overline{y})(y_{ij}-y_{i.})$$
+
+Considerando que
+
+$$\sum_{ij}(y_{i.}-\overline{y})(y_{ij}-y_{i.})=\sum_{ij}(y_{ij}-y_{i.})y_{i.}-\sum_{ij}(y_{ij}-y_{i.})\overline{y}=0$$
+
+La igualdad se da por que $\hat y_{ij}=\hat\mu_i=y_{i.}$ entonces $\sum_{ij}(y_{ij}-y_{i.})$ representa la suma de los residuales la cual es cero.
+
+Por lo tanto la ecuación queda como:
+
+$$\sum_{ij}(y_{ij}-\overline{y})^2=\sum_{ij}(y_{i.}-\overline{y})^2+\sum_{ij}(y_{ij}-y_{i.})^2$$
+
+Generalmente se hace un cambio de notación:
+
+- $SC_{T}$ es la suma de cuadrados total, mide la variabilidad de las observaciones del total respecto a la media global y es denotado por  $SC_{T}=\sum_{ij}(y_{ij}-\overline{y})^2$
+
+- $SC_{E}$ es la suma de cuadrados entre grupos, es denotado por $SC_{E}=\sum_{ij}(y_{i.}-\overline{y})^2=\sum_{j}n_{i}(y_{i.}-\overline{y})^2$
+
+- $SC_{D}$ es la suma de cuadrados dentro de grupos o intragrupos, es denotado por $SC_{D}=\sum_{ij}(y_{ij}-y_{i.})^2$
+
+De esta forma se tiene la siguiente igualdad:
+
+$$SC_{T}=SC_{E}+SC_{D}$$
+
+Además se observa que:
+
+- $SC_{T}$ tiene $n-1$ grados de libertad, ya que la suma $\sum_{ij}(y_{ij}-\overline{y})^2$ es la parte central del estimador de la varianza $(n-1)S^2=\frac{\sum_{ij}(y_{ij}-\overline{y})^2}{n-1}$ en el cual al estimar media global con $\overline{y}$ pierde un grado de libertad.
+
+- $SC_{E}$ tiene $k-1$ grado de libertad,ya que $SC_{E}=\sum_{j}n_{i}(y_{i.}-\overline{y})^2$ la suma es sobre los $k$ factores y se esta estimando la media global con $\overline{y}$.
+
+- $SC_{D}$ tiene $n-k$ grados de libertad, ya que la regresión $SC_{D}=SC_{T}-SC_{E},$ en el cual se ha visto que $SC_{T}$ y $SC_{E}$ tienen $n-1$ y $k-1$ grado de libertad, respectivamente, así los grados de libertad de $SC_{D}=n-1-(k-1),$ entonces $SC_{D}$ tienen n-k grados de libertad. 
+
+Sabemos que el modelo propuesto considera que los errores tienen distribución normal, por lo tanto dado que $\epsilon_{ij} \sim N(0,\sigma^2)$:
+
+
+- $\frac{SC_{D}}{\sigma^2}\sim \chi^2_{(n-k)}.$
+
+- Bajo el supuesto de que las medias de las $k$ poblaciones son iguales entonces $SC_{E}/(k-1)$ es otro estimador insesgado de $\sigma^2$ y $\frac{SC_{E}}{\sigma^2}\sim\chi^2_{(k-1)}$
+
+- Debido a un resultado de probabilidad se sabe que si $x \sim \chi^2_{(n)}$ y $y \sim \chi^2_{(m)}$ y si $x$ es independiente a $y$ entonces:
+
+$$\frac{x/n}{y/m}\sim F_{(n,m)}$$
+
+El contraste estadístico de interés en este modelo, como mencionamos al principio de esta sección, es el que tiene como hipótesis nula la igualdad de medias de los tratamientos, la cual se puede expresar de la siguiente forma:
+
+$$H_0: \mu_1=\mu_2=...=\mu_k=\mu$$
+
+o
+
+$$H_0: \tau_1=\tau_2=...=\tau_k=0$$
+
+Por lo tanto se puede aplicar la prueba $F$ de Fisher en el análisis de varianza para probar las hipótesis de que las medias de las $k$ poblaciones son iguales, quedando el estadístico F
+
+$$F=\frac{\frac{SC_{E}}{k-1}}{\frac{SC_{D}}{n-k}} \sim F_{(k-1,n-k)}$$
+
+
+El siguiente cuadro resume la información anterior, mejor conocida como **Tabla ANOVA:**
+
+$$
+\begin{array}{|c| c| c| c| c|}
+\hline
+&Grados\ de\ libertad & Suma\ de\ Cuadrados & Cuadrado\ Medio & Prueba\ F \\
+\hline
+\hline
+Entre\ grupos & k-1   & SC_{E}=\sum_{j}n_{i}(y_{i.}-\overline{y})^2 & \frac{SC_{E}}{k-1} &\frac{SC_{E}/(k-1)}{SC_{D}/(n-k)} \\
+\hline
+Dentro\ grupos     & n-k & SC_{D}=\sum_{ij}(y_{ij}-y_{i.})^2& \frac{SC_{D}}{n-k} & -\\
+\hline 
+Total     & n-1 & SC_{T}=\sum_{ij}(y_{ij}-\overline{y})^2 & - & - \\
+\hline
+\end{array}
+$$ 
+
+En esta tabla tenemos entonces la descomposición de la varianza observada en los datos. En la columna de suma de cuadrados tenemos la suma de cuadrados totales que y la descomposición de esta en la diferencia observada entre los grupos y la diferencia observada dentro de los grupos. En la tabla ANOVA también se incluye el estadístico de prueba F que se usa para concluir estadisticamente si los distintos niveles o grupos en los que están clasificadas las observaciones son significativamente diferentes o no.
+
+Similar a lo estudiado en los modelos de regresión lineal, en este análisis de varianza también se tiene el coeficiente de determinación, el cual con frecuencia se le asocia a la proporción de la variación explicada por los grupos, ya que $0<SC_{E}<SC_{T}$ entonces los valores del coeficiente de determinación están entre $0<R^2<1.$
+
+Se define el coeficiente de determinación del modelo del como:
+
+$$R^2=\frac{SC_{E}}{SC_{T}}=1-\frac{SC_{D}}{SC_{T}}.$$
+
+### Ejemplo
+
+Se desean comparar dos medicamentos D (diurético), B (betabloquedor) con un producto inocuo P (placebo). Se tomó una muestra de 15 individuos hipertensos cuyas condiciones iniciales eran suficientemente homogéneas y se asignaron los tratamientos al azar.
+
+El objetivo del estudio es ver cómo actuan los tres tratamientos frente a la hipertensión, concretamente si la disminuyen. Para cubrir con el objetivo, se ha elegido la variable observable “porcentaje de descenso de la presión arterial media”. Los datos obtenidos se presentan en la siguiente tabla:
+
+|  D |  B |  P |
+|:--:|:--:|:--:|
+| 22 | 20 | 10 |
+| 28 | 28 |  5 |
+| 30 | 35 |  0 |
+| 15 | 19 | 14 |
+| 17 | 33 | 18 |
+
+Primero calculamos las medias por medicamento $y_{D.}$, $y_{B.}$ y $y_{P.}$ asi como la media global $y_{..}$
+
+```{r}
+x=c(22,18,30,15,17,20,28,35,19,33,10,5,0,14,18)
+y=c(rep("D",5),rep("B",5),rep("P",5))
+A=data.frame(x,y)
+aggregate(A$x,by=list(A$y), FUN=mean)
+mean(A$x)
+```
+
+$$y_{B.}=27.00$$
+
+$$y_{D.}=20.40$$
+
+$$y_{P.}=9.40$$
+
+$$y_{..}=18.93$$
+
+Ahora calculamos $SC_E$ y $SC_T$
+
+```{r}
+SCE=5*(27-18.93)^2+5*(20.4-18.93)^2+5*(9.4-18.93)^2
+SCE
+SCT=sum((x-mean(x))^2)
+SCT
+```
+
+Por lo tanto $SC_D$ se puede calcular como la diferencia entre $SC_T$ y $SC_E$
+
+```{r}
+SCD=SCT-SCE
+SCD
+```
+
+La estadística $F$ tomará entonces el valor de
+
+```{r}
+Est_F=(SCE/2)/(SCD/12)
+Est_F
+```
+
+Y su correspondiente p-value es
+
+```{r}
+1-pf(Est_F,2,12)
+```
+
+Aplicando las funciones de R que calculan el análisis de varianza obtenemos
+
+```{r}
+anova(lm(x~y,data=A))
+mod <- aov(x ~ y, data = A)
+mod
+```
+
+De los resultados es posible concluir que la diferencia entre los tres fármacos es claramente significativa.
