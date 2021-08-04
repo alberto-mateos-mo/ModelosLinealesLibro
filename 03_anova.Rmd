@@ -26,6 +26,7 @@ Supongamos que una variable $Y$ ha sido observada bajo $k$ condiciones experimen
 
 Indiquemos por $y_{ij}$ la réplica $j (j = 1, . . . , n_i)$ en la población o nivel $i (i = 1, . . . , k)$, donde $n_i$ es el número de réplicas en la población o nivel $i$. Entonce el conjunto de datos se puede ver como:
 
+$$
 \begin{align*}
 Nivel 1 \quad y_{11}, y_{12}, . . . , y_{1n_1}\\
 Nivel 2 \quad y_{21}, y_{22}, . . . , y_{2n_2}\\
@@ -34,6 +35,7 @@ Nivel 2 \quad y_{21}, y_{22}, . . . , y_{2n_2}\\
 .\\
 Nivel k \quad y_{k1}, y_{k2}, . . . , y_{kn_k}
 \end{align*}
+$$
 
 Con estos datos se pueden calcular las siguientes medias:
 
@@ -325,3 +327,296 @@ mod
 ```
 
 De los resultados es posible concluir que la diferencia entre los tres fármacos es claramente significativa.
+
+## Modelo de dos vías
+
+Una variable o factor cuyo efecto sobre la respuesta no es directamente de interés pero que se introduce en el experimento para obtener comparaciones homogéneas se denomina una variable bloque. Por ejemplo, en una investigación para comparar la efectividad de varios fertilizantes (tratamientos) se puede considerar las fincas donde se prueban como un factor bloque.
+
+El efecto de la finca sobre la producción no es de interés y el objetivo es comparar los fertilizantes eliminando el efecto de la pertenencia de una cosecha a una finca en específico. En general, se supone que no hay interacción entre la variable bloque y los factores de interés.
+
+Supongamos que la variable respuesta está afectada por dos causas de variabilidad, es decir, por dos variables o factores cualitativos A y B, con a y b niveles respectivamente. El factor A es el factor principal, mientras que el factor B es una variable bloque. Supongamos también que tenemos unicamente una observación combinación de niveles. Eso significa tener tantas unidades experimentales por bloque como tratamientos o niveles del factor principal y que la asignación del tratamiento se hace al azar en cada bloque. Entonces, podemos representar las observaciones del siguiente modo:
+
+|         | $B_1$    | $B_2$    | $\dots$ | $B_b$    |          |
+|---------|----------|----------|---------|----------|----------|
+| $A_1$   | $y_{11}$ | $y_{12}$ | $\dots$ | $y_{1b}$ | $y_{1.}$ |
+| $A_2$   | $y_{21}$ | $y_{22}$ | $\dots$ | $y_{2b}$ | $y_{2.}$ |
+| $\dots$ | $\vdots$ |          |         |          |          |
+| $A_a$   | $y_{a1}$ | $y_{a2}$ | $\dots$ | $y_{ab}$ | $y_{a.}$ |
+|         | $y_{.1}$ | $y_{.2}$ | $\dots$ | $y_{.b}$ | $y_{..}$ |
+
+Con estos datos se pueden calcular las siguientes medias:
+
+Media en el factor o nivel $i$: 
+
+$$y_{i.} =\frac{1}{b}\sum_{j=1}^{b}y_{ij}$$
+
+Media en el bloque $j$: 
+
+$$y_{.j} =\frac{1}{a}\sum_{i=1}^{a}y_{ij}$$
+
+Media general: 
+
+$$\bar{y} = y_{\cdot\cdot} =\frac{1}{ab}\sum_{i=1}^{a}\sum_{j=1}^{b}y_{ij}$$
+
+Con esta presentación de los datos, se puede decir que A es el factor principal, mientras que B es una variable bloque. O también se puede decir que A es el  factor fila y B el factor columna.
+
+Realizando un proceso similar al que ANOVA de un factor lo que buscamos es plantear un modelo lineal que ajuste a los datos con las caracteristicas antes descritas. El primero que presentamos en un modelo en que suponemos que tanto el efecto fila como el efecto columna son aditivos.
+
+### Modelo aditivo
+
+En el modeo aditivo de dos factores se asume que los efectos se suman, por lo que el modelo matemático queda de la siguiente forma:
+
+$$y_{ij}=\mu+\alpha_i+\beta_j+\epsilon_{ij},\quad i=1,...,a;\quad j=1,...,b$$
+
+donde:
+
+$\mu$ es la media general.
+
+$\alpha_i$ es el efecto del i-ésimo nivel del factor A.
+
+$\beta_j$ es el efecto del j-ésimo nivel del factor B.
+
+Y en este caso pondremos la restricción de que la suma de los $i$ parámetros $\alpha$ y los $j$ parámetros $\beta$ sean cero. Es decir $$\sum_{i}\alpha_i=\sum_{j}\beta{j}=0$$
+
+Dicha restricción nos lleva a que el modelo de $y_{ij}$ solamente depende de $\mu,\alpha_1,...\alpha_{a-1},\beta_1,...\beta_{b-1}$ ya que $$\alpha_a=-\alpha_1-\alpha_2-...-\alpha_{a-1}$$
+
+y 
+
+$$\beta_b=-\beta_1-\beta_2-...-\beta_{b-1}$$
+
+Por lo tanto el numero de parámetros a estimar en este modelo serán a+b+1.
+
+El objetivo es estimar los efectos de los distintos $a$ niveles del factor A y contrastar la hipótesis de que todos los niveles del factor producen el mismo efecto. Analogamente se buscará que los distintos $b$ niveles del factor B producen el mismo efecto. Con lo que se estaría concluyendo que el factor A y/o el factor B no son significativos.
+
+Para la estimación de los parámetros de este modelo se utiliza el método de mínimos cuadrados, entonces partiendo de la ecuación $y_{ij}-\mu-\alpha_i-\beta_j$ se suman ceros y queda la siguiente igualdad.
+
+$$y_{ij}-\mu-\alpha_i-\beta_j=(\bar y-\mu)+(y_{i.}-\bar y-\alpha_i)+(y_{.j}-\bar y-\beta_j)+(y_{ij}-y_{i.}-y_{.j}+\bar y)$$
+
+la cual al elevar al cuadrado y sumar sobre todos los valores obtenemos del lado izquierdo la función a minimizar y del lado derecho después de desarrollar los cuadrados y observar que los productos cruzados se anulan queda:
+
+$$\sum_{ij}(y_{ij}-\mu-\alpha_i-\beta_j)^2=\sum_{ij}(\bar y-\mu)^2+\sum_{ij}(y_{i.}-\bar y-\alpha_i)^2+\sum_{ij}(y_{.j}-\bar y-\beta_j)^2+\sum_{ij}(y_{ij}-y_{i.}-y_{.j}+\bar y)^2$$
+
+por lo tanto, considerando la restricción de que la suma de los parámetros $\alpha$ y $\beta$ deben ser cero llegamos a que los valores de $\mu, \alpha_i, \beta_i$ que minimizan la ecuación serán. 
+
+$$\hat \mu= \bar y$$
+
+$$\hat\alpha_i=y_{i.}-\bar y$$
+
+$$\hat\beta_j= y_{.j}-\bar y$$
+
+Entonces la suma de los cuadrados de los residuales estará dado por $SC_R=\sum_{ij}(y_{ij}-y_{i.}-y_{.j}+\bar y)^2$
+
+#### Hipótesis
+
+En este caso la hipótesis se plantean para cada factor. Siendo las hipótesis nulas las que dicen que el factor A o B según el caso no muestran efecto.
+
+Entonces la hipótesis de que el factor principal A no es significativo (no hay efecto fila) es:
+
+$$H_0^A: \alpha_1=\alpha_2=...=\alpha_a=0$$
+Y la hipótesis de que el factor B no es significativo (no hay efecto columna) es:
+
+$$H_0^B: \beta_1=\beta_2=...=\beta_b=0$$
+
+La prueba para contrastar las hipótesis será una F y se obtendrá de forma similar al caso de una vía con la descomposición de la suma de los cuadrados. 
+
+$$\sum_{ij}(y_{ij}-\overline{y})^2=b\sum_{ij}(y_{i.}-\overline{y})^2+a\sum_{ij}(y_{.j}-\overline{y})^2-\sum_{ij}(y_{ij}-y_{i.}-y_{.j}+\overline{y})^2$$
+
+$$SC_T=SC_F+SC_C+SCR$$
+
+donde $SC_T$ es la suma de cuadrados total, $SC_F$ es la suma de cuadrados entre filas, $SC_C$ es la suma de cuadrados entre columnas y $SCR$ es la suma de cuadrados residual.
+
+Se observa que si $H_0^B$ es cierta entonces el modelo se convertirá en un modelo de una vía $$y_{ij}=\mu +\alpha_i+\epsilon_{ij}$$ Y la suma de cuadrados residual será entonces
+
+$$SCR_H=\sum_{ij}(y_{ij}-y_{i.})^2=\sum_{ij}(y_{.j}+\overline{y})^2\sum_{ij}(y_{ij}-y_{i.}-y_{.j}+\overline{y})^2=SC_C+SCR$$
+
+Entonces la regla de decisión para la prueba de hipótesis esta dada por el estadístico
+
+$$F=\frac{\frac{SC_C}{b-1}}{\frac{SCR}{(a-1)(b-1)}}$$
+
+Bajo $H_0$ el estadítico tiene distribución $F$ con $(a-1)$ y $(b-1)$ grados de libertad 
+
+#### Descomposición de la variabilidad
+
+Para comparar los efectos de los distintos niveles de ambos factores emplearemos el análisis de la varianza (ANOVA). Similar a el caso de un factor, el análisis se basa en la descomposición de la variabilidad total de los datos en distintas componentes.
+
+|                | Grados de libertad |                  Suma de Cuadrados                  |      Cuadrado Medio      |                 Prueba F                |
+|:--------------:|:------------------:|:---------------------------------------------------:|:------------------------:|:---------------------------------------:|
+|   Entre filas  |        $a-1$       |      $SC_{F}=b\sum_{i}(y_{i.}-\overline{y})^2$      |   $\frac{SC_{F}}{a-1}$   | $\frac{SC_{F}/(a-1)}{SCR/[(a-1)(b-1)]}$ |
+| Entre columnas |        $b-1$       |      $SC_{C}=a\sum_{j}(y_{.j}-\overline{y})^2$      |   $\frac{SC_{C}}{b-1}$   | $\frac{SC_{C}/(b-1)}{SCR/[(a-1)(b-1)]}$ |
+|     Residuo    |    $(a-1)(b-1)$    | $SCR=\sum_{ij}(y_{ij}-y_{i.}-y{.j}+\overline{y})^2$ | $\frac{SCR}{(a-1)(b-1)}$ |                    -                    |
+|      Total     |       $ab-1$       |      $SC_{T}=\sum_{ij}(y_{ij}-\overline{y})^2$      |             -            |                    -                    | 
+
+Cuando el efecto de la variable bloque no es significativo se puede considerar el modelo más sencillo con un solo factor, prescindiendo de los bloques. Sin embargo, si hay diferencias entre los bloques, el modelo en bloques aleatorizados es mucho más eficaz en la detección de diferencias entre tratamientos.
+
+#### Coeficientes de determinación parcial
+
+El coeficiente de determinación se define como
+
+$$R^2=1-\frac{SCR}{SC_T}=\frac{SC_F+SC_C}{SC_T}$$
+
+De modo que los coeficientes de determinación parcial
+
+$$R^2_F=\frac{SC_F}{SC_T}$$
+
+y $$R^2_C=\frac{SC_C}{SC_T}$$
+
+indican el porcentaje de la variabilidad total explicada por el factor principal y por el factor bloque, respectivamente.
+
+#### Ejemplo
+
+Retomando el ejemplo mencionado en la introducción, se desea estudiar las diferencias entre los efectos de 4 fertilizantes sobre la producción de papas, para ello se cuenta con 5 fincas, cada una de las cuales se dividió en 4 parcelas del mismo tamaño y tipo. Los fertilizantes fueron asignados al azar en las parcelas de cada finca. El rendimiento en toneladas fue
+
+|              |     |     | Finca |     |     |
+|:------------:|:---:|:---:|:-----:|:---:|:---:|
+| Fertilizante |  1  |  2  |   3   |  4  |  5  |
+|       1      | 2.1 | 2.2 |  1.8  | 2.0 | 1.9 |
+|       2      | 2.2 | 2.6 |  2.7  | 2.5 | 2.8 |
+|       3      | 1.8 | 1.9 |  1.6  | 2.0 | 1.9 |
+|       4      | 2.1 | 2.0 |  2.2  | 2.4 | 2.1 |
+
+Este diseño es especialmente utilizado en experimentación agrícola. Y el objetivo es comparar $a = 4$ tratamientos (fertilizantes en este caso) utilizando $b = 5$ bloques (fincas) y repartiendo aleatoriamente los a tratamientos en cada uno de los bloques (los fertilizantes son asignados al azar en las parcelas de cada finca). Para una correcta aplicación de este diseño se debe considerar que hay homogeneidad dentro de cada bloque, de modo que el efecto bloque sea el mismo para todos los tratamientos.
+
+Nos interesa saber si hay diferencias significativas entre los tratamientos $\alpha_i$ y entre los bloques $\beta_j$.
+Los resultados obtenidos son
+
+Primero calculamos las medias por tratamiento ($y_{1.}$, $y_{2.}$, $y_{3.}$ y $y_{4.}$), las medias por finca, asi como la media global $y_{..}$
+
+```{r}
+x=c(2.1,2.2,1.8,2.0,1.9,2.2,2.6,2.7,2.5,2.8,1.8,1.9,1.6,2.0,1.9,2.1,2.0,2.2,2.4,2.1)
+f=c(rep("1",5),rep("2",5),rep("3",5),rep("4",5))
+c=c(rep(c("1","2","3","4","5"),4))
+A=data.frame(x,f,c)
+MF=aggregate(A$x,by=list(A$f), FUN=mean)
+MC=aggregate(A$x,by=list(A$c), FUN=mean)
+MG=mean(A$x)
+MF
+MC
+MG
+```
+
+Ahora calculamos $SC_F$, $SC_C$ y $SC_T$
+
+```{r}
+SCF=5*sum((MF$x-MG)^2)
+SCF
+SCC=4*sum((MC$x-MG)^2)
+SCC
+SCT=sum((x-mean(x))^2)
+SCT
+SCR=SCT-SCF-SCC
+```
+
+La estadística $F$ para comparar los tratamientos tomará entonces el valor de
+
+```{r}
+Est_F=(SCF/3)/(SCR/12)
+Est_F
+```
+
+Y su correspondiente p-value es
+
+```{r}
+1-pf(Est_F,3,12)
+```
+
+La estadística $F$ para comparar las fincas tomará entonces el valor de
+
+```{r}
+Est_F=(SCC/4)/(SCR/12)
+Est_F
+```
+
+Y su correspondiente p-value es
+
+```{r}
+1-pf(Est_F,3,12)
+```
+
+Por lo tanto se concluye que si hay un efecto por tratamiento pero no por finca.
+
+Aplicando las funciones de R que calculan el análisis de varianza obtenemos
+
+```{r}
+mod <- aov(x ~ f+c, data = A)
+summary(mod)
+```
+
+De los resultados es posible concluir que el efecto por fila si es significativo pero el efecto por columna no es significativo, lo cual en términos del problema se traduce a que si hay evidencia de una diferencia entre los fertiizantes. 
+
+### Modelo aditivo con iteracción
+
+Este modelo es una extensión del modeo aditivo en donde adicional a suponer que los efectos de los dos factores se suman,  también se considera la presencia del efecto interacción npor lo que el modelo matemático queda de la siguiente forma:
+
+$$y_{ijk}=\mu+\alpha_i+\beta_j+\gamma_{ij}+\epsilon_{ijk},\quad i=1,...,a;\quad j=1,...,b; \quad k=1,...,r$$
+
+donde:
+
+$\mu$ es la media general.
+
+$\alpha_i$ es el efecto del i-ésimo nivel del factor A.
+
+$\beta_j$ es el efecto del j-ésimo nivel del factor B.
+
+$\gamma_{ij}$ es la interacción entre el i-ésimo nivel del factor A y el j-ésimo nivel del factor B.
+
+Análogo a lo visto en el modelo anterior, para la determinación de los parámetros se imponen las siguientes restricciones: 
+
+$$\sum_{i}\alpha_i=\sum_{j}\beta{j}=\sum_{i}\gamma_{ij}=\sum_{j}\gamma_{ij}=0$$
+
+Por otra parte, se dice que un diseño es de rango completo si el número de parámetros es igual al número de condiciones experimentales, es decir, al número de filas distintas de la matriz de diseño. En un diseño que no es de rango completo hay menos parámetros que condiciones experimentales, por lo que en realidad “admitimos” que los datos se ajustan al modelo propuesto. 
+
+En general, un modelo de rango completo se ajusta intrínsecamente a los datos sin problemas. No obstante, para poder estimar todos los parámetros es necesario disponer de más de una réplica por condición experimental.
+
+Por esta razón en ocasiones la interacción no puede ser incluida en un modelo aditivo como la parametrización presentada.Sin embargo para resolver este problema se pueden considera las siguientes transformaciones:
+
+$$\mu=\frac{1}{ab}\sum_{ij}\eta_{ij}$$
+
+$$\alpha_i=\frac{1}{b}\sum_j\eta_{ij}-\mu$$
+
+$$\beta_j=\frac{1}{a}\sum_i\eta_{ij}-\mu$$
+
+$$\gamma_{ij}=\eta_{ij}-\mu-\alpha_i-\beta_j$$
+
+Y con esto el modelo puede ser reparamentrizado de la siguiente forma:
+
+$$y_{ijk} = \eta_{ij}+\epsilon_{ijk}$$
+
+Los estimadores de los parámetros serán
+
+$$\hat \mu= \bar y$$
+
+$$\hat\alpha_i=y_{i..}-\bar y$$
+
+$$\hat\beta_j= y_{.j.}-\bar y$$
+
+$$\hat\gamma_{ij}=y_{ij.}-y_{i..}-y_{.j.}+\overline{y}$$
+
+Entonces la suma de los cuadrados de los residuales estará dado por $SC_R=\sum_{ij}(y_{ijk}-y_{ij.})^2$. Entonces $\hat\eta_{ij}=y_{ij.}$
+
+#### Hipótesis y tabla ANOVA
+
+En este caso las hipótesis son las siguientes:
+
+$$H_0^A: \alpha_1=\alpha_2=...=\alpha_a=0 \quad (no\ hay\ efecto\ fila)$$
+
+$$H_0^B: \beta_1=\beta_2=...=\beta_b=0  \quad (no\ hay\ efecto\ columna)$$
+
+$$H_0^I: \gamma_{ij}=0 \quad\forall i,j  \quad (no\ hay\ interacción)$$
+
+La prueba para contrastar las hipótesis será una F y se obtendrá de forma similar a los casos anteriores con la descomposición de la suma de los cuadrados.Entonces la suma de cuadrados totales $SC_T$ se descompondrá en: 
+
+$$SC_T=\sum_{ijk} (y_{ijk}-\overline y)^2=br\sum_{ij}(y_{i..}-\overline{y})^2+ar\sum_{ij}(y_{.j.}-\overline{y})^2-r\sum_{ij}(y_{ijk}-y_{i..}-y_{.j.}+\overline{y})^2+\sum_{ijk}(y_{ijk}-y_{ij.})^2$$
+
+$$SC_T=SC_F+SC_C+SC_I+SCR$$
+
+La tabla ANOVA muestra la descomposición de la variabilidad total de los datos en los distintos componentes considerados en este modelo (factor fila, factor columna e interacción.
+
+|                | Grados de libertad |                     Suma de Cuadrados                     |       Cuadrado Medio      |                  Prueba F                 |
+|:--------------:|:------------------:|:---------------------------------------------------------:|:-------------------------:|:-----------------------------------------:|
+|   Entre filas  |        $a-1$       |        $SC_{F}=br\sum_{i}(y_{i..}-\overline{y})^2$        |     $\frac{SC_{F}}{a-1}$  |   $\frac{SC_{F}/(a-1)}{SCR/[(a-1)(b-1)]}$   |
+| Entre columnas |        $b-1$       |         $SC_{C}=ar\sum_{j}(y_{.j.}-\overline{y})^2$         |   $\frac{SC_{C}}{b-1}$    |   $\frac{SC_{C}/(b-1)}{SCR/[(a-1)(b-1)]}$   |
+|   Interacción  |        $b-1$       | $SC_{I}=r\sum_{ij}(y_{ij.}-y_{i..}-y_{.j.}+\overline{y})^2$ |$\frac{SC_{I}}{(a-1)(b-1)}$| $\frac{SC_{I}/[(a-1)(b-1)]}{SCR/[ab(r-1)]}$ |
+|     Residuo    |      $ab(r-1)$     |             $SCR=\sum_{ijk}(y_{ijk}-y_{ij.})^2$             |   $\frac{SCR}{ab(r-1)}$  |                     -                     |
+|      Total     |       $abr-1$      |         $SC_{T}=\sum_{ijk}(y_{ijk}-\overline{y})^2$         |             -             |                     -                     |
+
+Similar a lo que hemos visto en los modelos de ANOVA previos entonces cada una de las hipótesis se probará con su estadística de prueba F que se incluye en la última columna de la tabla.
