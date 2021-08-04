@@ -204,6 +204,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.2.4" data-path="anova.html"><a href="anova.html#descomposición-de-la-variabilidad"><i class="fa fa-check"></i><b>5.2.4</b> Descomposición de la variabilidad</a></li>
 <li class="chapter" data-level="5.2.5" data-path="anova.html"><a href="anova.html#ejemplo"><i class="fa fa-check"></i><b>5.2.5</b> Ejemplo</a></li>
 </ul></li>
+<li class="chapter" data-level="5.3" data-path="anova.html"><a href="anova.html#modelo-de-dos-vías"><i class="fa fa-check"></i><b>5.3</b> Modelo de dos vías</a>
+<ul>
+<li class="chapter" data-level="5.3.1" data-path="anova.html"><a href="anova.html#modelo-aditivo"><i class="fa fa-check"></i><b>5.3.1</b> Modelo aditivo</a></li>
+<li class="chapter" data-level="5.3.2" data-path="anova.html"><a href="anova.html#modelo-aditivo-con-iteracción"><i class="fa fa-check"></i><b>5.3.2</b> Modelo aditivo con iteracción</a></li>
+</ul></li>
 </ul></li>
 </ul>
 
@@ -241,14 +246,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">5.2</span> Modelo de una vía</h2>
 <p>Supongamos que una variable <span class="math inline">\(Y\)</span> ha sido observada bajo <span class="math inline">\(k\)</span> condiciones experimentales distintas. Puede ser que las observaciones provengan de <span class="math inline">\(k\)</span> poblaciones, o bien tratarse de réplicas para cada uno de los <span class="math inline">\(k\)</span> niveles de un factor.</p>
 <p>Indiquemos por <span class="math inline">\(y_{ij}\)</span> la réplica <span class="math inline">\(j (j = 1, . . . , n_i)\)</span> en la población o nivel <span class="math inline">\(i (i = 1, . . . , k)\)</span>, donde <span class="math inline">\(n_i\)</span> es el número de réplicas en la población o nivel <span class="math inline">\(i\)</span>. Entonce el conjunto de datos se puede ver como:</p>
-<p><span class="math display">\[\begin{align*}
+<p><span class="math display">\[
+\begin{align*}
 Nivel 1 \quad y_{11}, y_{12}, . . . , y_{1n_1}\\
 Nivel 2 \quad y_{21}, y_{22}, . . . , y_{2n_2}\\
 .\\
 .\\
 .\\
 Nivel k \quad y_{k1}, y_{k2}, . . . , y_{kn_k}
-\end{align*}\]</span></p>
+\end{align*}
+\]</span></p>
 <p>Con estos datos se pueden calcular las siguientes medias:</p>
 <p>Media en la población o nivel <span class="math inline">\(i\)</span>:</p>
 <p><span class="math display">\[y_{i.} =\frac{1}{n_i}\sum_{j=1}^{n_i}y_{ij}\]</span></p>
@@ -488,7 +495,393 @@ Total     &amp; n-1 &amp; SC_{T}=\sum_{ij}(y_{ij}-\overline{y})^2 &amp; - &amp; 
 ## Residual standard error: 6.821535
 ## Estimated effects may be unbalanced</code></pre>
 <p>De los resultados es posible concluir que la diferencia entre los tres fármacos es claramente significativa.</p>
+</div>
+</div>
+<div id="modelo-de-dos-vías" class="section level2" number="5.3">
+<h2><span class="header-section-number">5.3</span> Modelo de dos vías</h2>
+<p>Una variable o factor cuyo efecto sobre la respuesta no es directamente de interés pero que se introduce en el experimento para obtener comparaciones homogéneas se denomina una variable bloque. Por ejemplo, en una investigación para comparar la efectividad de varios fertilizantes (tratamientos) se puede considerar las fincas donde se prueban como un factor bloque.</p>
+<p>El efecto de la finca sobre la producción no es de interés y el objetivo es comparar los fertilizantes eliminando el efecto de la pertenencia de una cosecha a una finca en específico. En general, se supone que no hay interacción entre la variable bloque y los factores de interés.</p>
+<p>Supongamos que la variable respuesta está afectada por dos causas de variabilidad, es decir, por dos variables o factores cualitativos A y B, con a y b niveles respectivamente. El factor A es el factor principal, mientras que el factor B es una variable bloque. Supongamos también que tenemos unicamente una observación combinación de niveles. Eso significa tener tantas unidades experimentales por bloque como tratamientos o niveles del factor principal y que la asignación del tratamiento se hace al azar en cada bloque. Entonces, podemos representar las observaciones del siguiente modo:</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th><span class="math inline">\(B_1\)</span></th>
+<th><span class="math inline">\(B_2\)</span></th>
+<th><span class="math inline">\(\dots\)</span></th>
+<th><span class="math inline">\(B_b\)</span></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(A_1\)</span></td>
+<td><span class="math inline">\(y_{11}\)</span></td>
+<td><span class="math inline">\(y_{12}\)</span></td>
+<td><span class="math inline">\(\dots\)</span></td>
+<td><span class="math inline">\(y_{1b}\)</span></td>
+<td><span class="math inline">\(y_{1.}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(A_2\)</span></td>
+<td><span class="math inline">\(y_{21}\)</span></td>
+<td><span class="math inline">\(y_{22}\)</span></td>
+<td><span class="math inline">\(\dots\)</span></td>
+<td><span class="math inline">\(y_{2b}\)</span></td>
+<td><span class="math inline">\(y_{2.}\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\dots\)</span></td>
+<td><span class="math inline">\(\vdots\)</span></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(A_a\)</span></td>
+<td><span class="math inline">\(y_{a1}\)</span></td>
+<td><span class="math inline">\(y_{a2}\)</span></td>
+<td><span class="math inline">\(\dots\)</span></td>
+<td><span class="math inline">\(y_{ab}\)</span></td>
+<td><span class="math inline">\(y_{a.}\)</span></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td><span class="math inline">\(y_{.1}\)</span></td>
+<td><span class="math inline">\(y_{.2}\)</span></td>
+<td><span class="math inline">\(\dots\)</span></td>
+<td><span class="math inline">\(y_{.b}\)</span></td>
+<td><span class="math inline">\(y_{..}\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Con estos datos se pueden calcular las siguientes medias:</p>
+<p>Media en el factor o nivel <span class="math inline">\(i\)</span>:</p>
+<p><span class="math display">\[y_{i.} =\frac{1}{b}\sum_{j=1}^{b}y_{ij}\]</span></p>
+<p>Media en el bloque <span class="math inline">\(j\)</span>:</p>
+<p><span class="math display">\[y_{.j} =\frac{1}{a}\sum_{i=1}^{a}y_{ij}\]</span></p>
+<p>Media general:</p>
+<p><span class="math display">\[\bar{y} = y_{\cdot\cdot} =\frac{1}{ab}\sum_{i=1}^{a}\sum_{j=1}^{b}y_{ij}\]</span></p>
+<p>Con esta presentación de los datos, se puede decir que A es el factor principal, mientras que B es una variable bloque. O también se puede decir que A es el factor fila y B el factor columna.</p>
+<p>Realizando un proceso similar al que ANOVA de un factor lo que buscamos es plantear un modelo lineal que ajuste a los datos con las caracteristicas antes descritas. El primero que presentamos en un modelo en que suponemos que tanto el efecto fila como el efecto columna son aditivos.</p>
+<div id="modelo-aditivo" class="section level3" number="5.3.1">
+<h3><span class="header-section-number">5.3.1</span> Modelo aditivo</h3>
+<p>En el modeo aditivo de dos factores se asume que los efectos se suman, por lo que el modelo matemático queda de la siguiente forma:</p>
+<p><span class="math display">\[y_{ij}=\mu+\alpha_i+\beta_j+\epsilon_{ij},\quad i=1,...,a;\quad j=1,...,b\]</span></p>
+<p>donde:</p>
+<p><span class="math inline">\(\mu\)</span> es la media general.</p>
+<p><span class="math inline">\(\alpha_i\)</span> es el efecto del i-ésimo nivel del factor A.</p>
+<p><span class="math inline">\(\beta_j\)</span> es el efecto del j-ésimo nivel del factor B.</p>
+<p>Y en este caso pondremos la restricción de que la suma de los <span class="math inline">\(i\)</span> parámetros <span class="math inline">\(\alpha\)</span> y los <span class="math inline">\(j\)</span> parámetros <span class="math inline">\(\beta\)</span> sean cero. Es decir <span class="math display">\[\sum_{i}\alpha_i=\sum_{j}\beta{j}=0\]</span></p>
+<p>Dicha restricción nos lleva a que el modelo de <span class="math inline">\(y_{ij}\)</span> solamente depende de <span class="math inline">\(\mu,\alpha_1,...\alpha_{a-1},\beta_1,...\beta_{b-1}\)</span> ya que <span class="math display">\[\alpha_a=-\alpha_1-\alpha_2-...-\alpha_{a-1}\]</span></p>
+<p>y</p>
+<p><span class="math display">\[\beta_b=-\beta_1-\beta_2-...-\beta_{b-1}\]</span></p>
+<p>Por lo tanto el numero de parámetros a estimar en este modelo serán a+b+1.</p>
+<p>El objetivo es estimar los efectos de los distintos <span class="math inline">\(a\)</span> niveles del factor A y contrastar la hipótesis de que todos los niveles del factor producen el mismo efecto. Analogamente se buscará que los distintos <span class="math inline">\(b\)</span> niveles del factor B producen el mismo efecto. Con lo que se estaría concluyendo que el factor A y/o el factor B no son significativos.</p>
+<p>Para la estimación de los parámetros de este modelo se utiliza el método de mínimos cuadrados, entonces partiendo de la ecuación <span class="math inline">\(y_{ij}-\mu-\alpha_i-\beta_j\)</span> se suman ceros y queda la siguiente igualdad.</p>
+<p><span class="math display">\[y_{ij}-\mu-\alpha_i-\beta_j=(\bar y-\mu)+(y_{i.}-\bar y-\alpha_i)+(y_{.j}-\bar y-\beta_j)+(y_{ij}-y_{i.}-y_{.j}+\bar y)\]</span></p>
+<p>la cual al elevar al cuadrado y sumar sobre todos los valores obtenemos del lado izquierdo la función a minimizar y del lado derecho después de desarrollar los cuadrados y observar que los productos cruzados se anulan queda:</p>
+<p><span class="math display">\[\sum_{ij}(y_{ij}-\mu-\alpha_i-\beta_j)^2=\sum_{ij}(\bar y-\mu)^2+\sum_{ij}(y_{i.}-\bar y-\alpha_i)^2+\sum_{ij}(y_{.j}-\bar y-\beta_j)^2+\sum_{ij}(y_{ij}-y_{i.}-y_{.j}+\bar y)^2\]</span></p>
+<p>por lo tanto, considerando la restricción de que la suma de los parámetros <span class="math inline">\(\alpha\)</span> y <span class="math inline">\(\beta\)</span> deben ser cero llegamos a que los valores de <span class="math inline">\(\mu, \alpha_i, \beta_i\)</span> que minimizan la ecuación serán.</p>
+<p><span class="math display">\[\hat \mu= \bar y\]</span></p>
+<p><span class="math display">\[\hat\alpha_i=y_{i.}-\bar y\]</span></p>
+<p><span class="math display">\[\hat\beta_j= y_{.j}-\bar y\]</span></p>
+<p>Entonces la suma de los cuadrados de los residuales estará dado por <span class="math inline">\(SC_R=\sum_{ij}(y_{ij}-y_{i.}-y_{.j}+\bar y)^2\)</span></p>
+<div id="hipótesis" class="section level4" number="5.3.1.1">
+<h4><span class="header-section-number">5.3.1.1</span> Hipótesis</h4>
+<p>En este caso la hipótesis se plantean para cada factor. Siendo las hipótesis nulas las que dicen que el factor A o B según el caso no muestran efecto.</p>
+<p>Entonces la hipótesis de que el factor principal A no es significativo (no hay efecto fila) es:</p>
+<p><span class="math display">\[H_0^A: \alpha_1=\alpha_2=...=\alpha_a=0\]</span>
+Y la hipótesis de que el factor B no es significativo (no hay efecto columna) es:</p>
+<p><span class="math display">\[H_0^B: \beta_1=\beta_2=...=\beta_b=0\]</span></p>
+<p>La prueba para contrastar las hipótesis será una F y se obtendrá de forma similar al caso de una vía con la descomposición de la suma de los cuadrados.</p>
+<p><span class="math display">\[\sum_{ij}(y_{ij}-\overline{y})^2=b\sum_{ij}(y_{i.}-\overline{y})^2+a\sum_{ij}(y_{.j}-\overline{y})^2-\sum_{ij}(y_{ij}-y_{i.}-y_{.j}+\overline{y})^2\]</span></p>
+<p><span class="math display">\[SC_T=SC_F+SC_C+SCR\]</span></p>
+<p>donde <span class="math inline">\(SC_T\)</span> es la suma de cuadrados total, <span class="math inline">\(SC_F\)</span> es la suma de cuadrados entre filas, <span class="math inline">\(SC_C\)</span> es la suma de cuadrados entre columnas y <span class="math inline">\(SCR\)</span> es la suma de cuadrados residual.</p>
+<p>Se observa que si <span class="math inline">\(H_0^B\)</span> es cierta entonces el modelo se convertirá en un modelo de una vía <span class="math display">\[y_{ij}=\mu +\alpha_i+\epsilon_{ij}\]</span> Y la suma de cuadrados residual será entonces</p>
+<p><span class="math display">\[SCR_H=\sum_{ij}(y_{ij}-y_{i.})^2=\sum_{ij}(y_{.j}+\overline{y})^2\sum_{ij}(y_{ij}-y_{i.}-y_{.j}+\overline{y})^2=SC_C+SCR\]</span></p>
+<p>Entonces la regla de decisión para la prueba de hipótesis esta dada por el estadístico</p>
+<p><span class="math display">\[F=\frac{\frac{SC_C}{b-1}}{\frac{SCR}{(a-1)(b-1)}}\]</span></p>
+<p>Bajo <span class="math inline">\(H_0\)</span> el estadítico tiene distribución <span class="math inline">\(F\)</span> con <span class="math inline">\((a-1)\)</span> y <span class="math inline">\((b-1)\)</span> grados de libertad</p>
+</div>
+<div id="descomposición-de-la-variabilidad-1" class="section level4" number="5.3.1.2">
+<h4><span class="header-section-number">5.3.1.2</span> Descomposición de la variabilidad</h4>
+<p>Para comparar los efectos de los distintos niveles de ambos factores emplearemos el análisis de la varianza (ANOVA). Similar a el caso de un factor, el análisis se basa en la descomposición de la variabilidad total de los datos en distintas componentes.</p>
+<table>
+<colgroup>
+<col width="10%" />
+<col width="12%" />
+<col width="33%" />
+<col width="16%" />
+<col width="26%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"></th>
+<th align="center">Grados de libertad</th>
+<th align="center">Suma de Cuadrados</th>
+<th align="center">Cuadrado Medio</th>
+<th align="center">Prueba F</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Entre filas</td>
+<td align="center"><span class="math inline">\(a-1\)</span></td>
+<td align="center"><span class="math inline">\(SC_{F}=b\sum_{i}(y_{i.}-\overline{y})^2\)</span></td>
+<td align="center"><span class="math inline">\(\frac{SC_{F}}{a-1}\)</span></td>
+<td align="center"><span class="math inline">\(\frac{SC_{F}/(a-1)}{SCR/[(a-1)(b-1)]}\)</span></td>
+</tr>
+<tr class="even">
+<td align="center">Entre columnas</td>
+<td align="center"><span class="math inline">\(b-1\)</span></td>
+<td align="center"><span class="math inline">\(SC_{C}=a\sum_{j}(y_{.j}-\overline{y})^2\)</span></td>
+<td align="center"><span class="math inline">\(\frac{SC_{C}}{b-1}\)</span></td>
+<td align="center"><span class="math inline">\(\frac{SC_{C}/(b-1)}{SCR/[(a-1)(b-1)]}\)</span></td>
+</tr>
+<tr class="odd">
+<td align="center">Residuo</td>
+<td align="center"><span class="math inline">\((a-1)(b-1)\)</span></td>
+<td align="center"><span class="math inline">\(SCR=\sum_{ij}(y_{ij}-y_{i.}-y{.j}+\overline{y})^2\)</span></td>
+<td align="center"><span class="math inline">\(\frac{SCR}{(a-1)(b-1)}\)</span></td>
+<td align="center">-</td>
+</tr>
+<tr class="even">
+<td align="center">Total</td>
+<td align="center"><span class="math inline">\(ab-1\)</span></td>
+<td align="center"><span class="math inline">\(SC_{T}=\sum_{ij}(y_{ij}-\overline{y})^2\)</span></td>
+<td align="center">-</td>
+<td align="center">-</td>
+</tr>
+</tbody>
+</table>
+<p>Cuando el efecto de la variable bloque no es significativo se puede considerar el modelo más sencillo con un solo factor, prescindiendo de los bloques. Sin embargo, si hay diferencias entre los bloques, el modelo en bloques aleatorizados es mucho más eficaz en la detección de diferencias entre tratamientos.</p>
+</div>
+<div id="coeficientes-de-determinación-parcial" class="section level4" number="5.3.1.3">
+<h4><span class="header-section-number">5.3.1.3</span> Coeficientes de determinación parcial</h4>
+<p>El coeficiente de determinación se define como</p>
+<p><span class="math display">\[R^2=1-\frac{SCR}{SC_T}=\frac{SC_F+SC_C}{SC_T}\]</span></p>
+<p>De modo que los coeficientes de determinación parcial</p>
+<p><span class="math display">\[R^2_F=\frac{SC_F}{SC_T}\]</span></p>
+<p>y <span class="math display">\[R^2_C=\frac{SC_C}{SC_T}\]</span></p>
+<p>indican el porcentaje de la variabilidad total explicada por el factor principal y por el factor bloque, respectivamente.</p>
+</div>
+<div id="ejemplo-1" class="section level4" number="5.3.1.4">
+<h4><span class="header-section-number">5.3.1.4</span> Ejemplo</h4>
+<p>Retomando el ejemplo mencionado en la introducción, se desea estudiar las diferencias entre los efectos de 4 fertilizantes sobre la producción de papas, para ello se cuenta con 5 fincas, cada una de las cuales se dividió en 4 parcelas del mismo tamaño y tipo. Los fertilizantes fueron asignados al azar en las parcelas de cada finca. El rendimiento en toneladas fue</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center"></th>
+<th align="center"></th>
+<th align="center"></th>
+<th align="center">Finca</th>
+<th align="center"></th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Fertilizante</td>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">3</td>
+<td align="center">4</td>
+<td align="center">5</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">2.1</td>
+<td align="center">2.2</td>
+<td align="center">1.8</td>
+<td align="center">2.0</td>
+<td align="center">1.9</td>
+</tr>
+<tr class="odd">
+<td align="center">2</td>
+<td align="center">2.2</td>
+<td align="center">2.6</td>
+<td align="center">2.7</td>
+<td align="center">2.5</td>
+<td align="center">2.8</td>
+</tr>
+<tr class="even">
+<td align="center">3</td>
+<td align="center">1.8</td>
+<td align="center">1.9</td>
+<td align="center">1.6</td>
+<td align="center">2.0</td>
+<td align="center">1.9</td>
+</tr>
+<tr class="odd">
+<td align="center">4</td>
+<td align="center">2.1</td>
+<td align="center">2.0</td>
+<td align="center">2.2</td>
+<td align="center">2.4</td>
+<td align="center">2.1</td>
+</tr>
+</tbody>
+</table>
+<p>Este diseño es especialmente utilizado en experimentación agrícola. Y el objetivo es comparar <span class="math inline">\(a = 4\)</span> tratamientos (fertilizantes en este caso) utilizando <span class="math inline">\(b = 5\)</span> bloques (fincas) y repartiendo aleatoriamente los a tratamientos en cada uno de los bloques (los fertilizantes son asignados al azar en las parcelas de cada finca). Para una correcta aplicación de este diseño se debe considerar que hay homogeneidad dentro de cada bloque, de modo que el efecto bloque sea el mismo para todos los tratamientos.</p>
+<p>Nos interesa saber si hay diferencias significativas entre los tratamientos <span class="math inline">\(\alpha_i\)</span> y entre los bloques <span class="math inline">\(\beta_j\)</span>.
+Los resultados obtenidos son</p>
+<p>Primero calculamos las medias por tratamiento (<span class="math inline">\(y_{1.}\)</span>, <span class="math inline">\(y_{2.}\)</span>, <span class="math inline">\(y_{3.}\)</span> y <span class="math inline">\(y_{4.}\)</span>), las medias por finca, asi como la media global <span class="math inline">\(y_{..}\)</span></p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="anova.html#cb58-1" aria-hidden="true" tabindex="-1"></a>x<span class="ot">=</span><span class="fu">c</span>(<span class="fl">2.1</span>,<span class="fl">2.2</span>,<span class="fl">1.8</span>,<span class="fl">2.0</span>,<span class="fl">1.9</span>,<span class="fl">2.2</span>,<span class="fl">2.6</span>,<span class="fl">2.7</span>,<span class="fl">2.5</span>,<span class="fl">2.8</span>,<span class="fl">1.8</span>,<span class="fl">1.9</span>,<span class="fl">1.6</span>,<span class="fl">2.0</span>,<span class="fl">1.9</span>,<span class="fl">2.1</span>,<span class="fl">2.0</span>,<span class="fl">2.2</span>,<span class="fl">2.4</span>,<span class="fl">2.1</span>)</span>
+<span id="cb58-2"><a href="anova.html#cb58-2" aria-hidden="true" tabindex="-1"></a>f<span class="ot">=</span><span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;1&quot;</span>,<span class="dv">5</span>),<span class="fu">rep</span>(<span class="st">&quot;2&quot;</span>,<span class="dv">5</span>),<span class="fu">rep</span>(<span class="st">&quot;3&quot;</span>,<span class="dv">5</span>),<span class="fu">rep</span>(<span class="st">&quot;4&quot;</span>,<span class="dv">5</span>))</span>
+<span id="cb58-3"><a href="anova.html#cb58-3" aria-hidden="true" tabindex="-1"></a>c<span class="ot">=</span><span class="fu">c</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">&quot;1&quot;</span>,<span class="st">&quot;2&quot;</span>,<span class="st">&quot;3&quot;</span>,<span class="st">&quot;4&quot;</span>,<span class="st">&quot;5&quot;</span>),<span class="dv">4</span>))</span>
+<span id="cb58-4"><a href="anova.html#cb58-4" aria-hidden="true" tabindex="-1"></a>A<span class="ot">=</span><span class="fu">data.frame</span>(x,f,c)</span>
+<span id="cb58-5"><a href="anova.html#cb58-5" aria-hidden="true" tabindex="-1"></a>MF<span class="ot">=</span><span class="fu">aggregate</span>(A<span class="sc">$</span>x,<span class="at">by=</span><span class="fu">list</span>(A<span class="sc">$</span>f), <span class="at">FUN=</span>mean)</span>
+<span id="cb58-6"><a href="anova.html#cb58-6" aria-hidden="true" tabindex="-1"></a>MC<span class="ot">=</span><span class="fu">aggregate</span>(A<span class="sc">$</span>x,<span class="at">by=</span><span class="fu">list</span>(A<span class="sc">$</span>c), <span class="at">FUN=</span>mean)</span>
+<span id="cb58-7"><a href="anova.html#cb58-7" aria-hidden="true" tabindex="-1"></a>MG<span class="ot">=</span><span class="fu">mean</span>(A<span class="sc">$</span>x)</span>
+<span id="cb58-8"><a href="anova.html#cb58-8" aria-hidden="true" tabindex="-1"></a>MF</span></code></pre></div>
+<pre><code>##   Group.1    x
+## 1       1 2.00
+## 2       2 2.56
+## 3       3 1.84
+## 4       4 2.16</code></pre>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="anova.html#cb60-1" aria-hidden="true" tabindex="-1"></a>MC</span></code></pre></div>
+<pre><code>##   Group.1     x
+## 1       1 2.050
+## 2       2 2.175
+## 3       3 2.075
+## 4       4 2.225
+## 5       5 2.175</code></pre>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="anova.html#cb62-1" aria-hidden="true" tabindex="-1"></a>MG</span></code></pre></div>
+<pre><code>## [1] 2.14</code></pre>
+<p>Ahora calculamos <span class="math inline">\(SC_F\)</span>, <span class="math inline">\(SC_C\)</span> y <span class="math inline">\(SC_T\)</span></p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="anova.html#cb64-1" aria-hidden="true" tabindex="-1"></a>SCF<span class="ot">=</span><span class="dv">5</span><span class="sc">*</span><span class="fu">sum</span>((MF<span class="sc">$</span>x<span class="sc">-</span>MG)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb64-2"><a href="anova.html#cb64-2" aria-hidden="true" tabindex="-1"></a>SCF</span></code></pre></div>
+<pre><code>## [1] 1.432</code></pre>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="anova.html#cb66-1" aria-hidden="true" tabindex="-1"></a>SCC<span class="ot">=</span><span class="dv">4</span><span class="sc">*</span><span class="fu">sum</span>((MC<span class="sc">$</span>x<span class="sc">-</span>MG)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb66-2"><a href="anova.html#cb66-2" aria-hidden="true" tabindex="-1"></a>SCC</span></code></pre></div>
+<pre><code>## [1] 0.088</code></pre>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="anova.html#cb68-1" aria-hidden="true" tabindex="-1"></a>SCT<span class="ot">=</span><span class="fu">sum</span>((x<span class="sc">-</span><span class="fu">mean</span>(x))<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb68-2"><a href="anova.html#cb68-2" aria-hidden="true" tabindex="-1"></a>SCT</span></code></pre></div>
+<pre><code>## [1] 1.928</code></pre>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="anova.html#cb70-1" aria-hidden="true" tabindex="-1"></a>SCR<span class="ot">=</span>SCT<span class="sc">-</span>SCF<span class="sc">-</span>SCC</span></code></pre></div>
+<p>La estadística <span class="math inline">\(F\)</span> para comparar los tratamientos tomará entonces el valor de</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="anova.html#cb71-1" aria-hidden="true" tabindex="-1"></a>Est_F<span class="ot">=</span>(SCF<span class="sc">/</span><span class="dv">3</span>)<span class="sc">/</span>(SCR<span class="sc">/</span><span class="dv">12</span>)</span>
+<span id="cb71-2"><a href="anova.html#cb71-2" aria-hidden="true" tabindex="-1"></a>Est_F</span></code></pre></div>
+<pre><code>## [1] 14.03922</code></pre>
+<p>Y su correspondiente p-value es</p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="anova.html#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pf</span>(Est_F,<span class="dv">3</span>,<span class="dv">12</span>)</span></code></pre></div>
+<pre><code>## [1] 0.0003136709</code></pre>
+<p>La estadística <span class="math inline">\(F\)</span> para comparar las fincas tomará entonces el valor de</p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="anova.html#cb75-1" aria-hidden="true" tabindex="-1"></a>Est_F<span class="ot">=</span>(SCC<span class="sc">/</span><span class="dv">4</span>)<span class="sc">/</span>(SCR<span class="sc">/</span><span class="dv">12</span>)</span>
+<span id="cb75-2"><a href="anova.html#cb75-2" aria-hidden="true" tabindex="-1"></a>Est_F</span></code></pre></div>
+<pre><code>## [1] 0.6470588</code></pre>
+<p>Y su correspondiente p-value es</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="anova.html#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pf</span>(Est_F,<span class="dv">3</span>,<span class="dv">12</span>)</span></code></pre></div>
+<pre><code>## [1] 0.599646</code></pre>
+<p>Por lo tanto se concluye que si hay un efecto por tratamiento pero no por finca.</p>
+<p>Aplicando las funciones de R que calculan el análisis de varianza obtenemos</p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="anova.html#cb79-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">aov</span>(x <span class="sc">~</span> f<span class="sc">+</span>c, <span class="at">data =</span> A)</span>
+<span id="cb79-2"><a href="anova.html#cb79-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mod)</span></code></pre></div>
+<pre><code>##             Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+## f            3  1.432  0.4773  14.039 0.000314 ***
+## c            4  0.088  0.0220   0.647 0.639572    
+## Residuals   12  0.408  0.0340                     
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>De los resultados es posible concluir que el efecto por fila si es significativo pero el efecto por columna no es significativo, lo cual en términos del problema se traduce a que si hay evidencia de una diferencia entre los fertiizantes.</p>
+</div>
+</div>
+<div id="modelo-aditivo-con-iteracción" class="section level3" number="5.3.2">
+<h3><span class="header-section-number">5.3.2</span> Modelo aditivo con iteracción</h3>
+<p>Este modelo es una extensión del modeo aditivo en donde adicional a suponer que los efectos de los dos factores se suman, también se considera la presencia del efecto interacción npor lo que el modelo matemático queda de la siguiente forma:</p>
+<p><span class="math display">\[y_{ijk}=\mu+\alpha_i+\beta_j+\gamma_{ij}+\epsilon_{ijk},\quad i=1,...,a;\quad j=1,...,b; \quad k=1,...,r\]</span></p>
+<p>donde:</p>
+<p><span class="math inline">\(\mu\)</span> es la media general.</p>
+<p><span class="math inline">\(\alpha_i\)</span> es el efecto del i-ésimo nivel del factor A.</p>
+<p><span class="math inline">\(\beta_j\)</span> es el efecto del j-ésimo nivel del factor B.</p>
+<p><span class="math inline">\(\gamma_{ij}\)</span> es la interacción entre el i-ésimo nivel del factor A y el j-ésimo nivel del factor B.</p>
+<p>Análogo a lo visto en el modelo anterior, para la determinación de los parámetros se imponen las siguientes restricciones:</p>
+<p><span class="math display">\[\sum_{i}\alpha_i=\sum_{j}\beta{j}=\sum_{i}\gamma_{ij}=\sum_{j}\gamma_{ij}=0\]</span></p>
+<p>Por otra parte, se dice que un diseño es de rango completo si el número de parámetros es igual al número de condiciones experimentales, es decir, al número de filas distintas de la matriz de diseño. En un diseño que no es de rango completo hay menos parámetros que condiciones experimentales, por lo que en realidad “admitimos” que los datos se ajustan al modelo propuesto.</p>
+<p>En general, un modelo de rango completo se ajusta intrínsecamente a los datos sin problemas. No obstante, para poder estimar todos los parámetros es necesario disponer de más de una réplica por condición experimental.</p>
+<p>Por esta razón en ocasiones la interacción no puede ser incluida en un modelo aditivo como la parametrización presentada.Sin embargo para resolver este problema se pueden considera las siguientes transformaciones:</p>
+<p><span class="math display">\[\mu=\frac{1}{ab}\sum_{ij}\eta_{ij}\]</span></p>
+<p><span class="math display">\[\alpha_i=\frac{1}{b}\sum_j\eta_{ij}-\mu\]</span></p>
+<p><span class="math display">\[\beta_j=\frac{1}{a}\sum_i\eta_{ij}-\mu\]</span></p>
+<p><span class="math display">\[\gamma_{ij}=\eta_{ij}-\mu-\alpha_i-\beta_j\]</span></p>
+<p>Y con esto el modelo puede ser reparamentrizado de la siguiente forma:</p>
+<p><span class="math display">\[y_{ijk} = \eta_{ij}+\epsilon_{ijk}\]</span></p>
+<p>Los estimadores de los parámetros serán</p>
+<p><span class="math display">\[\hat \mu= \bar y\]</span></p>
+<p><span class="math display">\[\hat\alpha_i=y_{i..}-\bar y\]</span></p>
+<p><span class="math display">\[\hat\beta_j= y_{.j.}-\bar y\]</span></p>
+<p><span class="math display">\[\hat\gamma_{ij}=y_{ij.}-y_{i..}-y_{.j.}+\overline{y}\]</span></p>
+<p>Entonces la suma de los cuadrados de los residuales estará dado por <span class="math inline">\(SC_R=\sum_{ij}(y_{ijk}-y_{ij.})^2\)</span>. Entonces <span class="math inline">\(\hat\eta_{ij}=y_{ij.}\)</span></p>
+<div id="hipótesis-y-tabla-anova" class="section level4" number="5.3.2.1">
+<h4><span class="header-section-number">5.3.2.1</span> Hipótesis y tabla ANOVA</h4>
+<p>En este caso las hipótesis son las siguientes:</p>
+<p><span class="math display">\[H_0^A: \alpha_1=\alpha_2=...=\alpha_a=0 \quad (no\ hay\ efecto\ fila)\]</span></p>
+<p><span class="math display">\[H_0^B: \beta_1=\beta_2=...=\beta_b=0  \quad (no\ hay\ efecto\ columna)\]</span></p>
+<p><span class="math display">\[H_0^I: \gamma_{ij}=0 \quad\forall i,j  \quad (no\ hay\ interacción)\]</span></p>
+<p>La prueba para contrastar las hipótesis será una F y se obtendrá de forma similar a los casos anteriores con la descomposición de la suma de los cuadrados.Entonces la suma de cuadrados totales <span class="math inline">\(SC_T\)</span> se descompondrá en:</p>
+<p><span class="math display">\[SC_T=\sum_{ijk} (y_{ijk}-\overline y)^2=br\sum_{ij}(y_{i..}-\overline{y})^2+ar\sum_{ij}(y_{.j.}-\overline{y})^2-r\sum_{ij}(y_{ijk}-y_{i..}-y_{.j.}+\overline{y})^2+\sum_{ijk}(y_{ijk}-y_{ij.})^2\]</span></p>
+<p><span class="math display">\[SC_T=SC_F+SC_C+SC_I+SCR\]</span></p>
+<p>La tabla ANOVA muestra la descomposición de la variabilidad total de los datos en los distintos componentes considerados en este modelo (factor fila, factor columna e interacción.</p>
+<table>
+<colgroup>
+<col width="9%" />
+<col width="12%" />
+<col width="35%" />
+<col width="16%" />
+<col width="26%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center"></th>
+<th align="center">Grados de libertad</th>
+<th align="center">Suma de Cuadrados</th>
+<th align="center">Cuadrado Medio</th>
+<th align="center">Prueba F</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Entre filas</td>
+<td align="center"><span class="math inline">\(a-1\)</span></td>
+<td align="center"><span class="math inline">\(SC_{F}=br\sum_{i}(y_{i..}-\overline{y})^2\)</span></td>
+<td align="center"><span class="math inline">\(\frac{SC_{F}}{a-1}\)</span></td>
+<td align="center"><span class="math inline">\(\frac{SC_{F}/(a-1)}{SCR/[(a-1)(b-1)]}\)</span></td>
+</tr>
+<tr class="even">
+<td align="center">Entre columnas</td>
+<td align="center"><span class="math inline">\(b-1\)</span></td>
+<td align="center"><span class="math inline">\(SC_{C}=ar\sum_{j}(y_{.j.}-\overline{y})^2\)</span></td>
+<td align="center"><span class="math inline">\(\frac{SC_{C}}{b-1}\)</span></td>
+<td align="center"><span class="math inline">\(\frac{SC_{C}/(b-1)}{SCR/[(a-1)(b-1)]}\)</span></td>
+</tr>
+<tr class="odd">
+<td align="center">Interacción</td>
+<td align="center"><span class="math inline">\(b-1\)</span></td>
+<td align="center"><span class="math inline">\(SC_{I}=r\sum_{ij}(y_{ij.}-y_{i..}-y_{.j.}+\overline{y})^2\)</span></td>
+<td align="center"><span class="math inline">\(\frac{SC_{I}}{(a-1)(b-1)}\)</span></td>
+<td align="center"><span class="math inline">\(\frac{SC_{I}/[(a-1)(b-1)]}{SCR/[ab(r-1)]}\)</span></td>
+</tr>
+<tr class="even">
+<td align="center">Residuo</td>
+<td align="center"><span class="math inline">\(ab(r-1)\)</span></td>
+<td align="center"><span class="math inline">\(SCR=\sum_{ijk}(y_{ijk}-y_{ij.})^2\)</span></td>
+<td align="center"><span class="math inline">\(\frac{SCR}{ab(r-1)}\)</span></td>
+<td align="center">-</td>
+</tr>
+<tr class="odd">
+<td align="center">Total</td>
+<td align="center"><span class="math inline">\(abr-1\)</span></td>
+<td align="center"><span class="math inline">\(SC_{T}=\sum_{ijk}(y_{ijk}-\overline{y})^2\)</span></td>
+<td align="center">-</td>
+<td align="center">-</td>
+</tr>
+</tbody>
+</table>
+<p>Similar a lo que hemos visto en los modelos de ANOVA previos entonces cada una de las hipótesis se probará con su estadística de prueba F que se incluye en la última columna de la tabla.</p>
 
+</div>
 </div>
 </div>
 </div>
