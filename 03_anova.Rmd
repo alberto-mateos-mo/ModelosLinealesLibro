@@ -376,7 +376,7 @@ $\alpha_i$ es el efecto del i-ésimo nivel del factor A.
 
 $\beta_j$ es el efecto del j-ésimo nivel del factor B.
 
-Y en este caso pondremos la restricción de que la suma de los $i$ parámetros $\alpha$ y los $j$ parámetros $\beta$ sean cero. Es decir $$\sum_{i}\alpha_i=\sum_{j}\beta{j}=0$$
+Y en este caso pondremos la restricción de que la suma de los $i$ parámetros $\alpha$ y los $j$ parámetros $\beta$ sean cero. Es decir $$\sum_{i}\alpha_i=\sum_{j}\beta_{j}=0$$
 
 Dicha restricción nos lleva a que el modelo de $y_{ij}$ solamente depende de $\mu,\alpha_1,...\alpha_{a-1},\beta_1,...\beta_{b-1}$ ya que $$\alpha_a=-\alpha_1-\alpha_2-...-\alpha_{a-1}$$
 
@@ -543,9 +543,9 @@ summary(mod)
 
 De los resultados es posible concluir que el efecto por fila si es significativo pero el efecto por columna no es significativo, lo cual en términos del problema se traduce a que si hay evidencia de una diferencia entre los fertiizantes. 
 
-### Modelo aditivo con iteracción
+### Modelo aditivo con interacción
 
-Este modelo es una extensión del modeo aditivo en donde adicional a suponer que los efectos de los dos factores se suman,  también se considera la presencia del efecto interacción npor lo que el modelo matemático queda de la siguiente forma:
+Este modelo es una extensión del modeo aditivo en donde adicional a suponer que los efectos de los dos factores se suman,  también se considera la presencia del efecto interacción por lo que el modelo matemático queda de la siguiente forma:
 
 $$y_{ijk}=\mu+\alpha_i+\beta_j+\gamma_{ij}+\epsilon_{ijk},\quad i=1,...,a;\quad j=1,...,b; \quad k=1,...,r$$
 
@@ -561,7 +561,7 @@ $\gamma_{ij}$ es la interacción entre el i-ésimo nivel del factor A y el j-és
 
 Análogo a lo visto en el modelo anterior, para la determinación de los parámetros se imponen las siguientes restricciones: 
 
-$$\sum_{i}\alpha_i=\sum_{j}\beta{j}=\sum_{i}\gamma_{ij}=\sum_{j}\gamma_{ij}=0$$
+$$\sum_{i}\alpha_i=\sum_{j}\beta_{j}=\sum_{i}\gamma_{ij}=\sum_{j}\gamma_{ij}=0$$
 
 Por otra parte, se dice que un diseño es de rango completo si el número de parámetros es igual al número de condiciones experimentales, es decir, al número de filas distintas de la matriz de diseño. En un diseño que no es de rango completo hay menos parámetros que condiciones experimentales, por lo que en realidad “admitimos” que los datos se ajustan al modelo propuesto. 
 
@@ -577,7 +577,7 @@ $$\beta_j=\frac{1}{a}\sum_i\eta_{ij}-\mu$$
 
 $$\gamma_{ij}=\eta_{ij}-\mu-\alpha_i-\beta_j$$
 
-Y con esto el modelo puede ser reparamentrizado de la siguiente forma:
+Y con esto el modelo puede ser reparametrizado de la siguiente forma:
 
 $$y_{ijk} = \eta_{ij}+\epsilon_{ijk}$$
 
@@ -615,7 +615,7 @@ La tabla ANOVA muestra la descomposición de la variabilidad total de los datos 
 |:--------------:|:------------------:|:---------------------------------------------------------:|:-------------------------:|:-----------------------------------------:|
 |   Entre filas  |        $a-1$       |        $SC_{F}=br\sum_{i}(y_{i..}-\overline{y})^2$        |     $\frac{SC_{F}}{a-1}$  |   $\frac{SC_{F}/(a-1)}{SCR/[(a-1)(b-1)]}$   |
 | Entre columnas |        $b-1$       |         $SC_{C}=ar\sum_{j}(y_{.j.}-\overline{y})^2$         |   $\frac{SC_{C}}{b-1}$    |   $\frac{SC_{C}/(b-1)}{SCR/[(a-1)(b-1)]}$   |
-|   Interacción  |        $b-1$       | $SC_{I}=r\sum_{ij}(y_{ij.}-y_{i..}-y_{.j.}+\overline{y})^2$ |$\frac{SC_{I}}{(a-1)(b-1)}$| $\frac{SC_{I}/[(a-1)(b-1)]}{SCR/[ab(r-1)]}$ |
+|   Interacción  |        $(a-1)(b-1)$       | $SC_{I}=r\sum_{ij}(y_{ij.}-y_{i..}-y_{.j.}+\overline{y})^2$ |$\frac{SC_{I}}{(a-1)(b-1)}$| $\frac{SC_{I}/[(a-1)(b-1)]}{SCR/[ab(r-1)]}$ |
 |     Residuo    |      $ab(r-1)$     |             $SCR=\sum_{ijk}(y_{ijk}-y_{ij.})^2$             |   $\frac{SCR}{ab(r-1)}$  |                     -                     |
 |      Total     |       $abr-1$      |         $SC_{T}=\sum_{ijk}(y_{ijk}-\overline{y})^2$         |             -             |                     -                     |
 
