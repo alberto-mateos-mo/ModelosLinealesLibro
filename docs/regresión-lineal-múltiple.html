@@ -207,7 +207,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.3" data-path="anova.html"><a href="anova.html#modelo-de-dos-vías"><i class="fa fa-check"></i><b>5.3</b> Modelo de dos vías</a>
 <ul>
 <li class="chapter" data-level="5.3.1" data-path="anova.html"><a href="anova.html#modelo-aditivo"><i class="fa fa-check"></i><b>5.3.1</b> Modelo aditivo</a></li>
-<li class="chapter" data-level="5.3.2" data-path="anova.html"><a href="anova.html#modelo-aditivo-con-iteracción"><i class="fa fa-check"></i><b>5.3.2</b> Modelo aditivo con iteracción</a></li>
+<li class="chapter" data-level="5.3.2" data-path="anova.html"><a href="anova.html#modelo-aditivo-con-interacción"><i class="fa fa-check"></i><b>5.3.2</b> Modelo aditivo con interacción</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -508,10 +508,10 @@ La siguiente tabla muestra el rango de valores de <span class="math inline">\(\l
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="regresión-lineal-múltiple.html#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">multi.hist</span>(<span class="at">x =</span> datos, <span class="at">dcol =</span> <span class="fu">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>), <span class="at">dlty =</span> <span class="fu">c</span>(<span class="st">&quot;dotted&quot;</span>, <span class="st">&quot;solid&quot;</span>), <span class="at">main =</span> <span class="st">&quot;&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 <p>Otros paquetes permiten representar a la vez los diagramas de dispersión, los valores de correlación para cada par de variables y la distribución de cada una de las variables, ese es el caso de la función <code>ggpairs</code>.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="regresión-lineal-múltiple.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GGally)</span>
-<span id="cb10-2"><a href="regresión-lineal-múltiple.html#cb10-2" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb10-3"><a href="regresión-lineal-múltiple.html#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggpairs</span>(datos, <span class="at">lower =</span> <span class="fu">list</span>(<span class="at">continuous =</span> <span class="st">&quot;smooth&quot;</span>),</span>
-<span id="cb10-4"><a href="regresión-lineal-múltiple.html#cb10-4" aria-hidden="true" tabindex="-1"></a>        <span class="at">diag =</span> <span class="fu">list</span>(<span class="at">continuous =</span> <span class="st">&quot;barDiag&quot;</span>), <span class="at">axisLabels =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="regresión-lineal-múltiple.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(GGally)</span></code></pre></div>
+<pre><code>## Warning: package &#39;GGally&#39; was built under R version 4.0.4</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="regresión-lineal-múltiple.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggpairs</span>(datos, <span class="at">lower =</span> <span class="fu">list</span>(<span class="at">continuous =</span> <span class="st">&quot;smooth&quot;</span>),</span>
+<span id="cb12-2"><a href="regresión-lineal-múltiple.html#cb12-2" aria-hidden="true" tabindex="-1"></a>        <span class="at">diag =</span> <span class="fu">list</span>(<span class="at">continuous =</span> <span class="st">&quot;barDiag&quot;</span>), <span class="at">axisLabels =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/setup-1.png" width="672" /></p>
 <p>Del análisis preliminar se pueden extraer las siguientes conclusiones:</p>
 <p>Las variables que tienen una mayor relación lineal con la esperanza de vida son: asesinatos (<span class="math inline">\(r=-0.78\)</span>), analfabetismo (<span class="math inline">\(r=-0.59\)</span>) y estudios (<span class="math inline">\(r=0.58\)</span>).</p>
@@ -521,9 +521,9 @@ La siguiente tabla muestra el rango de valores de <span class="math inline">\(\l
 <div id="generar-el-modelo" class="section level4" number="4.7.1.2">
 <h4><span class="header-section-number">4.7.1.2</span> Generar el modelo</h4>
 <p>Sabemos que hay diferentes formas (algoritmos) para llegar al modelo final más adecuado. En este caso se va a emplear el método mixto iniciando el modelo con todas las variables como predictores y realizando la selección de los mejores predictores con la medición Akaike(AIC).</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="regresión-lineal-múltiple.html#cb11-1" aria-hidden="true" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">lm</span>(esp_vida <span class="sc">~</span> habitantes <span class="sc">+</span> ingresos <span class="sc">+</span> analfabetismo <span class="sc">+</span> asesinatos <span class="sc">+</span></span>
-<span id="cb11-2"><a href="regresión-lineal-múltiple.html#cb11-2" aria-hidden="true" tabindex="-1"></a>               estudios <span class="sc">+</span> heladas <span class="sc">+</span> area <span class="sc">+</span> densidad_pobl, <span class="at">data =</span> datos )</span>
-<span id="cb11-3"><a href="regresión-lineal-múltiple.html#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="regresión-lineal-múltiple.html#cb13-1" aria-hidden="true" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">lm</span>(esp_vida <span class="sc">~</span> habitantes <span class="sc">+</span> ingresos <span class="sc">+</span> analfabetismo <span class="sc">+</span> asesinatos <span class="sc">+</span></span>
+<span id="cb13-2"><a href="regresión-lineal-múltiple.html#cb13-2" aria-hidden="true" tabindex="-1"></a>               estudios <span class="sc">+</span> heladas <span class="sc">+</span> area <span class="sc">+</span> densidad_pobl, <span class="at">data =</span> datos )</span>
+<span id="cb13-3"><a href="regresión-lineal-múltiple.html#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = esp_vida ~ habitantes + ingresos + analfabetismo + 
@@ -556,7 +556,7 @@ La siguiente tabla muestra el rango de valores de <span class="math inline">\(\l
 <div id="selección-de-los-mejores-predictores" class="section level4" number="4.7.1.3">
 <h4><span class="header-section-number">4.7.1.3</span> Selección de los mejores predictores</h4>
 <p>En este caso se van a emplear la estrategia de stepwise mixto. El valor matemático empleado para determinar la calidad del modelo va a ser Akaike(AIC).</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="regresión-lineal-múltiple.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">step</span>(<span class="at">object =</span> modelo, <span class="at">direction =</span> <span class="st">&quot;both&quot;</span>, <span class="at">trace =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="regresión-lineal-múltiple.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">step</span>(<span class="at">object =</span> modelo, <span class="at">direction =</span> <span class="st">&quot;both&quot;</span>, <span class="at">trace =</span> <span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## Start:  AIC=-22.89
 ## esp_vida ~ habitantes + ingresos + analfabetismo + asesinatos + 
 ##     estudios + heladas + area + densidad_pobl
@@ -638,9 +638,9 @@ La siguiente tabla muestra el rango de valores de <span class="math inline">\(\l
 ## (Intercept)   habitantes   asesinatos     estudios      heladas  
 ##   7.103e+01    5.014e-05   -3.001e-01    4.658e-02   -5.943e-03</code></pre>
 <p>El mejor modelo resultante del proceso de selección ha sido:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="regresión-lineal-múltiple.html#cb16-1" aria-hidden="true" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> esp_vida <span class="sc">~</span> habitantes <span class="sc">+</span> asesinatos <span class="sc">+</span> estudios <span class="sc">+</span></span>
-<span id="cb16-2"><a href="regresión-lineal-múltiple.html#cb16-2" aria-hidden="true" tabindex="-1"></a>                heladas, <span class="at">data =</span> datos)</span>
-<span id="cb16-3"><a href="regresión-lineal-múltiple.html#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="regresión-lineal-múltiple.html#cb18-1" aria-hidden="true" tabindex="-1"></a>modelo <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> esp_vida <span class="sc">~</span> habitantes <span class="sc">+</span> asesinatos <span class="sc">+</span> estudios <span class="sc">+</span></span>
+<span id="cb18-2"><a href="regresión-lineal-múltiple.html#cb18-2" aria-hidden="true" tabindex="-1"></a>                heladas, <span class="at">data =</span> datos)</span>
+<span id="cb18-3"><a href="regresión-lineal-múltiple.html#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(modelo)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = esp_vida ~ habitantes + asesinatos + estudios + 
@@ -664,8 +664,8 @@ La siguiente tabla muestra el rango de valores de <span class="math inline">\(\l
 ## Multiple R-squared:  0.736,	Adjusted R-squared:  0.7126 
 ## F-statistic: 31.37 on 4 and 45 DF,  p-value: 1.696e-12</code></pre>
 <p>Es recomendable mostrar el intervalo de confianza para cada uno de los coeficientes parciales de regresión:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="regresión-lineal-múltiple.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(<span class="fu">lm</span>(<span class="at">formula =</span> esp_vida <span class="sc">~</span> habitantes <span class="sc">+</span> asesinatos <span class="sc">+</span> estudios <span class="sc">+</span></span>
-<span id="cb18-2"><a href="regresión-lineal-múltiple.html#cb18-2" aria-hidden="true" tabindex="-1"></a>             heladas, <span class="at">data =</span> datos))</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="regresión-lineal-múltiple.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(<span class="fu">lm</span>(<span class="at">formula =</span> esp_vida <span class="sc">~</span> habitantes <span class="sc">+</span> asesinatos <span class="sc">+</span> estudios <span class="sc">+</span></span>
+<span id="cb20-2"><a href="regresión-lineal-múltiple.html#cb20-2" aria-hidden="true" tabindex="-1"></a>             heladas, <span class="at">data =</span> datos))</span></code></pre></div>
 <pre><code>##                     2.5 %        97.5 %
 ## (Intercept)  6.910798e+01 72.9462729104
 ## habitantes  -4.543308e-07  0.0001007343
@@ -680,35 +680,35 @@ La siguiente tabla muestra el rango de valores de <span class="math inline">\(\l
 <div id="relación-lineal-entre-los-predictores-numéricos-y-la-variable-respuesta" class="section level5" number="4.7.1.4.1">
 <h5><span class="header-section-number">4.7.1.4.1</span> Relación lineal entre los predictores numéricos y la variable respuesta</h5>
 <p>Esta condición se puede validar bien mediante diagramas de dispersión entre la variable dependiente y cada uno de los predictores (como se ha hecho en el análisis preliminar) o con diagramas de dispersión entre cada uno de los predictores y los residuos del modelo. Si la relación es lineal, los residuos deben de distribuirse aleatoriamente en torno a 0 con una variabilidad constante a lo largo del eje X. Esta última opción suele ser más indicada ya que permite identificar posibles datos atípicos.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="regresión-lineal-múltiple.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb20-2"><a href="regresión-lineal-múltiple.html#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span>
-<span id="cb20-3"><a href="regresión-lineal-múltiple.html#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-4"><a href="regresión-lineal-múltiple.html#cb20-4" aria-hidden="true" tabindex="-1"></a>plot1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> datos, <span class="fu">aes</span>(habitantes, modelo<span class="sc">$</span>residuals)) <span class="sc">+</span></span>
-<span id="cb20-5"><a href="regresión-lineal-múltiple.html#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">color =</span> <span class="st">&quot;firebrick&quot;</span>) <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
-<span id="cb20-6"><a href="regresión-lineal-múltiple.html#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb20-7"><a href="regresión-lineal-múltiple.html#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-8"><a href="regresión-lineal-múltiple.html#cb20-8" aria-hidden="true" tabindex="-1"></a>plot2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> datos, <span class="fu">aes</span>(asesinatos, modelo<span class="sc">$</span>residuals)) <span class="sc">+</span></span>
-<span id="cb20-9"><a href="regresión-lineal-múltiple.html#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">color =</span> <span class="st">&quot;firebrick&quot;</span>) <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
-<span id="cb20-10"><a href="regresión-lineal-múltiple.html#cb20-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb20-11"><a href="regresión-lineal-múltiple.html#cb20-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-12"><a href="regresión-lineal-múltiple.html#cb20-12" aria-hidden="true" tabindex="-1"></a>plot3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> datos, <span class="fu">aes</span>(estudios, modelo<span class="sc">$</span>residuals)) <span class="sc">+</span></span>
-<span id="cb20-13"><a href="regresión-lineal-múltiple.html#cb20-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">color =</span> <span class="st">&quot;firebrick&quot;</span>) <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
-<span id="cb20-14"><a href="regresión-lineal-múltiple.html#cb20-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb20-15"><a href="regresión-lineal-múltiple.html#cb20-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-16"><a href="regresión-lineal-múltiple.html#cb20-16" aria-hidden="true" tabindex="-1"></a>plot4 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> datos, <span class="fu">aes</span>(heladas, modelo<span class="sc">$</span>residuals)) <span class="sc">+</span></span>
-<span id="cb20-17"><a href="regresión-lineal-múltiple.html#cb20-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">color =</span> <span class="st">&quot;firebrick&quot;</span>) <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
-<span id="cb20-18"><a href="regresión-lineal-múltiple.html#cb20-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
-<span id="cb20-19"><a href="regresión-lineal-múltiple.html#cb20-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-20"><a href="regresión-lineal-múltiple.html#cb20-20" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(plot1, plot2, plot3, plot4)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="regresión-lineal-múltiple.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb22-2"><a href="regresión-lineal-múltiple.html#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span>
+<span id="cb22-3"><a href="regresión-lineal-múltiple.html#cb22-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="regresión-lineal-múltiple.html#cb22-4" aria-hidden="true" tabindex="-1"></a>plot1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> datos, <span class="fu">aes</span>(habitantes, modelo<span class="sc">$</span>residuals)) <span class="sc">+</span></span>
+<span id="cb22-5"><a href="regresión-lineal-múltiple.html#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">color =</span> <span class="st">&quot;firebrick&quot;</span>) <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb22-6"><a href="regresión-lineal-múltiple.html#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb22-7"><a href="regresión-lineal-múltiple.html#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-8"><a href="regresión-lineal-múltiple.html#cb22-8" aria-hidden="true" tabindex="-1"></a>plot2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> datos, <span class="fu">aes</span>(asesinatos, modelo<span class="sc">$</span>residuals)) <span class="sc">+</span></span>
+<span id="cb22-9"><a href="regresión-lineal-múltiple.html#cb22-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">color =</span> <span class="st">&quot;firebrick&quot;</span>) <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb22-10"><a href="regresión-lineal-múltiple.html#cb22-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb22-11"><a href="regresión-lineal-múltiple.html#cb22-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-12"><a href="regresión-lineal-múltiple.html#cb22-12" aria-hidden="true" tabindex="-1"></a>plot3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> datos, <span class="fu">aes</span>(estudios, modelo<span class="sc">$</span>residuals)) <span class="sc">+</span></span>
+<span id="cb22-13"><a href="regresión-lineal-múltiple.html#cb22-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">color =</span> <span class="st">&quot;firebrick&quot;</span>) <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb22-14"><a href="regresión-lineal-múltiple.html#cb22-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb22-15"><a href="regresión-lineal-múltiple.html#cb22-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-16"><a href="regresión-lineal-múltiple.html#cb22-16" aria-hidden="true" tabindex="-1"></a>plot4 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> datos, <span class="fu">aes</span>(heladas, modelo<span class="sc">$</span>residuals)) <span class="sc">+</span></span>
+<span id="cb22-17"><a href="regresión-lineal-múltiple.html#cb22-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> <span class="fu">geom_smooth</span>(<span class="at">color =</span> <span class="st">&quot;firebrick&quot;</span>) <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb22-18"><a href="regresión-lineal-múltiple.html#cb22-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb22-19"><a href="regresión-lineal-múltiple.html#cb22-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-20"><a href="regresión-lineal-múltiple.html#cb22-20" aria-hidden="true" tabindex="-1"></a><span class="fu">grid.arrange</span>(plot1, plot2, plot3, plot4)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 <p>Analizando las gráficas no se observa evidencia suficiente para sospechar que no se cumple la linealidad para todos los predictores.</p>
 </div>
 <div id="distribución-normal-de-los-residuos" class="section level5" number="4.7.1.4.2">
 <h5><span class="header-section-number">4.7.1.4.2</span> Distribución normal de los residuos:</h5>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="regresión-lineal-múltiple.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(modelo<span class="sc">$</span>residuals)</span>
-<span id="cb21-2"><a href="regresión-lineal-múltiple.html#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(modelo<span class="sc">$</span>residuals)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="regresión-lineal-múltiple.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(modelo<span class="sc">$</span>residuals)</span>
+<span id="cb23-2"><a href="regresión-lineal-múltiple.html#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(modelo<span class="sc">$</span>residuals)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="regresión-lineal-múltiple.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(modelo<span class="sc">$</span>residuals)</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="regresión-lineal-múltiple.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(modelo<span class="sc">$</span>residuals)</span></code></pre></div>
 <pre><code>## 
 ## 	Shapiro-Wilk normality test
 ## 
@@ -720,14 +720,21 @@ La siguiente tabla muestra el rango de valores de <span class="math inline">\(\l
 <h5><span class="header-section-number">4.7.1.4.3</span> Variabilidad constante de los residuos (homocedasticidad):</h5>
 <p>Al representar los residuos frente a los valores ajustados por el modelo, los primeros se tienen que distribuir de forma aleatoria en torno a cero, manteniendo aproximadamente la misma variabilidad a lo largo del eje X.</p>
 <p>Si se observa algún patrón específico, por ejemplo forma cónica o mayor dispersión en los extremos, significa que la variabilidad es dependiente del valor ajustado y por lo tanto no hay homocedasticidad.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="regresión-lineal-múltiple.html#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> datos, <span class="fu">aes</span>(modelo<span class="sc">$</span>fitted.values, modelo<span class="sc">$</span>residuals)) <span class="sc">+</span></span>
-<span id="cb24-2"><a href="regresión-lineal-múltiple.html#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb24-3"><a href="regresión-lineal-múltiple.html#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">color =</span> <span class="st">&quot;firebrick&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb24-4"><a href="regresión-lineal-múltiple.html#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
-<span id="cb24-5"><a href="regresión-lineal-múltiple.html#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="regresión-lineal-múltiple.html#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> datos, <span class="fu">aes</span>(modelo<span class="sc">$</span>fitted.values, modelo<span class="sc">$</span>residuals)) <span class="sc">+</span></span>
+<span id="cb26-2"><a href="regresión-lineal-múltiple.html#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb26-3"><a href="regresión-lineal-múltiple.html#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">color =</span> <span class="st">&quot;firebrick&quot;</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb26-4"><a href="regresión-lineal-múltiple.html#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb26-5"><a href="regresión-lineal-múltiple.html#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="regresión-lineal-múltiple.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmtest)</span>
-<span id="cb25-2"><a href="regresión-lineal-múltiple.html#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">bptest</span>(modelo)</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="regresión-lineal-múltiple.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmtest)</span></code></pre></div>
+<pre><code>## Warning: package &#39;lmtest&#39; was built under R version 4.0.3</code></pre>
+<pre><code>## Loading required package: zoo</code></pre>
+<pre><code>## 
+## Attaching package: &#39;zoo&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     as.Date, as.Date.numeric</code></pre>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="regresión-lineal-múltiple.html#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">bptest</span>(modelo)</span></code></pre></div>
 <pre><code>## 
 ## 	studentized Breusch-Pagan test
 ## 
@@ -738,38 +745,38 @@ La siguiente tabla muestra el rango de valores de <span class="math inline">\(\l
 <div id="multicolinealidad-1" class="section level5" number="4.7.1.4.4">
 <h5><span class="header-section-number">4.7.1.4.4</span> Multicolinealidad:</h5>
 <p><strong>Matriz de correlación entre predictores:</strong></p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="regresión-lineal-múltiple.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(<span class="fu">cor</span>(dplyr<span class="sc">::</span><span class="fu">select</span>(datos, habitantes, asesinatos,estudios,heladas)),</span>
-<span id="cb27-2"><a href="regresión-lineal-múltiple.html#cb27-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">method =</span> <span class="st">&quot;number&quot;</span>, <span class="at">tl.col =</span> <span class="st">&quot;black&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="regresión-lineal-múltiple.html#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">corrplot</span>(<span class="fu">cor</span>(dplyr<span class="sc">::</span><span class="fu">select</span>(datos, habitantes, asesinatos,estudios,heladas)),</span>
+<span id="cb34-2"><a href="regresión-lineal-múltiple.html#cb34-2" aria-hidden="true" tabindex="-1"></a>         <span class="at">method =</span> <span class="st">&quot;number&quot;</span>, <span class="at">tl.col =</span> <span class="st">&quot;black&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 <p><strong>Análisis de Inflación de Varianza (VIF):</strong></p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="regresión-lineal-múltiple.html#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(modelo)</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="regresión-lineal-múltiple.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vif</span>(modelo)</span></code></pre></div>
 <pre><code>## habitantes asesinatos   estudios    heladas 
 ##   1.189835   1.727844   1.356791   1.498077</code></pre>
 <p>No hay predictores que muestren una correlación lineal muy alta ni inflación de varianza.</p>
 <p><strong>Autocorrelación:</strong></p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="regresión-lineal-múltiple.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dwt</span>(modelo, <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="regresión-lineal-múltiple.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dwt</span>(modelo, <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>)</span></code></pre></div>
 <pre><code>##  lag Autocorrelation D-W Statistic p-value
-##    1      0.02867262      1.913997   0.744
+##    1      0.02867262      1.913997    0.78
 ##  Alternative hypothesis: rho != 0</code></pre>
 <p>No hay evidencia de autocorrelación</p>
 </div>
 <div id="identificación-de-posibles-valores-atípicos-o-influyentes" class="section level5" number="4.7.1.4.5">
 <h5><span class="header-section-number">4.7.1.4.5</span> Identificación de posibles valores atípicos o influyentes</h5>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="regresión-lineal-múltiple.html#cb32-1" aria-hidden="true" tabindex="-1"></a>datos<span class="sc">$</span>studentized_residual <span class="ot">&lt;-</span> <span class="fu">rstudent</span>(modelo)</span>
-<span id="cb32-2"><a href="regresión-lineal-múltiple.html#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-3"><a href="regresión-lineal-múltiple.html#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> datos, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">predict</span>(modelo), <span class="at">y =</span> <span class="fu">abs</span>(studentized_residual))) <span class="sc">+</span></span>
-<span id="cb32-4"><a href="regresión-lineal-múltiple.html#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;grey&quot;</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span></span>
-<span id="cb32-5"><a href="regresión-lineal-múltiple.html#cb32-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># se identifican en rojo observaciones con residuos estandarizados absolutos &gt; 3</span></span>
-<span id="cb32-6"><a href="regresión-lineal-múltiple.html#cb32-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> <span class="fu">ifelse</span>(<span class="fu">abs</span>(studentized_residual) <span class="sc">&gt;</span> <span class="dv">3</span>, <span class="st">&#39;red&#39;</span>, <span class="st">&#39;black&#39;</span>))) <span class="sc">+</span></span>
-<span id="cb32-7"><a href="regresión-lineal-múltiple.html#cb32-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_identity</span>() <span class="sc">+</span></span>
-<span id="cb32-8"><a href="regresión-lineal-múltiple.html#cb32-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Distribución de los residuos studentized&quot;</span>,</span>
-<span id="cb32-9"><a href="regresión-lineal-múltiple.html#cb32-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;predicción modelo&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb32-10"><a href="regresión-lineal-múltiple.html#cb32-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="regresión-lineal-múltiple.html#cb39-1" aria-hidden="true" tabindex="-1"></a>datos<span class="sc">$</span>studentized_residual <span class="ot">&lt;-</span> <span class="fu">rstudent</span>(modelo)</span>
+<span id="cb39-2"><a href="regresión-lineal-múltiple.html#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-3"><a href="regresión-lineal-múltiple.html#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> datos, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">predict</span>(modelo), <span class="at">y =</span> <span class="fu">abs</span>(studentized_residual))) <span class="sc">+</span></span>
+<span id="cb39-4"><a href="regresión-lineal-múltiple.html#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;grey&quot;</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>) <span class="sc">+</span></span>
+<span id="cb39-5"><a href="regresión-lineal-múltiple.html#cb39-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># se identifican en rojo observaciones con residuos estandarizados absolutos &gt; 3</span></span>
+<span id="cb39-6"><a href="regresión-lineal-múltiple.html#cb39-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> <span class="fu">ifelse</span>(<span class="fu">abs</span>(studentized_residual) <span class="sc">&gt;</span> <span class="dv">3</span>, <span class="st">&#39;red&#39;</span>, <span class="st">&#39;black&#39;</span>))) <span class="sc">+</span></span>
+<span id="cb39-7"><a href="regresión-lineal-múltiple.html#cb39-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_identity</span>() <span class="sc">+</span></span>
+<span id="cb39-8"><a href="regresión-lineal-múltiple.html#cb39-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Distribución de los residuos studentized&quot;</span>,</span>
+<span id="cb39-9"><a href="regresión-lineal-múltiple.html#cb39-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;predicción modelo&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb39-10"><a href="regresión-lineal-múltiple.html#cb39-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="fl">0.5</span>))</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="regresión-lineal-múltiple.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(<span class="fu">abs</span>(datos<span class="sc">$</span>studentized_residual) <span class="sc">&gt;</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="regresión-lineal-múltiple.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">which</span>(<span class="fu">abs</span>(datos<span class="sc">$</span>studentized_residual) <span class="sc">&gt;</span> <span class="dv">3</span>)</span></code></pre></div>
 <pre><code>## integer(0)</code></pre>
 <p>No se identifica ninguna observación atípica.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="regresión-lineal-múltiple.html#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">influence.measures</span>(modelo))</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="regresión-lineal-múltiple.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">influence.measures</span>(modelo))</span></code></pre></div>
 <pre><code>## Potentially influential observations of
 ## 	 lm(formula = esp_vida ~ habitantes + asesinatos + estudios +      heladas, data = datos) :
 ## 
@@ -786,7 +793,7 @@ La siguiente tabla muestra el rango de valores de <span class="math inline">\(\l
 <li><p><strong>Distancia Cook (cook.d):</strong> Se consideran influyentes valores superiores a 1.</p></li>
 </ul>
 <p>La visualización gráfica de las influencias se obtiene del siguiente modo:</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="regresión-lineal-múltiple.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">influencePlot</span>(modelo)</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="regresión-lineal-múltiple.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">influencePlot</span>(modelo)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
 <pre><code>##               StudRes        Hat       CookD
 ## California -0.1500614 0.38475924 0.002879053
@@ -810,7 +817,7 @@ La siguiente tabla muestra el rango de valores de <span class="math inline">\(\l
 <div id="ejercicio-interactivo-regresión-lineal-multiple-aplicada-a-marketing" class="section level3" number="4.7.2">
 <h3><span class="header-section-number">4.7.2</span> Ejercicio interactivo: regresión lineal multiple aplicada a marketing</h3>
 <p>Use el siguiente código para iniciar el ejercicio interactivo</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="regresión-lineal-múltiple.html#cb39-1" aria-hidden="true" tabindex="-1"></a>learnr<span class="sc">::</span><span class="fu">run_tutorial</span>(<span class="st">&quot;regresion_lineal_multiple&quot;</span>, <span class="at">package =</span> <span class="st">&quot;ModelosLinealesFC&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="regresión-lineal-múltiple.html#cb46-1" aria-hidden="true" tabindex="-1"></a>learnr<span class="sc">::</span><span class="fu">run_tutorial</span>(<span class="st">&quot;regresion_lineal_multiple&quot;</span>, <span class="at">package =</span> <span class="st">&quot;ModelosLinealesFC&quot;</span>)</span></code></pre></div>
 
 </div>
 </div>
